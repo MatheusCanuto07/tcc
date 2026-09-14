@@ -1,0 +1,1 @@
+Leve em conta o conteudo do arquivo AGENTS.md nas suas respostas
