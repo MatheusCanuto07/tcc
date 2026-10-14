@@ -101,6 +101,111 @@ Assim, o referencial teórico conecta a abertura dos dados, a classificação da
 
 ## Metodologia
 
+<!-- Substituir esse paragrafo por outro apresentando de forma mais ampla o objetivo da pesquisa -->
+
+Este capítulo descreve como a pesquisa será conduzida, de modo a permitir a reprodução das etapas principais.
+São apresentados o tipo de pesquisa, o objeto de estudo, as etapas do trabalho, as fontes de dados, o tratamento e a integração das bases, os procedimentos de análise, as ferramentas e os critérios de conferência dos resultados.
+
+### Classificação da pesquisa
+
+Quanto aos objetivos, a pesquisa classifica-se como descritiva.
+Segundo Gil (2008), a pesquisa descritiva registra características de determinada população ou fenômeno e permite a organização dessas informações em tabelas, gráficos e outras formas de apresentação.
+No presente trabalho, descrevem-se as empresas de Tecnologia da Informação localizadas em Contagem, a partir de atributos cadastrais e da distribuição geográfica observada nas bases abertas.
+
+Quanto aos procedimentos, trata-se de pesquisa documental.
+Utilizam-se documentos e bases oficiais já existentes, publicadas por órgãos públicos, e não a coleta direta de entrevistas ou questionários com pessoas.
+
+Quanto à abordagem, adota-se o caráter misto.
+A dimensão quantitativa aparece na contagem de estabelecimentos, na distribuição por subclasses da CNAE, por porte e por recortes territoriais.
+A dimensão qualitativa aparece na interpretação dos padrões espaciais e na discussão das limitações das fontes, sem pretender estabelecer relações causais entre localização e desempenho econômico.
+
+### Objeto de estudo e recorte
+
+O objeto de estudo são os estabelecimentos de Tecnologia da Informação situados no município de Contagem (MG), identificados pelo código IBGE 3118601.
+O setor será delimitado pela Classificação Nacional de Atividades Econômicas (CNAE), com recorte inicial na divisão 62, correspondente a atividades dos serviços de tecnologia da informação.
+A unidade de análise será o estabelecimento constante do cadastro de CNPJ, e não a empresa como um todo: matriz e filial entram como registros distintos quando estiverem no município e na atividade selecionada.
+Serão considerados, em regra, estabelecimentos com situação cadastral ativa na fotografia da base utilizada.
+Não haverá participantes humanos nem aplicação de questionários; por isso, não se aplica tramitação em comitê de ética para coleta com pessoas.
+Os dados empregados são públicos e abertos.
+
+### Etapas do trabalho
+
+<!-- Frase muito generica, substitua por: "Esta pesquisa será realizada em 4 etapas" -->
+O desenvolvimento seguirá um conjunto encadeado de etapas, alinhado aos objetivos específicos.
+A Figura 1 resume o fluxo geral.
+
+```mermaid
+flowchart TD
+    A[Definir recorte CNAE de TI] --> B[Extrair CNPJ de Contagem]
+    B --> C[Integrar razão social, porte e capital]
+    C --> D[Obter coordenadas via CNEFE]
+    D --> E[Associar malhas territoriais]
+    E --> F[Conferir totais no CEMPRE ou SIDRA]
+    F --> G[Desenvolver aplicação web interativa]
+    G --> H[Analisar distribuição e apresentar resultados]
+```
+
+As etapas serão as seguintes:
+
+\begin{itemize}
+    \item definir a lista de subclasses CNAE que representam o setor de TI no escopo do trabalho;
+    \item extrair e filtrar os estabelecimentos de Contagem na base de CNPJ, conforme município, situação cadastral e CNAE;
+    \item integrar atributos complementares, como razão social, porte e capital social, pela chave do CNPJ básico;
+    \item obter latitude e longitude a partir do CNEFE, preferencialmente pela junção por CEP, com registro da qualidade do georreferenciamento;
+    \item associar os pontos às malhas territoriais do IBGE para leitura por recortes do município;
+    \item conferir a ordem de grandeza das contagens com estatísticas agregadas do CEMPRE ou do SIDRA;
+    \item desenvolver a aplicação web interativa com indicadores, filtros, mapas, gráficos e tabelas;
+    \item analisar a distribuição geográfica e discutir os resultados à luz das limitações das fontes.
+\end{itemize}
+
+### Fontes de dados e coleta
+
+A coleta virá de bases abertas oficiais, por meio do download e da consulta a esses arquivos publicados por órgãos públicos.
+A principal fonte para a lista de estabelecimentos será a base pública de CNPJ da Receita Federal do Brasil, que reúne identificação, CNAE, situação cadastral e endereço declarado.
+A estrutura e a descrição das atividades virão da CNAE mantida pelo IBGE, utilizada para fechar o recorte setorial.
+As coordenadas geográficas serão obtidas no Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE), do IBGE, associado ao Censo Demográfico.
+As malhas territoriais do IBGE fornecerão o contorno do município e, quando disponíveis no nível adequado, recortes internos úteis à agregação espacial.
+Para conferência de totais, serão consultadas tabelas do Cadastro Central de Empresas (CEMPRE) por meio do SIDRA, sempre no município de Contagem e em nível de CNAE compatível com o recorte.
+Como apoio à extração, poderá ser utilizada a plataforma Base dos Dados, desde que os filtros reproduzam o mesmo universo da fonte oficial.
+O mapa de fundo da aplicação utilizará tiles do OpenStreetMap.
+Não se utilizará geocodificação em lote por serviços online para milhares de endereços; o CNEFE será a base prevista para essa etapa.
+
+### Tratamento e integração das bases
+
+Os arquivos nacionais não serão carregados integralmente na aplicação.
+O tratamento ocorrerá em ambiente local, com filtragem prévia para Contagem e para as subclasses CNAE definidas.
+A integração seguirá chaves explícitas: código de município da Receita para isolar Contagem; CNPJ básico para unir estabelecimentos e quadros de empresas; CNAE sem máscara para padronizar a atividade; código IBGE 3118601 para ligar o resultado às malhas, ao CNEFE e ao CEMPRE; CEP, e quando possível logradouro e número, para estimar a coordenada.
+Cada estabelecimento georreferenciado receberá um indicador da origem do ponto, por exemplo coordenada associada ao CEP, tentativa por endereço ou ausência de localização.
+Registros sem coordenada permanecerão na base analítica para contagens cadastrais, mas poderão ficar de fora das visualizações de mapa ou aparecer em categoria própria.
+A base resultante será exportada em formato adequado ao consumo da aplicação, reduzindo volume e facilitando a reprodução do painel.
+
+### Procedimentos de análise
+
+A análise será descritiva e exploratória.
+Serão calculados totais de estabelecimentos ativos no recorte, distribuições por subclasse CNAE e por porte, e indicadores de cobertura do georreferenciamento.
+No eixo espacial, serão observados a concentração de pontos no município, eventuais vazios e a agregação por recortes territoriais disponíveis nas malhas.
+Mapas de pontos e, quando fizer sentido, representações de densidade auxiliarão a leitura da distribuição.
+A comparação com o CEMPRE não buscará igualdade exata de números, pois as fotografias temporais e os critérios de cada base diferem; buscará verificar se a ordem de grandeza é coerente.
+Os resultados dessa análise serão apresentados em tabelas, gráficos e mapas, e discutidos no capítulo de resultados.
+
+### Desenvolvimento da aplicação e ferramentas
+
+A aplicação web será o meio de consulta e exploração da base integrada.
+Ela reunirá indicadores, filtros, tabelas, gráficos e mapa interativo, permitindo ao usuário examinar os estabelecimentos de TI de Contagem conforme os atributos disponíveis.
+Para o tratamento dos dados, serão utilizadas ferramentas de análise e manipulação tabular em linguagem Python, com apoio de bibliotecas adequadas à leitura de arquivos grandes e à filtragem por município e CNAE.
+Para a interface, serão empregados recursos de desenvolvimento web e biblioteca de mapas interativos compatível com tiles do OpenStreetMap.
+O detalhamento da arquitetura, das telas e das decisões de implementação será apresentado no capítulo de desenvolvimento.
+As versões das bases, as datas de download e as regras de filtro serão registradas para tornar o processo auditável.
+
+### Limitações metodológicas previstas
+
+Algumas limitações são inerentes às fontes e serão tratadas com transparência.
+O CNAE reflete a atividade declarada no cadastro, e não uma auditoria do que a empresa executa no dia a dia.
+A coordenada obtida pelo CNEFE é uma estimativa a partir do endereço ou do CEP, e não uma localização oficial do estabelecimento no terreno.
+Porte e capital social estão disponíveis no CNPJ; já o pessoal ocupado por empresa, em geral, não está de forma pública e identificável nas bases abertas usadas neste trabalho.
+Totais do CEMPRE e da RAIS não substituem a lista de CNPJs no mapa e não devem ser lidos como a mesma contagem.
+Essas restrições não invalidam o estudo; delimitam o que os resultados podem afirmar com segurança.
+
 ## Desenvolvimento
 
 ## Resultados
