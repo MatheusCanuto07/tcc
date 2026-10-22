@@ -8,11 +8,20 @@ Parte desses registros é publicada como dado aberto, em arquivos que cobrem o B
 Nenhuma dessas fontes, isoladamente, reúne a identificação do estabelecimento, a atividade econômica e a coordenada geográfica.
 Assim, conhecer um setor em uma cidade exige cruzar dados de mais de uma instituição.
 
-A existência de dados abertos com essas características oferece diferentes possibilidades de análise, porém a disponibilização das informações em sua forma original não necessariamente proporciona uma compreensão simples e acessível para diferentes públicos.
-Os arquivos podem conter uma quantidade significativa de registros, classificações e atributos geográficos, dispersos em mais de uma fonte, o que dificulta sua interpretação quando analisados diretamente em tabelas ou arquivos isolados.
-Segundo Ansari (2022), apesar do aumento da disponibilidade de dados governamentais, sua utilização ainda pode ser limitada, e o emprego de mecanismos de visualização pode tornar essas informações mais compreensíveis, úteis e acessíveis.
+A existência de dados abertos com essas características oferece diferentes possibilidades de análise. Porém, o arquivo original, do jeito que o órgão publica, não é simples de consultar.
+Neste trabalho, acessível quer dizer facilidade de uso: os dados ficam reunidos em um único site, com uma interface clara, em que a pessoa vê mapa, gráfico e tabela sem precisar baixar várias bases e cruzá-las.
+Não se trata de acessibilidade digital no sentido de normas para pessoas com deficiência, como a WCAG ou o Modelo de Acessibilidade em Governo Eletrônico (eMAG).
+Os arquivos podem conter muitos registros, códigos e campos de endereço, espalhados em mais de uma fonte, o que dificulta a leitura quando eles são abertos direto na tabela.
+Segundo Ansari (2022), mesmo com mais dados governamentais disponíveis, o uso ainda pode ser limitado, e a visualização pode deixar essas informações mais fáceis de entender.
 Diante desse cenário, este trabalho busca responder à seguinte questão de pesquisa: como dados abertos podem ser combinados para caracterizar e apresentar, de maneira acessível e interativa, informações sobre as empresas do setor de Tecnologia da Informação localizadas no município de Contagem?
-Além da caracterização geral dessas empresas, pretende-se explorar sua distribuição territorial a partir da integração entre os endereços dos estabelecimentos e bases geográficas abertas, sem limitar a análise ao aspecto espacial.
+Além de descrever essas empresas, o trabalho observa onde elas estão no município, a partir do endereço cruzado com bases geográficas abertas.
+A análise não fica só no mapa: também entra o perfil dos estabelecimentos, como atividade e porte.
+
+Neste trabalho, empresa de TI é o estabelecimento com situação cadastral ativa em Contagem cuja atividade principal está na divisão 62 da Classificação Nacional de Atividades Econômicas (CNAE), a de serviços de tecnologia da informação.
+Entram desenvolvimento de software, web design, consultoria e suporte em TI.
+Ficam de fora telecomunicações, hospedagem de dados, comércio e fabricação de equipamentos, conserto de computador e curso de informática.
+A lista fechada de códigos está na metodologia.
+A unidade observada é o estabelecimento do CNPJ, e não o grupo econômico: matriz e filial contam separado quando as duas estão no município e na atividade escolhida.
 
 Para responder a essa questão, o objetivo geral deste trabalho é desenvolver uma aplicação web interativa que permita caracterizar e visualizar as empresas do setor de Tecnologia da Informação do município de Contagem a partir da integração de dados abertos.
 A aplicação reunirá indicadores, gráficos, mapas, tabelas e mecanismos de filtragem, ajustados à estrutura e à qualidade das fontes utilizadas.
@@ -21,13 +30,18 @@ Como objetivos específicos, pretende-se:
 
 \begin{itemize}
     \item identificar as fontes de dados abertos pertinentes e mapear os atributos e as chaves que permitem integrá-las para o recorte municipal;
-    \item caracterizar as empresas de Tecnologia da Informação localizadas em Contagem, com base na classificação CNAE e nos atributos disponíveis nas bases integradas;
-    \item analisar a distribuição geográfica dessas empresas a partir das coordenadas obtidas pela integração entre endereço e bases territoriais abertas;
-    \item desenvolver a aplicação web interativa que permita ao usuário consultar, filtrar e interpretar as informações por meio de visualizações e tabelas.
+    \item caracterizar as empresas de Tecnologia da Informação localizadas em Contagem, no recorte da divisão 62 da CNAE, com base nos atributos disponíveis nas bases integradas;
+    \item analisar a distribuição geográfica dessas empresas a partir das coordenadas obtidas pela integração entre endereço e bases territoriais abertas, com uma medida que leve em conta o tamanho da área;
+    \item desenvolver a aplicação web interativa que permita ao usuário consultar, filtrar e interpretar as informações por meio de visualizações e tabelas;
+    \item avaliar a usabilidade dessa aplicação por meio de uma inspeção heurística.
 \end{itemize}
 
-A relevância deste estudo justifica-se pela necessidade de aproximar dados públicos, hoje dispersos e pouco acessíveis em sua forma bruta, de públicos que podem utilizá-los na prática.
-Como por exemplo:
+Os dados usados são cadastrais e já publicados. Ainda assim, o trabalho leva em conta a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018).
+A aplicação não carrega a base de sócios, em que aparece CPF de pessoa física, e não pede cadastro de quem consulta o site.
+O que se mostra é dado do estabelecimento. O detalhe desse cuidado está na metodologia.
+
+A relevância deste estudo justifica-se pela necessidade de aproximar dados públicos, hoje dispersos e difíceis de consultar na forma bruta, de públicos que podem utilizá-los na prática.
+Os públicos previstos são:
 
 \begin{itemize}
     \item cidadãos poderão conhecer melhor as empresas de tecnologia existentes no município;
@@ -49,62 +63,86 @@ Por fim, o Capítulo 7 apresenta as conclusões do trabalho, suas limitações e
 ## Referencial Teórico
 
 Este capítulo apresenta os conceitos que fundamentam o trabalho.
-São tratados, em sequência, dados abertos, classificação de atividades econômicas (CNAE), distribuição geográfica das empresas e aplicações web interativas.
+São tratados, em sequência, dados abertos, visualização e usabilidade, avaliação heurística, a classificação das atividades econômicas, a distribuição geográfica das empresas e as aplicações web de consulta.
 
 ### Dados abertos governamentais
 
-Dados abertos governamentais são informações produzidas ou mantidas pelo poder público e disponibilizadas para que outras pessoas possam usá-las de novo. O objetivo costuma ser aumentar a transparência, a participação e a inovação. Attard et al. (2015), em revisão de iniciativas nessa área, descrevem um ciclo que inclui publicar e usar os dados. Os autores mostram que só abrir a base não basta: o valor depende dos processos, dos formatos e das regras de uso. Em linha parecida, Janssen, Charalabidis e Zuiderwijk (2012) dizem que os benefícios esperados convivem com barreiras de instituição, lei, técnica e qualidade dos dados, além da dificuldade das tarefas pedidas ao usuário. Assim, ter arquivos públicos disponíveis não garante que eles sejam fáceis de entender ou de reutilizar. Para o uso funcionar na prática, é preciso tratar, combinar e apresentar os dados de forma adequada ao público. Esse raciocínio apoia a ideia deste trabalho: caracterizar as empresas de Tecnologia da Informação em Contagem a partir de bases abertas nacionais e estaduais, e não a partir de um único arquivo municipal já pronto.
+Dados abertos governamentais são informações produzidas ou mantidas pelo poder público e disponibilizadas para que outras pessoas possam usá-las de novo.
+O objetivo costuma ser aumentar a transparência e permitir que esses dados sejam reaproveitados.
+Molodtsov e Nikiforova (2024) estudaram a usabilidade de portais de dados abertos em 33 países.
+O quadro que eles aplicam não olha só se o arquivo está disponível para download.
+Também entra se a pessoa consegue explorar o dado e entendê-lo, mesmo sem prática com planilha.
+Ansari (2022), ao revisar pesquisas sobre visualização de dados governamentais, observa um ponto parecido: publicar o arquivo não faz, por si só, com que o dado seja usado.
+Muita gente não consegue ler o formato, cruzar bases diferentes e interpretar a tabela.
+Uma aplicação que junta as bases e mostra mapa, gráfico e filtro pode tornar essa consulta mais simples.
+Esse é o caminho deste trabalho: caracterizar as empresas de TI de Contagem a partir de bases abertas nacionais, e não a partir de um arquivo municipal já pronto.
 
 ### Visualização de dados e usabilidade
 
-A visualização de dados é apresentada na literatura como estratégia para reduzir a distância entre a publicação do dado e o seu uso por pessoas sem domínio técnico avançado.
-Graves e Hendler (2013) sustentam que parcela relevante da população poderia se beneficiar de dados abertos, mas não consegue coletar, processar, combinar e interpretar esses registros sem ferramentas que simplifiquem essas operações.
-Os autores defendem visualizações e mecanismos exploratórios sobre dados e metadados como meio de comunicação e de apoio à criação de sentido.
-Janssen, Charalabidis e Zuiderwijk (2012) convergem nesse ponto ao indicar que recursos de visualização podem diminuir barreiras de uso para usuários pouco experientes, desde que as iniciativas considerem a perspectiva de quem consome a informação.
-Ansari (2022) aprofunda essa discussão ao revisar pesquisas sobre visualização de dados governamentais abertos e observar que, apesar do crescimento de casos e ferramentas, ainda há lacunas na avaliação de usabilidade para públicos distintos.
-Para o autor, plataformas que embutem gráficos, mapas e recursos analíticos tendem a ampliar a utilidade do dado em relação à entrega isolada de arquivos.
-Esse conjunto de contribuições fundamenta a opção por uma aplicação que reúna indicadores, tabelas, filtros e representações geográficas, em vez de limitar a contribuição do trabalho à disponibilização de planilhas tratadas.
+A visualização de dados é uma forma de reduzir a distância entre o arquivo publicado e o uso por quem não tem domínio técnico.
+Mesquita et al. (2026) analisaram 30 painéis e 53 telas de consulta de dados de orçamento público no Brasil.
+O achado principal foi que a maior parte dos portais entrega o dado, mas pouco ajuda quem não tem familiaridade com números e tabelas.
+Falta contexto, e a tela quase não considera a pessoa que está consultando.
+Ansari (2022) descreve uma lacuna parecida: há muitos relatos de visualização de dados abertos e pouca avaliação de usabilidade para públicos diferentes.
+Para o autor, gráfico, mapa e consulta junto do dado tendem a ser mais úteis do que a entrega isolada do arquivo.
+Por isso este trabalho reúne indicadores, tabelas, filtros e mapa, em vez de disponibilizar só a planilha tratada.
+
+### Avaliação heurística de usabilidade
+
+Usabilidade, neste trabalho, é a facilidade de usar a interface.
+A pessoa encontra a informação, entende o que está vendo e consegue filtrar sem se perder.
+Como já foi dito na introdução, não se trata de normas de acessibilidade digital.
+A avaliação heurística é uma inspeção da tela.
+Quem avalia percorre a interface com uma lista de princípios e anota os problemas encontrados.
+A lista mais usada é a das dez heurísticas de Nielsen.
+Ela inclui, entre outros pontos, deixar claro o que o sistema está fazendo, manter um padrão visual, evitar erro e oferecer ajuda quando algo falha.
+Vázquez-Ingelmo et al. (2024) aplicaram essas heurísticas em uma ferramenta de criação de visualizações.
+Cada avaliador registrou o problema, a heurística relacionada e a gravidade.
+O estudo mostra que o método ajuda a localizar falhas de navegação, de retorno ao usuário e de organização da tela antes de um teste com o público final.
+Este trabalho usa o mesmo tipo de inspeção na aplicação desenvolvida, para registrar o que dificulta a consulta ao mapa, aos filtros, aos gráficos e à tabela.
 
 ### Classificação de atividades econômicas e integração de bases
 
-A identificação de um setor econômico em cadastros administrativos e estatísticos depende de uma classificação padronizada das atividades.
-No Brasil, a Classificação Nacional de Atividades Econômicas (CNAE), mantida pelo IBGE no âmbito da CONCLA, é o instrumento oficial adotado pelo sistema estatístico nacional e pelos órgãos gestores de registros administrativos (IBGE, 2020).
-A CNAE organiza as atividades em hierarquia e, na versão de subclasses para uso da Administração Pública, detalha categorias empregadas em cadastros de pessoa jurídica.
-Essa padronização permite filtrar estabelecimentos do setor de Tecnologia da Informação por códigos de atividade, em especial na divisão associada a serviços de TI, e comparar resultados com estatísticas oficiais agregadas.
-Contudo, a classificação resolve apenas parte do problema.
-Attard et al. (2015) enfatizam que o consumo de dados abertos envolve etapas de obtenção, transformação e combinação de fontes.
-Graves e Hendler (2013) reforçam que mesclar conjuntos distintos é uma das operações que afastam usuários leigos do aproveitamento direto dos portais.
-No caso deste trabalho, a caracterização municipal exige integrar cadastros de estabelecimentos, tabelas de referência de atividade e município, bases de endereço com coordenadas e malhas territoriais.
-A integração, portanto, não é detalhe operacional: é condição para que a CNAE, o endereço e a localização espacial passem a compor um mesmo conjunto analisável.
+A identificação de um setor em cadastros públicos depende de uma classificação padronizada das atividades.
+No Brasil, a Classificação Nacional de Atividades Econômicas (CNAE), mantida pelo IBGE, é o instrumento usado pelo sistema estatístico e pelos órgãos que registram empresas (IBGE, 2020).
+A CNAE organiza as atividades em níveis, da seção até a subclasse.
+No CNPJ, cada estabelecimento tem um código de atividade principal.
+Neste trabalho, empresa de TI é o estabelecimento cuja atividade principal está na divisão 62, de serviços de tecnologia da informação, na versão CNAE-Subclasses 2.3.
+Os códigos são 6201-5/01 (desenvolvimento de programas sob encomenda), 6201-5/02 (web design), 6202-3/00 (programas customizáveis), 6203-1/00 (programas não customizáveis), 6204-0/00 (consultoria em tecnologia da informação) e 6209-1/00 (suporte técnico e outros serviços em TI).
+Não entram a divisão 63 (hospedagem, tratamento de dados e portais), o comércio e a fabricação de equipamentos, o conserto de computador nem o curso de informática.
+A regra usa só a atividade principal, para a lista não crescer com códigos secundários de empresas de outro ramo.
+O código, sozinho, não monta o mapa.
+É preciso juntar o cadastro de estabelecimentos, a tabela da CNAE, o endereço com coordenada e o contorno do município.
+Sem essa junção, a atividade, o endereço e a localização ficam em arquivos separados.
 
 ### Distribuição espacial de empresas e geovisualização
 
-A localização das empresas no território é um atributo analítico, e não apenas um campo cadastral.
-Estudos sobre a distribuição intramunicipal de firmas de Tecnologia da Informação e Comunicação mostram que padrões de concentração podem ser identificados quando há informação geográfica adequada.
-Zenka (2021), ao investigar Ostrava, evidencia agrupamentos relevantes no centro e na cidade interior, com associação a tipologias urbanas específicas, e demonstra o valor de analisar a posição das empresas além da contagem agregada por município.
-Embora o contexto daquele estudo diferencie-se de Contagem, a contribuição conceitual permanece: a geografia intramunicipal ajuda a interpretar como o setor se organiza no espaço urbano.
-Para tornar essa geografia legível, a literatura de cartografia interativa e geovisualização discute o papel da exploração visual.
-Roth (2013) propõe uma taxonomia de primitivas de interação em cartografia e geovisualização, destacando operações como filtrar, ampliar, consultar e reordenar a representação como parte do raciocínio espacial mediado por mapas.
-Em diálogo com a agenda de dados abertos, Ansari (2022) inclui mapas entre os mecanismos capazes de ampliar a compreensão de conjuntos governamentais.
-A síntese dessas linhas orienta o presente estudo: a coordenada estimada a partir do endereço e das bases territoriais abertas não substitui, por si só, a análise; ela alimenta representações — pontos, mapas de calor e agregações por recortes do município — que permitem observar concentração, vazios e diferenças internas.
+A localização da empresa no município é parte da análise, e não só um campo de cadastro.
+Zenka (2021), ao estudar as firmas de tecnologia da informação e comunicação em Ostrava, na Tchéquia, encontrou concentração no centro e em áreas mais internas da cidade, e não uma dispersão uniforme.
+Contagem não é Ostrava, e o método de lá foi mapeamento em campo.
+Ainda assim, a contribuição que interessa aqui permanece: olhar a posição dentro da cidade muda a leitura do setor, coisa que um total municipal não mostra.
+Ansari (2022) inclui o mapa entre os recursos que ajudam a entender conjuntos de dados governamentais.
+A coordenada deste trabalho é estimada a partir do endereço e de bases territoriais abertas.
+Ela não substitui uma medição no terreno.
+Ela alimenta o mapa de pontos e a contagem por área do município.
+Como essas áreas não têm o mesmo tamanho, a comparação entre elas também usa uma medida relativa, como o número de estabelecimentos por quilômetro quadrado, e não apenas o total bruto.
 
 ### Aplicações web interativas para exploração de dados
 
-A materialização prática dos conceitos anteriores, no escopo de Sistemas de Informação, ocorre por meio de aplicações que integrem consulta, filtragem e visualização em uma interface acessível.
-Graves e Hendler (2013) defendem ferramentas que reduzam a necessidade de expertise técnica para explorar dados abertos e que apoiem a navegação por metadados e a construção de visualizações.
-Ansari (2022) recomenda plataformas avançadas com visualizações e recursos analíticos embutidos, associadas a avaliação do uso por diferentes stakeholders.
-Roth (2013), no domínio cartográfico, mostra que a interatividade não é adorno: ela estrutura a forma como o usuário formula e responde perguntas espaciais sobre o mapa.
-Combinadas, essas contribuições sustentam o quarto objetivo específico deste trabalho: desenvolver uma aplicação web interativa na qual indicadores, gráficos, mapas e tabelas operem sobre a base integrada, permitindo que o usuário explore as empresas de Tecnologia da Informação de Contagem de acordo com os atributos disponíveis.
-Assim, o referencial teórico conecta a abertura dos dados, a classificação da atividade, a leitura espacial e a interface de exploração em um mesmo encadeamento conceitual.
+Na prática, esses conceitos aparecem em uma aplicação que junta consulta, filtro e visualização.
+Ansari (2022) recomenda plataformas em que o gráfico e a consulta já venham com o dado, e em que o uso seja avaliado.
+Mesquita et al. (2026) mostram que, no Brasil, muitos painéis públicos de orçamento ainda não chegam nesse ponto: o acesso existe, mas a tela não ajuda quem tem pouca prática com dados.
+Essas referências apoiam dois objetivos deste trabalho: desenvolver a aplicação e avaliar a usabilidade dela por inspeção heurística.
+Na aplicação, indicadores, gráficos, mapa e tabelas funcionam sobre a mesma base, para a pessoa explorar as empresas de TI de Contagem com os atributos que as fontes permitem.
 
 ## Trabalhos Relacionados
 
 ## Metodologia
 
-<!-- Substituir esse paragrafo por outro apresentando de forma mais ampla o objetivo da pesquisa -->
-
-Este capítulo descreve como a pesquisa será conduzida, de modo a permitir a reprodução das etapas principais.
-São apresentados o tipo de pesquisa, o objeto de estudo, as etapas do trabalho, as fontes de dados, o tratamento e a integração das bases, os procedimentos de análise, as ferramentas e os critérios de conferência dos resultados.
+Este capítulo descreve como a pesquisa será feita.
+O objetivo é reunir dados abertos sobre as empresas de TI de Contagem, no recorte da divisão 62 da CNAE, e apresentá-los em uma aplicação web com mapa, gráficos, tabelas e filtros.
+A pesquisa também prevê uma inspeção heurística dessa interface e o cuidado para não expor dado pessoal além do que a consulta do setor exige.
+São apresentados o tipo de pesquisa, o objeto de estudo, as quatro etapas, as fontes, o tratamento das bases, a análise, a avaliação da interface e os limites dos resultados.
 
 ### Classificação da pesquisa
 
@@ -117,94 +155,155 @@ Utilizam-se documentos e bases oficiais já existentes, publicadas por órgãos 
 
 Quanto à abordagem, adota-se o caráter misto.
 A dimensão quantitativa aparece na contagem de estabelecimentos, na distribuição por subclasses da CNAE, por porte e por recortes territoriais.
-A dimensão qualitativa aparece na interpretação dos padrões espaciais e na discussão das limitações das fontes, sem pretender estabelecer relações causais entre localização e desempenho econômico.
+A dimensão qualitativa aparece na interpretação dos padrões espaciais, na inspeção heurística da interface e na discussão das limitações das fontes, sem pretender estabelecer relações causais entre localização e desempenho econômico.
 
 ### Objeto de estudo e recorte
 
 O objeto de estudo são os estabelecimentos de Tecnologia da Informação situados no município de Contagem (MG), identificados pelo código IBGE 3118601.
-O setor será delimitado pela Classificação Nacional de Atividades Econômicas (CNAE), com recorte inicial na divisão 62, correspondente a atividades dos serviços de tecnologia da informação.
-A unidade de análise será o estabelecimento constante do cadastro de CNPJ, e não a empresa como um todo: matriz e filial entram como registros distintos quando estiverem no município e na atividade selecionada.
-Serão considerados, em regra, estabelecimentos com situação cadastral ativa na fotografia da base utilizada.
-Não haverá participantes humanos nem aplicação de questionários; por isso, não se aplica tramitação em comitê de ética para coleta com pessoas.
+O setor fica delimitado pela CNAE-Subclasses 2.3, só com a atividade principal na divisão 62.
+Os códigos incluídos são:
+
+\begin{itemize}
+    \item 6201-5/01, desenvolvimento de programas de computador sob encomenda;
+    \item 6201-5/02, web design;
+    \item 6202-3/00, desenvolvimento e licenciamento de programas de computador customizáveis;
+    \item 6203-1/00, desenvolvimento e licenciamento de programas de computador não customizáveis;
+    \item 6204-0/00, consultoria em tecnologia da informação;
+    \item 6209-1/00, suporte técnico, manutenção e outros serviços em tecnologia da informação.
+\end{itemize}
+
+Ficam de fora, neste recorte, hospedagem e portais (divisão 63), comércio e fabricação de equipamentos de informática, conserto de computador e curso de informática.
+A unidade de análise é o estabelecimento do cadastro de CNPJ.
+Matriz e filial entram como registros distintos quando estiverem no município e na atividade selecionada.
+Serão considerados estabelecimentos com situação cadastral ativa na fotografia da base utilizada.
+O CNAE secundário não será usado como critério de entrada.
+
+A descrição dos dados será orientada por quatro perguntas: onde esses estabelecimentos se concentram em Contagem; qual é o perfil de porte; qual é a proporção de microempreendedores individuais; e qual parte dos endereços recebe coordenada em cada nível de junção.
+São perguntas para organizar a leitura. Não são hipóteses de causa e efeito.
+
+Não haverá teste com usuários nem questionário.
+A avaliação da interface será uma inspeção feita pelo próprio autor, descrita mais adiante.
+Por isso, não se aplica tramitação em comitê de ética para coleta com pessoas.
 Os dados empregados são públicos e abertos.
+
+### Proteção de dados
+
+A Lei nº 13.709/2018, a Lei Geral de Proteção de Dados Pessoais, trata de dado de pessoa natural.
+O foco deste trabalho é o estabelecimento, isto é, a unidade cadastrada no CNPJ.
+A base de sócios da Receita Federal, que pode trazer CPF de pessoa física, mesmo mascarado, não será baixada nem carregada na aplicação.
+Telefone e e-mail do estabelecimento também não entram na tela, porque não são necessários para descrever o setor nem para montar o mapa.
+O que será exibido é informação que a Receita já publica como dado aberto do estabelecimento: nome, CNAE, porte, situação cadastral e endereço.
+No caso do microempreendedor individual, o nome do cadastro pode ser o nome da pessoa.
+Esse nome já é público no CNPJ.
+A aplicação não junta esse nome com CPF nem com quadro de sócios.
+Não haverá cadastro de usuário no site.
 
 ### Etapas do trabalho
 
-<!-- Frase muito generica, substitua por: "Esta pesquisa será realizada em 4 etapas" -->
-O desenvolvimento seguirá um conjunto encadeado de etapas, alinhado aos objetivos específicos.
+Esta pesquisa será realizada em 4 etapas.
 A Figura 1 resume o fluxo geral.
 
 ```mermaid
 flowchart TD
-    A[Definir recorte CNAE de TI] --> B[Extrair CNPJ de Contagem]
-    B --> C[Integrar razão social, porte e capital]
-    C --> D[Obter coordenadas via CNEFE]
-    D --> E[Associar malhas territoriais]
-    E --> F[Conferir totais no CEMPRE ou SIDRA]
-    F --> G[Desenvolver aplicação web interativa]
-    G --> H[Analisar distribuição e apresentar resultados]
+    A[Recorte e coleta dos dados] --> B[Integração e localização no mapa]
+    B --> C[Desenvolvimento da aplicação]
+    C --> D[Análise e avaliação da interface]
 ```
 
-As etapas serão as seguintes:
-
-\begin{itemize}
-    \item definir a lista de subclasses CNAE que representam o setor de TI no escopo do trabalho;
-    \item extrair e filtrar os estabelecimentos de Contagem na base de CNPJ, conforme município, situação cadastral e CNAE;
-    \item integrar atributos complementares, como razão social, porte e capital social, pela chave do CNPJ básico;
-    \item obter latitude e longitude a partir do CNEFE, preferencialmente pela junção por CEP, com registro da qualidade do georreferenciamento;
-    \item associar os pontos às malhas territoriais do IBGE para leitura por recortes do município;
-    \item conferir a ordem de grandeza das contagens com estatísticas agregadas do CEMPRE ou do SIDRA;
-    \item desenvolver a aplicação web interativa com indicadores, filtros, mapas, gráficos e tabelas;
-    \item analisar a distribuição geográfica e discutir os resultados à luz das limitações das fontes.
-\end{itemize}
+Na primeira etapa, fecha-se a lista de subclasses da divisão 62 e extraem-se os estabelecimentos de Contagem na base de CNPJ, com situação cadastral ativa e CNAE principal nessa lista.
+Na segunda etapa, juntam-se razão social, porte e capital social, padronizam-se os endereços e obtêm-se as coordenadas no CNEFE, com registro do nível da junção.
+Os pontos são então associados às malhas do município, e os totais são conferidos, em ordem de grandeza, com o CEMPRE ou o SIDRA.
+O resultado é gravado em um banco local, com a data da fotografia.
+Na terceira etapa, desenvolve-se a aplicação web, que consulta esse banco, com indicadores, filtros, mapas, gráficos e tabelas.
+Na quarta etapa, descreve-se a distribuição das empresas, já com a medida relativa por área, e avalia-se a usabilidade da interface por inspeção heurística.
 
 ### Fontes de dados e coleta
 
 A coleta virá de bases abertas oficiais, por meio do download e da consulta a esses arquivos publicados por órgãos públicos.
 A principal fonte para a lista de estabelecimentos será a base pública de CNPJ da Receita Federal do Brasil, que reúne identificação, CNAE, situação cadastral e endereço declarado.
-A estrutura e a descrição das atividades virão da CNAE mantida pelo IBGE, utilizada para fechar o recorte setorial.
-As coordenadas geográficas serão obtidas no Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE), do IBGE, associado ao Censo Demográfico.
-As malhas territoriais do IBGE fornecerão o contorno do município e, quando disponíveis no nível adequado, recortes internos úteis à agregação espacial.
+O arquivo de sócios dessa base não será utilizado.
+A estrutura e a descrição das atividades virão da CNAE mantida pelo IBGE, na versão Subclasses 2.3, usada para fechar o recorte da divisão 62.
+As coordenadas geográficas serão obtidas no Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE), do IBGE, associado ao Censo Demográfico de 2022.
+As malhas territoriais do IBGE fornecerão o contorno do município e, quando disponíveis no nível adequado, recortes internos úteis à agregação espacial, com a área em quilômetros quadrados para a medida relativa.
 Para conferência de totais, serão consultadas tabelas do Cadastro Central de Empresas (CEMPRE) por meio do SIDRA, sempre no município de Contagem e em nível de CNAE compatível com o recorte.
 Como apoio à extração, poderá ser utilizada a plataforma Base dos Dados, desde que os filtros reproduzam o mesmo universo da fonte oficial.
 O mapa de fundo da aplicação utilizará tiles do OpenStreetMap.
-Não se utilizará geocodificação em lote por serviços online para milhares de endereços; o CNEFE será a base prevista para essa etapa.
+A base inteira não será geocodificada em lote por serviço online.
+O CNEFE é a fonte da coordenada.
+Um serviço ou uma consulta manual em outra fonte entra só na amostra de conferência, descrita a seguir.
 
 ### Tratamento e integração das bases
 
 Os arquivos nacionais não serão carregados integralmente na aplicação.
-O tratamento ocorrerá em ambiente local, com filtragem prévia para Contagem e para as subclasses CNAE definidas.
-A integração seguirá chaves explícitas: código de município da Receita para isolar Contagem; CNPJ básico para unir estabelecimentos e quadros de empresas; CNAE sem máscara para padronizar a atividade; código IBGE 3118601 para ligar o resultado às malhas, ao CNEFE e ao CEMPRE; CEP, e quando possível logradouro e número, para estimar a coordenada.
-Cada estabelecimento georreferenciado receberá um indicador da origem do ponto, por exemplo coordenada associada ao CEP, tentativa por endereço ou ausência de localização.
-Registros sem coordenada permanecerão na base analítica para contagens cadastrais, mas poderão ficar de fora das visualizações de mapa ou aparecer em categoria própria.
-A base resultante será exportada em formato adequado ao consumo da aplicação, reduzindo volume e facilitando a reprodução do painel.
+O tratamento ocorrerá em ambiente local, com filtragem prévia para Contagem e para as subclasses da divisão 62.
+A integração seguirá chaves explícitas: código de município da Receita para isolar Contagem; CNPJ básico para unir estabelecimentos e dados da empresa, como razão social, porte e capital social; CNAE sem máscara para padronizar a atividade; código IBGE 3118601 para ligar o resultado às malhas, ao CNEFE e ao CEMPRE.
+
+O endereço passa por uma padronização antes da junção com o CNEFE.
+O CEP fica com 8 dígitos, sem hífen.
+O texto vai para maiúsculas, sem acento.
+Abreviações comuns de tipo de logradouro são expandidas, como R. para RUA e AV. para AVENIDA, nos dois lados da junção.
+Número vazio ou registrado como S/N não entra na tentativa mais específica.
+
+A junção com o CNEFE segue uma ordem.
+Primeiro, tenta-se CEP, logradouro padronizado e número.
+Se não houver correspondência, tenta-se só o CEP, e o ponto é marcado como aproximado.
+Se o CEP do CNPJ não existir no CNEFE, o estabelecimento continua na base para as contagens e as tabelas, mas fica de fora do mapa de pontos.
+Cada registro guarda o nível obtido: endereço completo, só CEP ou sem coordenada.
+Com isso, calcula-se a taxa de acerto de cada nível.
+
+Quando várias empresas caem na mesma coordenada, o que é esperado no nível de CEP, o mapa não mostra um único ponto mudo.
+A aplicação indica quantos estabelecimentos estão naquele lugar.
+Essa sobreposição também é considerada na leitura de mapas de densidade, para não tratar um CEP com muitas empresas como se fosse um único endereço conferido no terreno.
+
+Para estimar o erro da localização, uma amostra de cerca de 30 endereços será conferida em outra fonte, por consulta manual no mapa ou por um serviço de geocodificação usado só nessa amostra.
+A conferência não substitui o CNEFE na base inteira.
+Ela serve para dizer, de forma aproximada, o quanto o ponto se afasta do endereço informado.
+O resultado dessa integração será gravado em um banco de dados local, com a data da fotografia das bases.
+A aplicação consulta esse banco, e não os arquivos nacionais nem os sites da Receita e do IBGE.
 
 ### Procedimentos de análise
 
-A análise será descritiva e exploratória.
-Serão calculados totais de estabelecimentos ativos no recorte, distribuições por subclasse CNAE e por porte, e indicadores de cobertura do georreferenciamento.
-No eixo espacial, serão observados a concentração de pontos no município, eventuais vazios e a agregação por recortes territoriais disponíveis nas malhas.
-Mapas de pontos e, quando fizer sentido, representações de densidade auxiliarão a leitura da distribuição.
-A comparação com o CEMPRE não buscará igualdade exata de números, pois as fotografias temporais e os critérios de cada base diferem; buscará verificar se a ordem de grandeza é coerente.
-Os resultados dessa análise serão apresentados em tabelas, gráficos e mapas, e discutidos no capítulo de resultados.
+A análise será descritiva e seguirá as quatro perguntas do objeto de estudo.
+Serão calculados totais de estabelecimentos ativos no recorte, a distribuição por subclasse da CNAE, o perfil de porte e a proporção de microempreendedores individuais.
+Também serão apresentados os percentuais de georreferenciamento em cada nível de junção.
+No mapa, serão observados onde os pontos se concentram, onde há vazios e como os estabelecimentos se distribuem pelos recortes territoriais disponíveis.
+A comparação entre áreas usa o total e uma medida normalizada, o número de estabelecimentos por quilômetro quadrado, para uma área maior não parecer mais concentrada só por ter mais espaço.
+Mapas de pontos e, quando a taxa de coordenada permitir, uma representação de densidade ajudam essa leitura, com o aviso sobre pontos sobrepostos.
+A comparação com o CEMPRE não busca números iguais, porque o ano e os critérios de cada base são diferentes.
+O que se verifica é se a ordem de grandeza é coerente.
+Os resultados serão apresentados em tabelas, gráficos e mapas, e discutidos no capítulo de resultados.
 
 ### Desenvolvimento da aplicação e ferramentas
 
-A aplicação web será o meio de consulta e exploração da base integrada.
-Ela reunirá indicadores, filtros, tabelas, gráficos e mapa interativo, permitindo ao usuário examinar os estabelecimentos de TI de Contagem conforme os atributos disponíveis.
+A aplicação web será o meio de consulta do banco local.
+Ela reunirá indicadores, filtros, tabelas, gráficos e mapa interativo, sempre sobre os mesmos registros carregados.
+Uma atualização dos dados será uma nova carga no banco, com outra data de fotografia, e não uma consulta ao vivo na hora em que alguém abre o site.
 Para o tratamento dos dados, serão utilizadas ferramentas de análise e manipulação tabular em linguagem Python, com apoio de bibliotecas adequadas à leitura de arquivos grandes e à filtragem por município e CNAE.
-Para a interface, serão empregados recursos de desenvolvimento web e biblioteca de mapas interativos compatível com tiles do OpenStreetMap.
+Para a interface, serão empregados recursos de desenvolvimento web e uma biblioteca de mapas interativos compatível com tiles do OpenStreetMap.
 O detalhamento da arquitetura, das telas e das decisões de implementação será apresentado no capítulo de desenvolvimento.
-As versões das bases, as datas de download e as regras de filtro serão registradas para tornar o processo auditável.
+As versões das bases, as datas de download e as regras de filtro serão registradas para que o processo possa ser refeito.
+
+### Avaliação heurística
+
+A usabilidade será avaliada por inspeção heurística, feita pelo autor, sem usuários convidados.
+A lista usada é a das dez heurísticas de Nielsen, no mesmo tipo de registro adotado por Vázquez-Ingelmo et al. (2024): problema encontrado, heurística relacionada e gravidade.
+A gravidade será anotada em três níveis: leve, médio e grave.
+As telas percorridas serão o mapa, os filtros, os gráficos e a tabela.
+O resultado dessa inspeção entra no capítulo de resultados, como lista de problemas e ajustes possíveis, e não como nota da aplicação.
 
 ### Limitações metodológicas previstas
 
-Algumas limitações são inerentes às fontes e serão tratadas com transparência.
-O CNAE reflete a atividade declarada no cadastro, e não uma auditoria do que a empresa executa no dia a dia.
-A coordenada obtida pelo CNEFE é uma estimativa a partir do endereço ou do CEP, e não uma localização oficial do estabelecimento no terreno.
-Porte e capital social estão disponíveis no CNPJ; já o pessoal ocupado por empresa, em geral, não está de forma pública e identificável nas bases abertas usadas neste trabalho.
-Totais do CEMPRE e da RAIS não substituem a lista de CNPJs no mapa e não devem ser lidos como a mesma contagem.
-Essas restrições não invalidam o estudo; delimitam o que os resultados podem afirmar com segurança.
+Algumas limitações vêm das fontes e serão descritas com os resultados.
+O CNAE é a atividade declarada no cadastro, não uma verificação do que a empresa faz no dia a dia.
+Usar só a atividade principal deixa de fora estabelecimentos de outro ramo que também prestam serviço de TI.
+A coordenada do CNEFE é uma estimativa a partir do endereço ou do CEP, não a localização oficial do estabelecimento no terreno.
+A padronização do endereço, a ordem da junção, a taxa de acerto de cada nível e a amostra de cerca de 30 endereços existem para deixar esse erro visível.
+Porte e capital social estão no CNPJ.
+O número de pessoas ocupadas por empresa, em geral, não está disponível de forma pública e identificável nas bases usadas aqui.
+Totais do CEMPRE não substituem a lista de CNPJs no mapa e não devem ser lidos como a mesma contagem.
+O banco guarda a fotografia do mês carregado. O CNPJ muda todo mês, e a aplicação não acompanha essa mudança sozinha.
+A inspeção heurística, feita por uma pessoa só, encontra problemas de uso, mas não mede como um grupo de usuários de fato utiliza a tela.
+Esses limites indicam o que os resultados podem afirmar.
 
 ## Desenvolvimento
 
