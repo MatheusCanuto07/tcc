@@ -107,6 +107,7 @@ A identificação de um setor em cadastros públicos depende de uma classificaç
 No Brasil, a Classificação Nacional de Atividades Econômicas (CNAE), mantida pelo IBGE, é o instrumento usado pelo sistema estatístico e pelos órgãos que registram empresas (IBGE, 2020).
 A CNAE organiza as atividades em níveis, da seção até a subclasse.
 No CNPJ, cada estabelecimento tem um código de atividade principal.
+
 Neste trabalho, empresa de TI é o estabelecimento cuja atividade principal está na divisão 62, de serviços de tecnologia da informação, na versão CNAE-Subclasses 2.3.
 Os códigos são 6201-5/01 (desenvolvimento de programas sob encomenda), 6201-5/02 (web design), 6202-3/00 (programas customizáveis), 6203-1/00 (programas não customizáveis), 6204-0/00 (consultoria em tecnologia da informação) e 6209-1/00 (suporte técnico e outros serviços em TI).
 Não entram a divisão 63 (hospedagem, tratamento de dados e portais), o comércio e a fabricação de equipamentos, o conserto de computador nem o curso de informática.
@@ -179,7 +180,6 @@ Serão considerados estabelecimentos com situação cadastral ativa na fotografi
 O CNAE secundário não será usado como critério de entrada.
 
 A descrição dos dados será orientada por quatro perguntas: onde esses estabelecimentos se concentram em Contagem; qual é o perfil de porte; qual é a proporção de microempreendedores individuais; e qual parte dos endereços recebe coordenada em cada nível de junção.
-São perguntas para organizar a leitura. Não são hipóteses de causa e efeito.
 
 Não haverá teste com usuários nem questionário.
 A avaliação da interface será uma inspeção feita pelo próprio autor, descrita mais adiante.
@@ -222,11 +222,14 @@ Na quarta etapa, descreve-se a distribuição das empresas, já com a medida rel
 A coleta virá de bases abertas oficiais, por meio do download e da consulta a esses arquivos publicados por órgãos públicos.
 A principal fonte para a lista de estabelecimentos será a base pública de CNPJ da Receita Federal do Brasil, que reúne identificação, CNAE, situação cadastral e endereço declarado.
 O arquivo de sócios dessa base não será utilizado.
+
 A estrutura e a descrição das atividades virão da CNAE mantida pelo IBGE, na versão Subclasses 2.3, usada para fechar o recorte da divisão 62.
 As coordenadas geográficas serão obtidas no Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE), do IBGE, associado ao Censo Demográfico de 2022.
 As malhas territoriais do IBGE fornecerão o contorno do município e, quando disponíveis no nível adequado, recortes internos úteis à agregação espacial, com a área em quilômetros quadrados para a medida relativa.
+
 Para conferência de totais, serão consultadas tabelas do Cadastro Central de Empresas (CEMPRE) por meio do SIDRA, sempre no município de Contagem e em nível de CNAE compatível com o recorte.
 Como apoio à extração, poderá ser utilizada a plataforma Base dos Dados, desde que os filtros reproduzam o mesmo universo da fonte oficial.
+
 O mapa de fundo da aplicação utilizará tiles do OpenStreetMap.
 A base inteira não será geocodificada em lote por serviço online.
 O CNEFE é a fonte da coordenada.
@@ -236,6 +239,7 @@ Um serviço ou uma consulta manual em outra fonte entra só na amostra de confer
 
 Os arquivos nacionais não serão carregados integralmente na aplicação.
 O tratamento ocorrerá em ambiente local, com filtragem prévia para Contagem e para as subclasses da divisão 62.
+
 A integração seguirá chaves explícitas: código de município da Receita para isolar Contagem; CNPJ básico para unir estabelecimentos e dados da empresa, como razão social, porte e capital social; CNAE sem máscara para padronizar a atividade; código IBGE 3118601 para ligar o resultado às malhas, ao CNEFE e ao CEMPRE.
 
 O endereço passa por uma padronização antes da junção com o CNEFE.
@@ -250,6 +254,10 @@ Se não houver correspondência, tenta-se só o CEP, e o ponto é marcado como a
 Se o CEP do CNPJ não existir no CNEFE, o estabelecimento continua na base para as contagens e as tabelas, mas fica de fora do mapa de pontos.
 Cada registro guarda o nível obtido: endereço completo, só CEP ou sem coordenada.
 Com isso, calcula-se a taxa de acerto de cada nível.
+
+O registro também guarda o nível de geocodificação informado pelo próprio CNEFE, na variável NV_GEO_COORD.
+Esse campo indica se a coordenada é a original do Censo 2022, se foi modificada para apartamentos no mesmo número, se foi estimada pelo IBGE ou se foi atribuída por face de quadra, localidade ou setor censitário.
+Assim, uma junção por endereço completo que herdou uma coordenada estimada pelo IBGE não é contada como ponto coletado em campo.
 
 Quando várias empresas caem na mesma coordenada, o que é esperado no nível de CEP, o mapa não mostra um único ponto mudo.
 A aplicação indica quantos estabelecimentos estão naquele lugar.
@@ -269,6 +277,7 @@ Também serão apresentados os percentuais de georreferenciamento em cada nível
 No mapa, serão observados onde os pontos se concentram, onde há vazios e como os estabelecimentos se distribuem pelos recortes territoriais disponíveis.
 A comparação entre áreas usa o total e uma medida normalizada, o número de estabelecimentos por quilômetro quadrado, para uma área maior não parecer mais concentrada só por ter mais espaço.
 Mapas de pontos e, quando a taxa de coordenada permitir, uma representação de densidade ajudam essa leitura, com o aviso sobre pontos sobrepostos.
+
 A comparação com o CEMPRE não busca números iguais, porque o ano e os critérios de cada base são diferentes.
 O que se verifica é se a ordem de grandeza é coerente.
 Os resultados serão apresentados em tabelas, gráficos e mapas, e discutidos no capítulo de resultados.
@@ -278,7 +287,9 @@ Os resultados serão apresentados em tabelas, gráficos e mapas, e discutidos no
 A aplicação web será o meio de consulta do banco local.
 Ela reunirá indicadores, filtros, tabelas, gráficos e mapa interativo, sempre sobre os mesmos registros carregados.
 Uma atualização dos dados será uma nova carga no banco, com outra data de fotografia, e não uma consulta ao vivo na hora em que alguém abre o site.
+
 Para o tratamento dos dados, serão utilizadas ferramentas de análise e manipulação tabular em linguagem Python, com apoio de bibliotecas adequadas à leitura de arquivos grandes e à filtragem por município e CNAE.
+
 Para a interface, serão empregados recursos de desenvolvimento web e uma biblioteca de mapas interativos compatível com tiles do OpenStreetMap.
 O detalhamento da arquitetura, das telas e das decisões de implementação será apresentado no capítulo de desenvolvimento.
 As versões das bases, as datas de download e as regras de filtro serão registradas para que o processo possa ser refeito.
@@ -296,8 +307,16 @@ O resultado dessa inspeção entra no capítulo de resultados, como lista de pro
 Algumas limitações vêm das fontes e serão descritas com os resultados.
 O CNAE é a atividade declarada no cadastro, não uma verificação do que a empresa faz no dia a dia.
 Usar só a atividade principal deixa de fora estabelecimentos de outro ramo que também prestam serviço de TI.
-A coordenada do CNEFE é uma estimativa a partir do endereço ou do CEP, não a localização oficial do estabelecimento no terreno.
+
+A coordenada do CNEFE foi registrada em campo pelo IBGE durante o Censo de 2022, e o próprio cadastro informa o nível de precisão de cada ponto.
+Ela representa o endereço censitário, não a localização auditada do estabelecimento.
+
+A principal fonte de erro está na junção.
+Como o CNEFE não tem CNPJ, a ligação é feita pelo endereço.
+Quando apenas o CEP coincide, a coordenada atribuída é uma aproximação, e vários estabelecimentos podem cair no mesmo ponto.
+
 A padronização do endereço, a ordem da junção, a taxa de acerto de cada nível e a amostra de cerca de 30 endereços existem para deixar esse erro visível.
+
 Porte e capital social estão no CNPJ.
 O número de pessoas ocupadas por empresa, em geral, não está disponível de forma pública e identificável nas bases usadas aqui.
 Totais do CEMPRE não substituem a lista de CNPJs no mapa e não devem ser lidos como a mesma contagem.

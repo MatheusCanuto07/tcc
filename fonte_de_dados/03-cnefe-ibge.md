@@ -35,6 +35,17 @@ Código do município, distrito, setor censitário, tipo e nome do logradouro, n
 
 Para o cruzamento, use CEP, nome do logradouro e número. Guarde o setor censitário se for agregar o mapa em unidade oficial do IBGE, em vez de bairro.
 
+Guarde também `NV_GEO_COORD`, o nível de geocodificação da coordenada. Códigos conferidos no `Dicionario_CNEFE_Censo_2022.xls` (pasta `Arquivos_CNEFE/CSV/` do FTP):
+
+- 1 = Endereço, coordenada original do Censo 2022
+- 2 = Endereço, coordenada modificada (apartamentos em um mesmo número no logradouro)
+- 3 = Endereço, coordenada estimada (endereços originalmente sem coordenadas ou com coordenadas inválidas)
+- 4 = Face de quadra
+- 5 = Localidade
+- 6 = Setor censitário
+
+Só o código 1 é ponto coletado em campo sem ajuste. Uma junção por endereço completo com código 3 a 6 herda uma coordenada aproximada do próprio IBGE.
+
 ## Como juntar com o CNPJ
 
 1. Normalize o CEP dos dois lados para 8 dígitos, sem hífen.
