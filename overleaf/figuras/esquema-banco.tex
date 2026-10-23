@@ -1,0 +1,97 @@
+% Esquema do banco de dados MySQL — incluído em textos.tex por \input{figuras/esquema-banco}
+% Requer no preâmbulo de principal.tex: \usetikzlibrary{positioning}
+\begin{figure}[htbp]
+    \centering
+    \caption{Esquema do banco de dados da aplicação}
+    \label{fig:esquema-banco}
+    \vspace{-0.2cm}
+    \renewcommand{\arraystretch}{1.1}
+    \begin{tikzpicture}[
+        tabela/.style={
+            draw=black,
+            thick,
+            inner sep=0pt,
+            font=\scriptsize\ttfamily,
+            fill=white
+        },
+        rel/.style={thick},
+        card/.style={font=\scriptsize, inner sep=2pt}
+    ]
+        \node[tabela, anchor=north] (estab) at (0,0) {%
+            \begin{tabular}{l}
+                \multicolumn{1}{c}{\textbf{estabelecimento}} \\ \hline
+                id\_estabelecimento (PK) \\
+                cnpj \\
+                cnpj\_basico (FK) \\
+                cnae\_subclasse (FK) \\
+                id\_carga (FK) \\
+                nome\_fantasia \\
+                situacao\_cadastral \\
+                data\_inicio \\
+                logradouro \\
+                numero \\
+                bairro \\
+                cep
+            \end{tabular}};
+
+        \node[tabela, anchor=north east] (ativ) at (-2.9,0) {%
+            \begin{tabular}{l}
+                \multicolumn{1}{c}{\textbf{atividade}} \\ \hline
+                cnae\_subclasse (PK) \\
+                descricao \\
+                classe \\
+                grupo \\
+                divisao
+            \end{tabular}};
+
+        \node[tabela, anchor=north west] (empresa) at (2.9,0) {%
+            \begin{tabular}{l}
+                \multicolumn{1}{c}{\textbf{empresa}} \\ \hline
+                cnpj\_basico (PK) \\
+                razao\_social \\
+                porte \\
+                capital\_social \\
+                opcao\_mei
+            \end{tabular}};
+
+        \node[tabela, below=0.9cm of estab] (loc) {%
+            \begin{tabular}{l}
+                \multicolumn{1}{c}{\textbf{localizacao}} \\ \hline
+                id\_estabelecimento (PK, FK) \\
+                latitude \\
+                longitude \\
+                nivel\_juncao \\
+                nv\_geo\_coord \\
+                qtd\_mesma\_coordenada \\
+                id\_area (FK)
+            \end{tabular}};
+
+        \node[tabela, anchor=north east] (carga) at (ativ.east |- loc.north) {%
+            \begin{tabular}{l}
+                \multicolumn{1}{c}{\textbf{carga}} \\ \hline
+                id\_carga (PK) \\
+                data\_fotografia \\
+                data\_download \\
+                versoes\_bases \\
+                regras\_filtro
+            \end{tabular}};
+
+        \node[tabela, anchor=north west] (area) at (empresa.west |- loc.north) {%
+            \begin{tabular}{l}
+                \multicolumn{1}{c}{\textbf{area}} \\ \hline
+                id\_area (PK) \\
+                nome \\
+                tipo \\
+                area\_km2 \\
+                geometria
+            \end{tabular}};
+
+        \draw[rel] (ativ.east) -- node[card, pos=0.15, above] {1} node[card, pos=0.85, above] {N} (ativ.east -| estab.west);
+        \draw[rel] (empresa.west) -- node[card, pos=0.15, above] {1} node[card, pos=0.85, above] {N} (empresa.west -| estab.east);
+        \draw[rel] (estab.south) -- node[card, pos=0.2, right] {1} node[card, pos=0.8, right] {1} (loc.north);
+        \draw[rel] (carga.north) |- node[card, pos=0.15, right] {1} node[card, pos=0.9, above] {N} ([yshift=0.5cm]estab.south west);
+        \draw[rel] (area.west) -- node[card, pos=0.15, above] {1} node[card, pos=0.85, above] {N} (area.west -| loc.east);
+    \end{tikzpicture}
+    \vspace{-0.2cm}
+    \\\textbf{\footnotesize Fonte: Elaborado pelo autor.}
+\end{figure}

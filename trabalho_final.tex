@@ -4,7 +4,7 @@
 % As citações dependem das entradas de referencias.bib e do arquivo abntex2-alf.bst no projeto.
 % A Figura 1 depende de \usepackage{tikz} e \usetikzlibrary{arrows.meta,positioning} no preâmbulo.
 
-\section{\esp Introdução}
+\section{Introdução}
 
 O uso de dados para compreender a dinâmica econômica de um município pode contribuir para a identificação de características relacionadas à distribuição das atividades econômicas, à ocupação territorial e ao desenvolvimento de determinados setores.
 Nesse contexto, dados produzidos e mantidos por órgãos públicos podem ser utilizados não apenas para fins administrativos, mas também para produzir informações que auxiliem cidadãos, empresas, pesquisadores e gestores na compreensão do ambiente econômico local.
@@ -14,7 +14,6 @@ Assim, conhecer um setor em uma cidade exige cruzar dados de mais de uma institu
 
 A existência de dados abertos com essas características oferece diferentes possibilidades de análise. Porém, o arquivo original, do jeito que o órgão publica, não é simples de consultar.
 Neste trabalho, acessível quer dizer facilidade de uso: os dados ficam reunidos em um único site, com uma interface clara, em que a pessoa vê mapa, gráfico e tabela sem precisar baixar várias bases e cruzá-las.
-Não se trata de acessibilidade digital no sentido de normas para pessoas com deficiência, como a WCAG ou o Modelo de Acessibilidade em Governo Eletrônico (eMAG).
 Os arquivos podem conter muitos registros, códigos e campos de endereço, espalhados em mais de uma fonte, o que dificulta a leitura quando eles são abertos direto na tabela.
 Segundo \citeonline{ansari2022}, mesmo com mais dados governamentais disponíveis, o uso ainda pode ser limitado, e a visualização pode deixar essas informações mais fáceis de entender.
 Diante desse cenário, este trabalho busca responder à seguinte questão de pesquisa: como dados abertos podem ser combinados para caracterizar e apresentar, de maneira acessível e interativa, informações sobre as empresas do setor de Tecnologia da Informação localizadas no município de Contagem?
@@ -27,7 +26,7 @@ Ficam de fora telecomunicações, hospedagem de dados, comércio e fabricação 
 A lista fechada de códigos está na metodologia.
 A unidade observada é o estabelecimento do CNPJ, e não o grupo econômico: matriz e filial contam separado quando as duas estão no município e na atividade escolhida.
 
-Para responder a essa questão, o objetivo geral deste trabalho é desenvolver uma aplicação web interativa que permita caracterizar e visualizar as empresas do setor de Tecnologia da Informação do município de Contagem a partir da integração de dados abertos.
+O objetivo geral deste trabalho é desenvolver uma aplicação web interativa que permita caracterizar e visualizar as empresas do setor de Tecnologia da Informação do município de Contagem a partir da integração de dados abertos.
 A aplicação reunirá indicadores, gráficos, mapas, tabelas e mecanismos de filtragem, ajustados à estrutura e à qualidade das fontes utilizadas.
 
 Como objetivos específicos, pretende-se:
@@ -39,7 +38,7 @@ Como objetivos específicos, pretende-se:
     \item testar a aplicação, conferindo a localização atribuída aos estabelecimentos e avaliando a usabilidade da interface por meio de inspeção heurística.
 \end{itemize}
 
-Os dados usados são cadastrais e já publicados. Ainda assim, o trabalho leva em conta a Lei Geral de Proteção de Dados Pessoais, Lei nº 13.709, de 14 de agosto de 2018 \cite{brasil2018}.
+Os dados usados são cadastrais e já publicados. Ainda assim, o trabalho leva em conta a Lei Geral de Proteção de Dados Pessoais (LGPD), Lei nº 13.709, de 14 de agosto de 2018 \cite{brasil2018}.
 A aplicação não carrega a base de sócios, em que aparece CPF de pessoa física, e não pede cadastro de quem consulta o site.
 O que se mostra é dado do estabelecimento. O detalhe desse cuidado está na metodologia.
 
@@ -62,12 +61,12 @@ A Seção 4 descreve a metodologia empregada, incluindo a coleta e a integraçã
 A Seção 5 apresenta e discute os resultados obtidos, bem como os testes da aplicação.
 Por fim, a Seção 6 apresenta as conclusões do trabalho, suas limitações e as possibilidades de continuidade da pesquisa.
 
-\section{\esp Referencial Teórico}
+\section{Referencial Teórico}
 
 Esta seção apresenta os conceitos que fundamentam o trabalho.
 São tratados, em sequência, dados abertos, visualização e usabilidade, avaliação heurística, a classificação das atividades econômicas, a distribuição geográfica das empresas e as aplicações web de consulta.
 
-\subsection{\esp Dados abertos governamentais}
+\subsection{Dados abertos governamentais}
 
 Dados abertos governamentais são informações produzidas ou mantidas pelo poder público e disponibilizadas para que outras pessoas possam usá-las de novo.
 O objetivo costuma ser aumentar a transparência e permitir que esses dados sejam reaproveitados.
@@ -79,7 +78,7 @@ Muita gente não consegue ler o formato, cruzar bases diferentes e interpretar a
 Uma aplicação que junta as bases e mostra mapa, gráfico e filtro pode tornar essa consulta mais simples.
 Esse é o caminho deste trabalho: caracterizar as empresas de TI de Contagem a partir de bases abertas nacionais, e não a partir de um arquivo municipal já pronto.
 
-\subsection{\esp Visualização de dados e usabilidade}
+\subsection{Visualização de dados e usabilidade}
 
 A visualização de dados é uma forma de reduzir a distância entre o arquivo publicado e o uso por quem não tem domínio técnico.
 \citeonline{mesquita2026} analisaram 30 painéis e 53 telas de consulta de dados de orçamento público no Brasil.
@@ -89,11 +88,10 @@ Falta contexto, e a tela quase não considera a pessoa que está consultando.
 Para os autores, gráfico, mapa e consulta junto do dado tendem a ser mais úteis do que a entrega isolada do arquivo.
 Por isso este trabalho reúne indicadores, tabelas, filtros e mapa, em vez de disponibilizar só a planilha tratada.
 
-\subsection{\esp Avaliação heurística de usabilidade}
+\subsection{Avaliação heurística de usabilidade}
 
 Usabilidade, neste trabalho, é a facilidade de usar a interface.
 A pessoa encontra a informação, entende o que está vendo e consegue filtrar sem se perder.
-Como já foi dito na introdução, não se trata de normas de acessibilidade digital.
 A avaliação heurística é uma inspeção da tela.
 Quem avalia percorre a interface com uma lista de princípios e anota os problemas encontrados.
 A lista mais usada é a das dez heurísticas de \citeonline{nielsen1994}.
@@ -103,7 +101,7 @@ Cada avaliador registrou o problema, a heurística relacionada e a gravidade.
 O estudo mostra que o método ajuda a localizar falhas de navegação, de retorno ao usuário e de organização da tela antes de um teste com o público final.
 Este trabalho usa o mesmo tipo de inspeção na aplicação desenvolvida, para registrar o que dificulta a consulta ao mapa, aos filtros, aos gráficos e à tabela.
 
-\subsection{\esp Classificação de atividades econômicas e integração de bases}
+\subsection{Classificação de atividades econômicas e integração de bases}
 
 A identificação de um setor em cadastros públicos depende de uma classificação padronizada das atividades.
 No Brasil, a Classificação Nacional de Atividades Econômicas (CNAE), mantida pelo IBGE, é o instrumento usado pelo sistema estatístico e pelos órgãos que registram empresas \cite{ibge2020}.
@@ -118,7 +116,7 @@ O código, sozinho, não monta o mapa.
 É preciso juntar o cadastro de estabelecimentos, a tabela da CNAE, o endereço com coordenada e o contorno do município.
 Sem essa junção, a atividade, o endereço e a localização ficam em arquivos separados.
 
-\subsection{\esp Distribuição espacial de empresas e geovisualização}
+\subsection{Distribuição espacial de empresas e geovisualização}
 
 A localização da empresa no município é parte da análise, e não só um campo de cadastro.
 \citeonline{zenka2021}, ao estudar as firmas de tecnologia da informação e comunicação em Ostrava, na Tchéquia, encontraram concentração no centro e em áreas mais internas da cidade, e não uma dispersão uniforme.
@@ -130,7 +128,7 @@ Ela não substitui uma medição no terreno.
 Ela alimenta o mapa de pontos e a contagem por área do município.
 Como essas áreas não têm o mesmo tamanho, a comparação entre elas também usa uma medida relativa, como o número de estabelecimentos por quilômetro quadrado, e não apenas o total bruto.
 
-\subsection{\esp Aplicações web interativas para exploração de dados}
+\subsection{Aplicações web interativas para exploração de dados}
 
 Na prática, esses conceitos aparecem em uma aplicação que junta consulta, filtro e visualização.
 \citeonline{ansari2022} recomendam plataformas em que o gráfico e a consulta já venham com o dado, e em que o uso seja avaliado.
@@ -138,15 +136,15 @@ Na prática, esses conceitos aparecem em uma aplicação que junta consulta, fil
 Essas referências apoiam dois objetivos deste trabalho: implementar a aplicação e testar a usabilidade dela por inspeção heurística.
 Na aplicação, indicadores, gráficos, mapa e tabelas funcionam sobre a mesma base, para a pessoa explorar as empresas de TI de Contagem com os atributos que as fontes permitem.
 
-\section{\esp Trabalhos Relacionados}
+\section{Trabalhos Relacionados}
 
-\section{\esp Metodologia}
+\section{Metodologia}
 
 Esta pesquisa tem como objetivo desenvolver uma aplicação web interativa que caracterize e apresente as empresas de Tecnologia da Informação do município de Contagem a partir da integração de dados abertos.
 Para isso, bases públicas sobre os estabelecimentos, suas atividades econômicas e seus endereços são coletadas, tratadas e combinadas em um banco de dados único.
 Esse banco alimenta uma aplicação com mapa, gráficos, tabelas e filtros, cuja usabilidade é avaliada por inspeção heurística.
 
-\subsection{\esp Classificação da pesquisa}
+\subsection{Classificação da pesquisa}
 
 Quanto aos objetivos, a pesquisa classifica-se como descritiva.
 Segundo \citeonline{gil2008}, a pesquisa descritiva registra características de determinada população ou fenômeno e permite a organização dessas informações em tabelas, gráficos e outras formas de apresentação.
@@ -159,7 +157,7 @@ Quanto à abordagem, adota-se o caráter misto.
 A dimensão quantitativa aparece na contagem de estabelecimentos, na distribuição por subclasses da CNAE, por porte e por recortes territoriais.
 A dimensão qualitativa aparece na interpretação dos padrões espaciais, na inspeção heurística da interface e na discussão das limitações das fontes, sem pretender estabelecer relações causais entre localização e desempenho econômico.
 
-\subsection{\esp Objeto de estudo e recorte}
+\subsection{Objeto de estudo e recorte}
 
 O objeto de estudo são os estabelecimentos de Tecnologia da Informação situados no município de Contagem (MG), identificados pelo código IBGE 3118601.
 O setor fica delimitado pela CNAE-Subclasses 2.3, só com a atividade principal na divisão 62.
@@ -185,21 +183,22 @@ A descrição dos dados será orientada por quatro perguntas: onde esses estabel
 Não haverá teste com usuários nem questionário.
 A avaliação da interface será uma inspeção feita pelo próprio autor, descrita na Seção \ref{subsec:testes}.
 Por isso, não se aplica tramitação em comitê de ética para coleta com pessoas.
-Os dados empregados são públicos e abertos.
 
-\subsection{\esp Proteção de dados}
+\subsection{Proteção de dados}
 
-A Lei nº 13.709/2018, a Lei Geral de Proteção de Dados Pessoais, trata de dado de pessoa natural \cite{brasil2018}.
 O foco deste trabalho é o estabelecimento, isto é, a unidade cadastrada no CNPJ.
 A base de sócios da Receita Federal, que pode trazer CPF de pessoa física, mesmo mascarado, não será baixada nem carregada na aplicação.
 Telefone e e-mail do estabelecimento também não entram na tela, porque não são necessários para descrever o setor nem para montar o mapa.
+
 O que será exibido é informação que a Receita já publica como dado aberto do estabelecimento: nome, CNAE, porte, situação cadastral e endereço.
+
 No caso do microempreendedor individual, o nome do cadastro pode ser o nome da pessoa.
 Esse nome já é público no CNPJ.
 A aplicação não junta esse nome com CPF nem com quadro de sócios.
+
 Não haverá cadastro de usuário no site.
 
-\subsection{\esp Etapas do trabalho}
+\subsection{Etapas do trabalho}
 
 Esta pesquisa será realizada em quatro etapas: coleta e tratamento dos dados, desenvolvimento do projeto da solução, implementação da solução e testes.
 Na primeira etapa, os estabelecimentos de TI de Contagem são extraídos das bases abertas e integrados em um banco de dados local, com atividade, porte e coordenada.
@@ -210,7 +209,7 @@ A Figura \ref{fig:fluxo-metodologia} resume esse fluxo.
 
 \input{figuras/fluxo-metodologia}
 
-\subsection{\esp Coleta e tratamento dos dados}
+\subsection{Coleta e tratamento dos dados}
 \label{subsec:coleta}
 
 A coleta será feita em bases abertas oficiais, por meio do \textit{download} e da consulta aos arquivos publicados por órgãos públicos.
@@ -256,12 +255,12 @@ Assim, um CEP com muitas empresas não é tratado como um único endereço confe
 O resultado dessa integração será gravado em um banco de dados local, com a data da fotografia das bases.
 A aplicação consulta esse banco, e não os arquivos nacionais nem os sites da Receita e do IBGE.
 
-\subsection{\esp Aplicação desenvolvida}
+\subsection{Aplicação desenvolvida}
 
 A aplicação será documentada segundo as etapas usuais de projeto de software: análise de requisitos, diagramas de casos de uso e de classes e protótipo das interfaces.
 A arquitetura e as ferramentas da implementação também são descritas nesta seção.
 
-\subsubsection{\esp Projeto da solução}
+\subsubsection{Projeto da solução}
 
 Os requisitos funcionais previstos são:
 
@@ -292,7 +291,7 @@ O diagrama de classes representará o estabelecimento, a atividade econômica, a
 O protótipo das interfaces cobrirá o painel de indicadores com os filtros, o mapa e a tabela.
 Os diagramas e o protótipo serão apresentados como figuras nesta seção.
 
-\subsubsection{\esp Implementação da solução}
+\subsubsection{Implementação da solução}
 
 A arquitetura terá três partes: os programas de carga, o banco de dados local e a aplicação web.
 Os programas de carga leem as bases, aplicam os filtros e as junções descritos na Seção \ref{subsec:coleta} e gravam o resultado no banco.
@@ -306,7 +305,7 @@ O mapa de fundo utilizará \textit{tiles} do OpenStreetMap.
 
 As versões das bases, as datas de \textit{download} e as regras de filtro serão registradas em cada carga, para que o processo possa ser refeito.
 
-\subsection{\esp Testes}
+\subsection{Testes}
 \label{subsec:testes}
 
 Os testes verificam dois aspectos da aplicação: a localização atribuída aos estabelecimentos e a usabilidade da interface.
@@ -325,7 +324,7 @@ A gravidade será anotada em três níveis: leve, médio e grave.
 As telas percorridas serão o mapa, os filtros, os gráficos e a tabela.
 O resultado dessa inspeção entra na seção de resultados, como lista de problemas e ajustes possíveis, e não como nota da aplicação.
 
-\subsection{\esp Procedimentos de análise}
+\subsection{Procedimentos de análise}
 
 A análise será descritiva e seguirá as quatro perguntas do objeto de estudo.
 Serão calculados totais de estabelecimentos ativos no recorte, a distribuição por subclasse da CNAE, o perfil de porte e a proporção de microempreendedores individuais.
@@ -337,7 +336,7 @@ Mapas de pontos e, quando a taxa de coordenada permitir, uma representação de 
 
 Os resultados serão apresentados em tabelas, gráficos e mapas, e discutidos na seção de resultados.
 
-\subsection{\esp Limitações metodológicas previstas}
+\subsection{Limitações metodológicas previstas}
 
 Algumas limitações vêm das fontes e serão descritas com os resultados.
 O CNAE é a atividade declarada no cadastro, não uma verificação do que a empresa faz no dia a dia.
@@ -359,6 +358,6 @@ O banco guarda a fotografia do mês carregado. O CNPJ muda todo mês, e a aplica
 A inspeção heurística, feita por uma pessoa só, encontra problemas de uso, mas não mede como um grupo de usuários de fato utiliza a tela.
 Esses limites indicam o que os resultados podem afirmar.
 
-\section{\esp Resultados}
+\section{Resultados}
 
-\section{\esp Considerações Finais}
+\section{Considerações Finais}

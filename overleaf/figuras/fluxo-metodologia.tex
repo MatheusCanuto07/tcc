@@ -1,0 +1,33 @@
+% Fluxograma da metodologia — incluído em textos.tex por \input{figuras/fluxo-metodologia}
+% Requer no preâmbulo de principal.tex: \usetikzlibrary{arrows.meta,positioning}
+\begin{figure}[htbp]
+    \centering
+    \caption{Fluxo geral das etapas metodológicas}
+    \label{fig:fluxo-metodologia}
+    \vspace{-0.2cm}
+    \begin{tikzpicture}[
+        node distance=0.55cm,
+        etapa/.style={
+            draw=black,
+            thick,
+            rounded corners=2pt,
+            align=center,
+            text width=9.2cm,
+            inner sep=6pt,
+            font=\small,
+            fill=white
+        },
+        seta/.style={-Latex, thick}
+    ]
+        \node[etapa] (a) {\textbf{1. Coleta e tratamento dos dados}\\ \footnotesize CNPJ, CNAE, CNEFE e malhas do IBGE integrados em banco MySQL};
+        \node[etapa, below=of a] (b) {\textbf{2. Projeto da solução}\\ \footnotesize requisitos, casos de uso e esquema do banco de dados};
+        \node[etapa, below=of b] (c) {\textbf{3. Implementação da solução}\\ \footnotesize programas de carga e aplicação web};
+        \node[etapa, below=of c] (d) {\textbf{4. Testes}\\ \footnotesize conferência da localização, comparação com o CEMPRE e inspeção heurística};
+
+        \draw[seta] (a) -- (b);
+        \draw[seta] (b) -- (c);
+        \draw[seta] (c) -- (d);
+    \end{tikzpicture}
+    \vspace{-0.2cm}
+    \\\textbf{\footnotesize Fonte: Elaborado pelo autor.}
+\end{figure}

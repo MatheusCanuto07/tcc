@@ -1,0 +1,50 @@
+% Diagrama de casos de uso — incluído em textos.tex por \input{figuras/casos-de-uso}
+% Requer no preâmbulo de principal.tex: \usetikzlibrary{shapes,positioning}
+\begin{figure}[htbp]
+    \centering
+    \caption{Diagrama de casos de uso da aplicação}
+    \label{fig:casos-de-uso}
+    \vspace{-0.2cm}
+    \begin{tikzpicture}[
+        caso/.style={
+            draw=black,
+            thick,
+            ellipse,
+            font=\small,
+            inner sep=0pt,
+            minimum height=0.9cm
+        },
+        assoc/.style={thick},
+        ator/.pic={
+            \draw[thick] (0,1.05) circle (0.2);
+            \draw[thick] (0,0.85) -- (0,0.3);
+            \draw[thick] (-0.35,0.65) -- (0.35,0.65);
+            \draw[thick] (0,0.3) -- (-0.3,-0.15);
+            \draw[thick] (0,0.3) -- (0.3,-0.15);
+        }
+    ]
+        \draw[thick] (-3.9,4.0) rectangle (3.9,-4.9);
+        \node[font=\small\bfseries, anchor=north] at (0,3.95) {Aplicação web};
+
+        \node[caso] (uc1) at (0,2.9) {Consultar indicadores gerais};
+        \node[caso] (uc2) at (0,1.7) {Filtrar estabelecimentos};
+        \node[caso] (uc3) at (0,0.5) {Explorar o mapa de pontos};
+        \node[caso] (uc4) at (0,-0.7) {Consultar densidade por área};
+        \node[caso] (uc5) at (0,-1.9) {Buscar na tabela por nome};
+        \node[caso] (uc6) at (0,-3.1) {Ver data e nível de coordenada};
+        \node[caso] (uc7) at (0,-4.3) {Carregar nova fotografia};
+
+        \pic at (-5.8,-0.6) {ator};
+        \node[font=\small, below] at (-5.8,-0.75) {Visitante};
+        \coordinate (v) at (-5.4,0.35);
+        \foreach \uc in {uc1,uc2,uc3,uc4,uc5,uc6} {
+            \draw[assoc] (v) -- (\uc.west);
+        }
+
+        \pic at (5.8,-4.9) {ator};
+        \node[font=\small, below] at (5.8,-5.05) {Administrador};
+        \draw[assoc] (5.4,-4.15) -- (uc7.east);
+    \end{tikzpicture}
+    \vspace{-0.2cm}
+    \\\textbf{\footnotesize Fonte: Elaborado pelo autor.}
+\end{figure}
