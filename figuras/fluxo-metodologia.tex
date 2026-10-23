@@ -1,7 +1,10 @@
-% Fluxograma da metodologia — cole no capítulo de Metodologia
+% Fluxograma da metodologia — incluído em trabalho_final.tex por \input{figuras/fluxo-metodologia}
 % Requer no preâmbulo: \usepackage{tikz} e \usetikzlibrary{arrows.meta,positioning}
 \begin{figure}[htbp]
     \centering
+    \caption{Fluxo geral das etapas metodológicas}
+    \label{fig:fluxo-metodologia}
+    \vspace{-0.2cm}
     \begin{tikzpicture}[
         node distance=0.55cm,
         etapa/.style={
@@ -16,23 +19,15 @@
         },
         seta/.style={-Latex, thick}
     ]
-        \node[etapa] (a) {1. Definir recorte CNAE de TI};
-        \node[etapa, below=of a] (b) {2. Extrair CNPJ de Contagem (ativos + CNAE)};
-        \node[etapa, below=of b] (c) {3. Integrar razão social, porte e capital social};
-        \node[etapa, below=of c] (d) {4. Obter coordenadas via CNEFE};
-        \node[etapa, below=of d] (e) {5. Associar malhas territoriais do IBGE};
-        \node[etapa, below=of e] (f) {6. Conferir totais no CEMPRE/SIDRA};
-        \node[etapa, below=of f] (g) {7. Desenvolver aplicação web interativa};
-        \node[etapa, below=of g] (h) {8. Analisar distribuição e apresentar resultados};
+        \node[etapa] (a) {\textbf{1. Coleta e tratamento dos dados}\\ \footnotesize CNPJ, CNAE, CNEFE e malhas do IBGE integrados em banco local};
+        \node[etapa, below=of a] (b) {\textbf{2. Projeto da solução}\\ \footnotesize requisitos, casos de uso, classes e protótipo das interfaces};
+        \node[etapa, below=of b] (c) {\textbf{3. Implementação da solução}\\ \footnotesize programas de carga e aplicação web};
+        \node[etapa, below=of c] (d) {\textbf{4. Testes}\\ \footnotesize conferência da localização, comparação com o CEMPRE e inspeção heurística};
 
         \draw[seta] (a) -- (b);
         \draw[seta] (b) -- (c);
         \draw[seta] (c) -- (d);
-        \draw[seta] (d) -- (e);
-        \draw[seta] (e) -- (f);
-        \draw[seta] (f) -- (g);
-        \draw[seta] (g) -- (h);
     \end{tikzpicture}
-    \caption{Fluxo geral das etapas metodológicas.}
-    \label{fig:fluxo-metodologia}
+    \vspace{-0.2cm}
+    \\\textbf{\footnotesize Fonte: Elaborado pelo autor.}
 \end{figure}
