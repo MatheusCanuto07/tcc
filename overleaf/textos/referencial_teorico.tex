@@ -1,0 +1,38 @@
+\section{Referencial Teórico}
+
+Esta seção apresenta os conceitos que sustentam o trabalho.
+
+\subsection{Dados abertos governamentais}
+
+Dados abertos governamentais são informações produzidas ou mantidas pelo poder público e disponibilizadas para que outras pessoas possam usá-las de novo.
+O objetivo costuma ser aumentar a transparência e permitir que esses dados sejam reaproveitados.
+\citeonline{molodtsov2024} estudaram a usabilidade de portais de dados abertos em 33 países.
+O quadro que eles aplicam não olha só se o arquivo está disponível para \textit{download}.
+Também entra se a pessoa consegue explorar o dado e entendê-lo, mesmo sem prática com planilha.
+\citeonline{ansari2022}, ao revisar pesquisas sobre visualização de dados governamentais, observam um ponto parecido: publicar o arquivo não faz, por si só, com que o dado seja usado.
+Muita gente não consegue ler o formato, cruzar bases diferentes e interpretar a tabela.
+Uma aplicação que junta as bases e mostra mapa, gráfico e filtro pode tornar essa consulta mais simples.
+Esse é o caminho deste trabalho: caracterizar as empresas de TI de Contagem a partir de bases abertas nacionais, e não a partir de um arquivo municipal já pronto.
+
+\subsection{Visualização de dados e usabilidade}
+
+A visualização de dados é uma forma de reduzir a distância entre o arquivo publicado e o uso por quem não tem domínio técnico.
+\citeonline{mesquita2026} analisaram 30 painéis e 53 telas de consulta de dados de orçamento público no Brasil.
+O achado principal foi que a maior parte dos portais entrega o dado, mas pouco ajuda quem não tem familiaridade com números e tabelas.
+Falta contexto, e a tela quase não considera a pessoa que está consultando.
+\citeonline{ansari2022} descrevem uma lacuna parecida: há muitos relatos de visualização de dados abertos e pouca avaliação de usabilidade para públicos diferentes.
+Para os autores, gráfico, mapa e consulta junto do dado tendem a ser mais úteis do que a entrega isolada do arquivo.
+Por isso este trabalho reúne indicadores, tabelas, filtros e mapa, em vez de disponibilizar só a planilha tratada.
+
+\subsection{Avaliação heurística de usabilidade}
+
+Usabilidade, neste trabalho, é a facilidade de usar a interface.
+A pessoa encontra a informação, entende o que está vendo e consegue filtrar sem se perder.
+A avaliação heurística é uma inspeção da tela.
+Quem avalia percorre a interface com uma lista de princípios e anota os problemas encontrados.
+A lista mais usada é a das dez heurísticas de \citeonline{nielsen1994}.
+Ela inclui, entre outros pontos, deixar claro o que o sistema está fazendo, manter um padrão visual, evitar erro e oferecer ajuda quando algo falha.
+\citeonline{vazquezingelmo2024} aplicaram essas heurísticas em uma ferramenta de criação de visualizações.
+Cada avaliador registrou o problema, a heurística relacionada e a gravidade.
+O estudo mostra que o método ajuda a localizar falhas de navegação, de retorno ao usuário e de organização da tela antes de um teste com o público final.
+Este trabalho usa o mesmo tipo de inspeção na aplicação desenvolvida, para registrar o que dificulta a consulta ao mapa, aos filtros, aos gráficos e à tabela.

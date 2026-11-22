@@ -62,6 +62,7 @@
 \makeatother
 
 \usepackage{adjustbox} % reduzir tamanho figuras
+\usepackage{float} % posição [H] para fixar figura no ponto do texto
 
 \usetikzlibrary{arrows,arrows.meta,shapes,positioning,shadows,trees}
 
@@ -128,7 +129,13 @@ The abstract is written in a single paragraph. A good abstract should include th
 %% INÍCIO DO TEXTO
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\include{textos}
+% \input (e não \include) para as seções seguirem na mesma página, sem quebra forçada
+\input{textos/introducao}
+\input{textos/referencial_teorico}
+\input{textos/trabalhos_relacionados}
+\input{textos/metodologia}
+\input{textos/o_software_desenvolvido}
+\input{textos/consideracoes_finais}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% FIM DO TEXTO

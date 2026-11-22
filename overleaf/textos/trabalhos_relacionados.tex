@@ -1,0 +1,20 @@
+\section{Trabalhos Relacionados}
+
+\citeonline{barretojunior2021} desenvolveram o Buskaki Empresas, uma aplicação web para consultar empresas de Curitiba por campos além do CNPJ, como a razão social e o nome fantasia.
+A ferramenta usa os dados abertos da Receita Federal, foi construída com Ruby on Rails, PostgreSQL e PostGIS e geocodifica os endereços por um serviço externo, que, segundo os autores, chegou a deslocar o ponto em até 2 km em alguns casos.
+Como resultado, a aplicação permite buscar a empresa pelo nome ou pelo CNPJ, listar as empresas por bairro e por rua e ver cada uma em um mapa dinâmico.
+O foco do Buskaki é encontrar uma empresa específica, e não caracterizar um setor; a consulta exige cadastro, e os testes com usuários ficaram como trabalho futuro.
+
+\citeonline{silva2024} apresentaram a base de CNPJ da Receita Federal como fonte para estudos espaciais na Geografia urbana, econômica e regional.
+As autoras integraram as tabelas da base pelo CNPJ básico, selecionaram municípios e códigos da CNAE, padronizaram os campos de endereço e geocodificaram os registros em \textit{software} de geoprocessamento.
+Em Presidente Prudente, 51.484 dos 52.876 CNPJs ativos selecionados receberam coordenada, e a perda em outras cidades não passou de 5\%; o artigo também aponta limitações da base, como registros duplicados e muitos CNPJs em um mesmo endereço residencial.
+O estudo é metodológico e não entrega uma aplicação: os mapas são figuras estáticas produzidas pelas pesquisadoras, sem registro da precisão do ponto de cada estabelecimento.
+
+O Mapa de Empresas é uma ferramenta do Governo Federal que publica mensalmente informações sobre o registro de empresas no país, a partir da base do CNPJ \cite{brasil2026}.
+O painel mostra empresas abertas, fechadas e ativas, permite filtrar por atividade econômica, natureza jurídica, porte e município e exporta gráficos, mapas e tabelas com os filtros aplicados.
+O manual recomenda registrar a data da consulta e os filtros usados, porque os números podem ser revistos em cargas posteriores, cuidado que este trabalho adota com a data da fotografia das bases.
+Os resultados são agregados: é possível saber quantas empresas de uma atividade existem em Contagem, mas o painel não lista nem localiza cada estabelecimento dentro do município.
+
+Os três trabalhos partem da base de CNPJ, como este, e os dois acadêmicos enfrentam o mesmo problema: o endereço não traz coordenada, e a geocodificação perde ou desloca parte dos registros.
+Nenhum deles reúne, em uma aplicação aberta e sem cadastro, a caracterização de um setor dentro de um município, a localização de cada estabelecimento com a indicação da precisão da coordenada e uma avaliação de usabilidade da interface.
+Este trabalho busca preencher essa lacuna para as empresas de TI de Contagem, ao combinar a base de CNPJ, a coordenada do CNEFE e um \textit{dashboard} em que indicadores, mapa e tabela respondem aos mesmos filtros.

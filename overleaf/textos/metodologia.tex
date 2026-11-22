@@ -1,0 +1,170 @@
+\section{Metodologia}
+
+Esta pesquisa tem como objetivo desenvolver uma aplicação web interativa que caracterize e apresente as empresas de Tecnologia da Informação do município de Contagem a partir da integração de dados abertos.
+Para isso, bases públicas sobre os estabelecimentos, suas atividades econômicas e seus endereços são coletadas, tratadas e combinadas em um banco de dados único.
+Esse banco alimenta uma aplicação com mapa, gráficos, tabelas e filtros, cuja usabilidade é avaliada por inspeção heurística.
+
+\subsection{Objeto de estudo e recorte}
+
+O objeto de estudo são os estabelecimentos de Tecnologia da Informação situados no município de Contagem (MG), identificados pelo código IBGE 3118601.
+O setor fica delimitado pela CNAE-Subclasses 2.3 \cite{ibge2020}, só com a atividade principal na divisão 62.
+Os códigos incluídos são:
+
+\begin{itemize}
+    \item 6201-5/01, desenvolvimento de programas de computador sob encomenda;
+    \item 6201-5/02, web design;
+    \item 6202-3/00, desenvolvimento e licenciamento de programas de computador customizáveis;
+    \item 6203-1/00, desenvolvimento e licenciamento de programas de computador não customizáveis;
+    \item 6204-0/00, consultoria em tecnologia da informação;
+    \item 6209-1/00, suporte técnico, manutenção e outros serviços em tecnologia da informação.
+\end{itemize}
+
+Ficam de fora, neste recorte, hospedagem e portais (divisão 63), comércio e fabricação de equipamentos de informática, conserto de computador e curso de informática.
+A unidade de análise é o estabelecimento do cadastro de CNPJ.
+Matriz e filial entram como registros distintos quando estiverem no município e na atividade selecionada.
+Serão considerados estabelecimentos com situação cadastral ativa na fotografia da base utilizada.
+O CNAE secundário não será usado como critério de entrada.
+
+A descrição dos dados será orientada por quatro perguntas: onde esses estabelecimentos se concentram em Contagem; qual é o perfil de porte; qual é a proporção de microempreendedores individuais; e qual parte dos endereços recebe coordenada em cada nível de junção.
+
+Não haverá teste com usuários nem questionário.
+A avaliação da interface será uma inspeção feita pelo próprio autor, descrita na Seção \ref{subsec:testes}.
+Por isso, não se aplica tramitação em comitê de ética para coleta com pessoas.
+
+\subsection{Proteção de dados}
+
+A base de sócios da Receita Federal, que traz CPF de pessoa física mesmo que mascarado, não será baixada nem carregada na aplicação, porque a unidade de análise é o estabelecimento, e não as pessoas ligadas a ele.
+No caso do microempreendedor individual, o nome do estabelecimento pode ser o nome da pessoa; esse nome já é público no cadastro do CNPJ, e a aplicação o exibe como consta ali, sem associá-lo a CPF nem a quadro de sócios.
+
+\subsection{Etapas do trabalho}
+
+Esta pesquisa será realizada em quatro etapas: coleta e tratamento dos dados, desenvolvimento do projeto da solução, implementação da solução e testes.
+
+Na primeira etapa, os estabelecimentos de TI de Contagem são extraídos das bases abertas e integrados em um banco de dados MySQL, com atividade, porte e coordenada.
+
+Na segunda, a aplicação é projetada por meio do levantamento de requisitos, do diagrama de casos de uso e do esquema do banco de dados.
+
+Na terceira, a aplicação é implementada sobre esse banco.
+
+Na quarta, são conferidas a localização atribuída aos estabelecimentos e a usabilidade da interface.
+
+\subsection{Coleta e tratamento dos dados}
+\label{subsec:coleta}
+
+A coleta será feita em bases abertas oficiais, por meio do \textit{download} e da consulta aos arquivos publicados por órgãos públicos.
+
+A principal fonte da lista de estabelecimentos será a base pública de CNPJ da Receita Federal do Brasil, que reúne identificação, CNAE, situação cadastral e endereço declarado.
+O arquivo de sócios dessa base não será utilizado.
+
+A estrutura e a descrição das atividades virão da CNAE-Subclasses 2.3, mantida pelo IBGE, usada para fechar o recorte da divisão 62.
+
+As coordenadas geográficas serão obtidas no Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE), do IBGE, associado ao Censo Demográfico de 2022.
+A base inteira não será geocodificada em lote por serviço online: o CNEFE é a fonte da coordenada.
+As malhas territoriais do IBGE fornecerão o contorno do município e, quando disponíveis no nível adequado, recortes internos úteis à agregação espacial, com a área em quilômetros quadrados para a medida relativa.
+
+Para a conferência dos totais, serão consultadas tabelas do Cadastro Central de Empresas (CEMPRE) por meio do SIDRA, sempre no município de Contagem e em nível de CNAE compatível com o recorte.
+
+Como apoio à extração, poderá ser utilizada a plataforma Base dos Dados, desde que os filtros reproduzam o mesmo universo da fonte oficial.
+
+Os arquivos nacionais não serão carregados integralmente na aplicação.
+O tratamento ocorrerá em ambiente local, em um banco MySQL de trabalho: os arquivos são importados para tabelas de carga, e a filtragem para Contagem e para as subclasses da divisão 62 é feita em SQL, antes de qualquer junção.
+
+A integração seguirá chaves explícitas: código de município da Receita para isolar Contagem; CNPJ básico para unir estabelecimentos e dados da empresa, como razão social, porte e capital social; CNAE sem máscara para padronizar a atividade; código IBGE 3118601 para ligar o resultado às malhas, ao CNEFE e ao CEMPRE.
+
+O endereço passa por uma padronização antes da junção com o CNEFE.
+O CEP fica com 8 dígitos, sem hífen.
+O texto vai para maiúsculas, sem acento.
+Abreviações comuns de tipo de logradouro são expandidas, como R.\ para RUA e AV.\ para AVENIDA, nos dois lados da junção.
+Número vazio ou registrado como S/N não entra na tentativa mais específica.
+
+A junção com o CNEFE segue uma ordem.
+Primeiro, tenta-se CEP, logradouro padronizado e número.
+Se não houver correspondência, tenta-se só o CEP, e o ponto é marcado como aproximado.
+Se o CEP do CNPJ não existir no CNEFE, o estabelecimento continua na base para as contagens e as tabelas, mas fica de fora do mapa de pontos.
+Cada registro guarda o nível obtido: endereço completo, só CEP ou sem coordenada.
+Com isso, calcula-se a taxa de acerto de cada nível.
+
+O registro também guarda o nível de geocodificação informado pelo próprio CNEFE, na variável \texttt{NV\_GEO\_COORD}.
+Esse campo indica se a coordenada é a original do Censo 2022, se foi modificada para apartamentos no mesmo número, se foi estimada pelo IBGE ou se foi atribuída por face de quadra, localidade ou setor censitário.
+Assim, uma junção por endereço completo que herdou uma coordenada estimada pelo IBGE não é contada como ponto coletado em campo.
+
+Quando várias empresas recebem a mesma coordenada, o que é esperado no nível de CEP, essa sobreposição fica registrada.
+Assim, um CEP com muitas empresas não é tratado como um único endereço conferido no terreno.
+
+O resultado dessa integração será gravado no banco de dados da aplicação, com a data da fotografia das bases.
+A aplicação consulta esse banco, e não os arquivos nacionais nem os sites da Receita e do IBGE.
+
+\subsection{Aplicação desenvolvida}
+
+Esta seção apresenta os requisitos da aplicação, a arquitetura da solução, o diagrama de casos de uso e o esquema do banco de dados.
+
+Os requisitos funcionais previstos são:
+
+\begin{itemize}
+    \item RF01: exibir um \textit{dashboard} (painel interativo de indicadores) com os indicadores gerais, como o total de estabelecimentos ativos, a distribuição por subclasse da CNAE, o porte e a proporção de microempreendedores individuais;
+    \item RF02: filtrar os estabelecimentos por subclasse da CNAE, porte, condição de microempreendedor individual e área do município;
+    \item RF03: exibir os estabelecimentos em um mapa de pontos, indicando quantos estão em uma mesma coordenada;
+    \item RF04: exibir a quantidade de estabelecimentos por área do município, em total e por quilômetro quadrado;
+    \item RF05: listar os estabelecimentos em uma tabela com busca por nome, com CNAE, porte, situação cadastral e endereço;
+    \item RF06: informar a data da fotografia das bases e o nível de coordenada de cada estabelecimento.
+\end{itemize}
+
+Os requisitos não funcionais previstos são:
+
+\begin{itemize}
+    \item RNF01: acesso pelo navegador, sem cadastro de usuário;
+    \item RNF02: não exibir CPF, quadro de sócios, telefone ou e-mail;
+    \item RNF03: o \textit{dashboard} deve ser integrado, isto é, indicadores, gráficos, mapa e tabela devem responder aos mesmos filtros, sobre os mesmos registros;
+    \item RNF04: as consultas devem ser feitas no banco de dados da aplicação, sem depender de serviço externo além do mapa de fundo.
+\end{itemize}
+
+A solução será uma aplicação web com arquitetura cliente/servidor, organizada em três partes: os programas de carga, o banco de dados e a aplicação web.
+Os programas de carga serão escritos em Python e importarão os arquivos da Receita Federal e do IBGE para tabelas de carga em um banco de dados MySQL, no qual os filtros e as junções descritos na Seção \ref{subsec:coleta} são executados em SQL e gravados nas tabelas finais da aplicação.
+O MySQL é usado em todas as etapas, do tratamento dos arquivos à consulta pela aplicação, o que mantém um único sistema de banco de dados no projeto.
+A aplicação web será desenvolvida com o SvelteKit, \textit{framework} baseado em JavaScript que reúne a interface executada no navegador, do lado do cliente, e o \textit{back-end} executado no servidor, que consulta o MySQL e entrega à interface os dados já filtrados.
+O mapa interativo usará a biblioteca Leaflet, com \textit{tiles} do OpenStreetMap como mapa de fundo.
+Uma atualização dos dados será uma nova carga, com outra data de fotografia, e não uma consulta ao vivo às bases da Receita e do IBGE na hora em que alguém abre o site.
+
+A Figura \ref{fig:casos-de-uso} apresenta o diagrama de casos de uso da aplicação, com dois atores.
+O visitante consulta os indicadores, aplica filtros, explora o mapa, consulta os estabelecimentos por área e na tabela e vê a data da fotografia e o nível de coordenada.
+O administrador, papel exercido pelo autor, carrega uma nova fotografia das bases.
+
+\input{figuras/casos-de-uso}
+
+A Figura \ref{fig:esquema-banco} apresenta o esquema do banco de dados MySQL.
+Cada estabelecimento se liga à empresa pelo CNPJ básico, à atividade pela subclasse da CNAE e à carga em que foi gravado.
+A localização guarda a coordenada, o nível de junção com o CNEFE, o nível de geocodificação informado pelo próprio CNEFE e a área do município em que o ponto está.
+A carga registra a data da fotografia, as versões das bases, a data de \textit{download} e as regras de filtro, para que o processo possa ser refeito.
+
+\input{figuras/esquema-banco}
+
+\subsection{Testes}
+\label{subsec:testes}
+
+Os testes verificam dois aspectos da aplicação: a localização atribuída aos estabelecimentos e a usabilidade da interface.
+
+Para estimar o erro da localização, uma amostra de cerca de 30 endereços será conferida em outra fonte, por consulta manual no mapa ou por um serviço de geocodificação usado só nessa amostra.
+A conferência não substitui o CNEFE na base inteira.
+Ela serve para dizer, de forma aproximada, o quanto o ponto se afasta do endereço informado.
+
+Os totais da base também serão comparados com os do CEMPRE.
+A comparação não busca números iguais, porque o ano e os critérios de cada base são diferentes.
+O que se verifica é se a ordem de grandeza é coerente.
+
+A usabilidade será avaliada por inspeção heurística, feita pelo autor, sem usuários convidados.
+A lista usada é a das dez heurísticas de \citeonline{nielsen1994}, no mesmo tipo de registro adotado por \citeonline{vazquezingelmo2024}: problema encontrado, heurística relacionada e gravidade.
+A gravidade será anotada em três níveis: leve, médio e grave.
+As telas percorridas serão o mapa, os filtros, os gráficos e a tabela.
+O resultado dessa inspeção entra na seção de resultados, como lista de problemas e ajustes possíveis, e não como nota da aplicação.
+
+\subsection{Procedimentos de análise}
+
+A análise será descritiva e seguirá as quatro perguntas do objeto de estudo.
+Serão calculados totais de estabelecimentos ativos no recorte, a distribuição por subclasse da CNAE, o perfil de porte e a proporção de microempreendedores individuais.
+Também serão apresentados os percentuais de georreferenciamento em cada nível de junção.
+
+No mapa, serão observados onde os pontos se concentram, onde há vazios e como os estabelecimentos se distribuem pelos recortes territoriais disponíveis.
+A comparação entre áreas usa o total e uma medida normalizada, o número de estabelecimentos por quilômetro quadrado, para uma área maior não parecer mais concentrada só por ter mais espaço.
+Mapas de pontos e, quando a taxa de coordenada permitir, uma representação de densidade ajudam essa leitura, com o aviso sobre pontos sobrepostos.
+
+Os resultados serão apresentados em tabelas, gráficos e mapas, e discutidos na seção de resultados.
