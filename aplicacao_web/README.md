@@ -24,7 +24,6 @@ Copie `.env.example` para `.env` (já há um `.env` local com os valores do `doc
 | `MYSQL_PORT` | `3307` | Porta publicada pelo Docker |
 | `MYSQL_USER` / `MYSQL_PASSWORD` | `tcc` / `tcc_senha` | Credenciais |
 | `MYSQL_DATABASE` | `tcc_contagem_ti` | Banco |
-| `CEMPRE_REF` | `535` | Referência CEMPRE (unidades locais div. 62) |
 
 ## Desenvolvimento
 

@@ -1,26 +1,23 @@
 \section{Considerações Finais}
 
-% Orientação do professor: incluir aqui os tópicos de limitações e de propostas para trabalhos futuros.
-% Texto da antiga subseção 4.9 (Limitações metodológicas previstas), removido da metodologia, para reaproveitar:
-%
-% \subsection{Limitações metodológicas previstas}
-% 
-% Algumas limitações vêm das fontes e serão descritas com os resultados.
-% O CNAE é a atividade declarada no cadastro, não uma verificação do que a empresa faz no dia a dia.
-% Usar só a atividade principal deixa de fora estabelecimentos de outro ramo que também prestam serviço de TI.
-% 
-% A coordenada do CNEFE foi registrada em campo pelo IBGE durante o Censo de 2022, e o próprio cadastro informa o nível de precisão de cada ponto.
-% Ela representa o endereço censitário, não a localização auditada do estabelecimento.
-% 
-% A principal fonte de erro está na junção.
-% Como o CNEFE não tem CNPJ, a ligação é feita pelo endereço.
-% Quando apenas o CEP coincide, a coordenada atribuída é uma aproximação, e vários estabelecimentos podem cair no mesmo ponto.
-% 
-% A padronização do endereço, a ordem da junção, a taxa de acerto de cada nível e a amostra de cerca de 30 endereços existem para deixar esse erro visível.
-% 
-% Porte e capital social estão no CNPJ.
-% O número de pessoas ocupadas por empresa, em geral, não está disponível de forma pública e identificável nas bases usadas aqui.
-% Totais do CEMPRE não substituem a lista de CNPJs no mapa e não devem ser lidos como a mesma contagem.
-% O banco guarda a fotografia do mês carregado. O CNPJ muda todo mês, e a aplicação não acompanha essa mudança sozinha.
-% A inspeção heurística, feita por uma pessoa só, encontra problemas de uso, mas não mede como um grupo de usuários de fato utiliza a tela.
-% Esses limites indicam o que os resultados podem afirmar.
+Este trabalho partiu da questão de se é possível combinar dados abertos para criar um sistema interativo que facilite a visualização das empresas de TI de Contagem.
+A resposta é positiva, com ressalvas: a aplicação integra as bases da Receita Federal e do IBGE e permite consultar, filtrar e localizar 781 estabelecimentos, mas a coordenada é aproximada.
+
+Os objetivos específicos foram atingidos, com ressalvas.
+Na base única, a coordenada vem apenas do CEP, e a proporção de MEI não pôde ser afirmada com segurança; na aplicação, a agregação por área do município, prevista no início, não foi implementada.
+Nos testes, a inspeção heurística apontou problemas de usabilidade a corrigir.
+
+Como contribuição prática, o trabalho oferece uma consulta única e sem cadastro às empresas de TI do município, com aviso da precisão da coordenada.
+Como contribuição acadêmica, documenta um procedimento reprodutível de integração de CNPJ, CNAE e CNEFE, com níveis de junção explícitos.
+A principal lição foi que a ligação entre bases por endereço é a etapa mais frágil e que a taxa de acerto deve ser informada junto com o mapa.
+
+\subsection{Limitações}
+
+A CNAE é a atividade declarada no cadastro, e usar só a atividade principal deixa de fora estabelecimentos de outro ramo que também prestam serviço de TI.
+A coordenada representa um endereço do CNEFE no mesmo CEP, e não a localização auditada do estabelecimento, e o campo de MEI não foi validado em outra fonte.
+O banco guarda a fotografia de um mês, e a inspeção heurística, feita por três especialistas, não mede como usuários reais utilizam a aplicação.
+
+\subsection{Trabalhos futuros}
+
+Como continuidade, propõe-se incluir o tipo de logradouro na chave de junção, agrupar ou deslocar os marcadores sobrepostos no mapa e implementar a agregação por bairro, com o total e a densidade por quilômetro quadrado, a partir das malhas do IBGE.
+Outras possibilidades são validar a condição de MEI em outra fonte, aplicar testes de usabilidade com usuários reais, automatizar a atualização mensal da base e estender a aplicação a outros municípios e setores.

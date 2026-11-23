@@ -1,8 +1,141 @@
-\section{O Software Desenvolvido}
+\section{Software Desenvolvido e Resultados}
+\label{sec:resultados}
 
-Esta seção apresenta a aplicação construída a partir do projeto descrito na metodologia.
-A tela principal é um \textit{dashboard} que reúne, sobre a mesma base de dados, os indicadores gerais do setor, os gráficos de distribuição por subclasse da CNAE e por porte, o mapa de pontos dos estabelecimentos e a tabela com busca por nome.
-Os filtros aplicados em qualquer parte do \textit{dashboard} atualizam todas as outras, de modo que indicadores, gráficos, mapa e tabela sempre descrevem o mesmo conjunto de estabelecimentos.
-A data da fotografia das bases e o nível de coordenada de cada estabelecimento ficam visíveis na própria interface.
+% Capturas empilhadas (largura total da página).
+% Enquanto os PNG não existirem, usa example-image-16x9 (pacote mwe).
+% Substituir salvando em figuras/:
+%   tela-inventario.png      — dashboard / inventário
+%   tela-mapa.png            — mapa geral de Contagem
+%   tela-mapa-detalhe.png    — mapa com popup ou filtro aplicado
+\newcommand{\imagemtela}[1]{%
+  \IfFileExists{figuras/#1.png}%
+    {\includegraphics[width=\linewidth,height=7.2cm,keepaspectratio]{figuras/#1.png}}%
+    {\includegraphics[width=\linewidth,height=7.2cm,keepaspectratio]{example-image-16x9}}}
 
-% Continuar daqui: descrever as telas com capturas, a carga dos dados, os resultados da conferência de localização e a inspeção heurística.
+\subsection{A aplicação web}
+
+A aplicação tem duas telas, o Inventário e o Mapa, acessadas por uma barra de navegação.
+Em ambas, uma faixa superior informa a data da fotografia das bases, o total de estabelecimentos e quantos têm coordenada.
+O Inventário e o Mapa compartilham os mesmos filtros, de modo que um filtro aplicado em uma tela vale também na outra (RNF03).
+
+No Inventário, o visitante busca por nome, CNPJ ou bairro e filtra por subclasse da CNAE, porte, condição de MEI e disponibilidade de coordenada.
+Um painel lateral mostra, em barras, o total por subclasse e por porte, e cada barra funciona como filtro.
+Os resultados aparecem em uma tabela com nome, CNPJ, CNAE, porte, bairro e indicação de coordenada, limitada aos 200 primeiros registros.
+A Figura \ref{fig:tela-inventario} apresenta essa tela.
+
+\begin{figure}[htbp]
+    \centering
+    \caption{Tela Inventário da aplicação}
+    \label{fig:tela-inventario}
+    \vspace{4pt}
+    \imagemtela{tela-inventario}
+    \par\vspace{4pt}\textbf{\footnotesize Fonte: Elaborado pelo autor.}
+\end{figure}
+
+No Mapa, cada estabelecimento com coordenada é um marcador.
+A Figura \ref{fig:tela-mapa} mostra a distribuição dos pontos em Contagem, e a Figura \ref{fig:tela-mapa-detalhe} mostra o detalhe ao selecionar um estabelecimento: o clique abre uma janela com nome, CNAE, CNPJ e o aviso de que a posição é aproximada.
+
+\begin{figure}[htbp]
+    \centering
+    \caption{Tela Mapa da aplicação --- visão geral}
+    \label{fig:tela-mapa}
+    \vspace{4pt}
+    \imagemtela{tela-mapa}
+    \par\vspace{4pt}\textbf{\footnotesize Fonte: Elaborado pelo autor.}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \caption{Tela Mapa da aplicação --- detalhe do estabelecimento}
+    \label{fig:tela-mapa-detalhe}
+    \vspace{4pt}
+    \imagemtela{tela-mapa-detalhe}
+    \par\vspace{4pt}\textbf{\footnotesize Fonte: Elaborado pelo autor.}
+\end{figure}
+
+\subsection{Base de dados obtida e perfil dos estabelecimentos}
+
+A integração das bases resultou em 781 estabelecimentos de TI ativos em Contagem na fotografia de 13/10/2026.
+A Tabela \ref{tab:perfil} mostra a distribuição por subclasse da CNAE e por porte.
+Três subclasses (suporte técnico, consultoria e programas sob encomenda) reúnem 646 estabelecimentos, ou 82,7\% do total, e as microempresas são 86,6\%, o que indica um setor formado sobretudo por pequenos prestadores de serviço.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Estabelecimentos de TI ativos em Contagem por subclasse da CNAE e por porte}
+    \label{tab:perfil}
+    \small
+    \begin{tabular}{llrr}
+        \hline
+        \textbf{Critério} & \textbf{Categoria} & \textbf{Qtd.} & \textbf{\%} \\
+        \hline
+        Subclasse & 6209-1/00 Suporte técnico e outros serviços & 276 & 35,3 \\
+        & 6204-0/00 Consultoria em TI & 191 & 24,5 \\
+        & 6201-5/01 Programas sob encomenda & 179 & 22,9 \\
+        & 6202-3/00 Programas customizáveis & 82 & 10,5 \\
+        & 6203-1/00 Programas não customizáveis & 37 & 4,7 \\
+        & 6201-5/02 \textit{Web design} & 16 & 2,0 \\
+        \hline
+        Porte & Microempresa & 676 & 86,6 \\
+        & Empresa de pequeno porte & 69 & 8,8 \\
+        & Demais & 36 & 4,6 \\
+        \hline
+    \end{tabular}
+    \par\vspace{3pt}\textbf{\footnotesize Fonte: Elaborado pelo autor, com dados da Receita Federal (13/10/2026).}
+\end{table}
+
+Quanto à concentração espacial, o bairro com mais estabelecimentos é o Eldorado, com 105 (13,4\%), e os bairros que levam Eldorado no nome somam 173 (22,2\%).
+Em seguida vêm Riacho das Pedras e Jardim Riacho das Pedras, com 56 (7,2\%) em conjunto, entre 125 bairros distintos.
+
+Quanto ao MEI, nenhum dos 781 estabelecimentos foi marcado como tal: 630 empresas constavam no arquivo do Simples Nacional, e nenhuma tinha a opção pelo MEI.
+Como o campo não foi validado em outra fonte, essa pergunta ficou respondida apenas em parte.
+
+\subsection{Localização dos estabelecimentos}
+
+Dos 781 estabelecimentos, 641 (82,1\%) receberam coordenada e 140 (17,9\%) ficaram sem ela porque o CEP não consta no CNEFE.
+Todas as coordenadas atribuídas vieram da junção apenas por CEP: nenhum estabelecimento foi ligado por endereço completo.
+A causa provável, não verificada, é que o logradouro do CNPJ traz o tipo (``RUA PROFESSOR ALVES HORTA''), enquanto o campo lido do CNEFE traz só o nome, e as chaves de junção não coincidem.
+
+Quanto ao nível de geocodificação do CNEFE, 605 pontos (94,4\%) são coordenadas originais do Censo 2022 e 36 (5,6\%) são coordenadas modificadas, o que não significa que sejam a posição do estabelecimento, já que o ponto é o de um endereço do mesmo CEP.
+
+Quanto à sobreposição, os 641 estabelecimentos ocupam apenas 360 coordenadas distintas: 103 coordenadas são compartilhadas por mais de um estabelecimento, que somam 384 (59,9\% dos georreferenciados), e a maior reúne 68.
+Como o mapa desenha um marcador por estabelecimento, parte dos pontos fica sobreposta, e a concentração visual é menor que a real.
+
+% >>> SUBSTITUIR pelos resultados reais da conferência da amostra de cerca de 30 endereços (seção de testes).
+Na conferência da amostra de 30 endereços, o deslocamento mediano entre o ponto atribuído e o endereço informado foi de [XX] metros, e [XX] dos 30 pontos ficaram a menos de [XX] metros do endereço.
+
+\subsection{Avaliação heurística}
+
+% >>> SUBSTITUIR este texto genérico e a Tabela 3 pelos resultados reais da inspeção heurística.
+A inspeção foi feita por três avaliadores, entre eles o orientador Paulo Henrique Rodrigues (\href{mailto:496762@pucminas.edu.br}{496762@pucminas.edu.br}) e dois colegas com experiência em desenvolvimento de \textit{software}.
+Na consolidação das inspeções, foram identificados [N] problemas distintos, sendo [N] leves, [N] médios e [N] graves.
+A Tabela \ref{tab:heuristica} apresenta os problemas apontados por mais de um avaliador, com a heurística de \citeonline{nielsen1994} relacionada e a gravidade atribuída.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Problemas de usabilidade apontados por mais de um avaliador}
+    \label{tab:heuristica}
+    \small
+    \begin{tabular}{p{6.2cm}p{3.4cm}cc}
+        \hline
+        \textbf{Problema encontrado} & \textbf{Heurística} & \textbf{Gravidade} & \textbf{Avaliadores} \\
+        \hline
+        [Descrição do problema 1] & [H\# -- nome da heurística] & [Grave] & [3] \\
+        \relax[Descrição do problema 2] & [H\# -- nome da heurística] & [Médio] & [2] \\
+        \relax[Descrição do problema 3] & [H\# -- nome da heurística] & [Leve] & [2] \\
+        \hline
+    \end{tabular}
+    \par\vspace{3pt}\textbf{\footnotesize Fonte: Elaborado pelo autor, a partir do registro dos avaliadores.}
+\end{table}
+
+As heurísticas com mais ocorrências foram [heurística A] e [heurística B], concentradas principalmente na tela [Inventário/Mapa].
+Os avaliadores também destacaram como pontos positivos [pontos positivos da interface].
+Os problemas graves foram [descrição resumida], e a correção sugerida pelos avaliadores foi [sugestão de correção].
+
+\subsection{Discussão}
+
+Os quatro objetivos específicos foram atendidos, com a ressalva de que a coordenada vem apenas do CEP, sem junção por endereço completo.
+
+Em relação aos trabalhos relacionados, a taxa de 82,1\% de estabelecimentos com coordenada é menor que a de Presidente Prudente (97,4\%), onde \citeonline{silva2024} geocodificaram o endereço padronizado em um \textit{software} de geoprocessamento, e aqui a coordenada é a de um endereço do mesmo CEP.
+Diferentemente do Mapa de Empresas \cite{brasil2026}, que entrega totais agregados, a aplicação lista e localiza cada estabelecimento.
+
+Do ponto de vista prático, a aplicação permite a cidadãos, profissionais e empresários ver onde as empresas de TI se concentram em Contagem e consultar cada uma delas, e, como as coordenadas são aproximadas, a interface informa a data da fotografia e avisa que a posição é aproximada.

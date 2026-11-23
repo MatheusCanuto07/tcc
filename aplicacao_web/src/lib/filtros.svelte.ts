@@ -16,16 +16,3 @@ export function limparFiltros() {
 	filtros.somente_coordenada = false;
 	filtros.excluir_micro = false;
 }
-
-export function aplicarCenario(aplicar: {
-	mei?: '' | '0' | '1';
-	porte?: string;
-	excluir_micro?: boolean;
-	somente_coordenada?: boolean;
-}) {
-	limparFiltros();
-	if (aplicar.mei) filtros.mei = aplicar.mei;
-	if (aplicar.porte) filtros.porte = aplicar.porte;
-	if (aplicar.excluir_micro) filtros.excluir_micro = true;
-	if (aplicar.somente_coordenada) filtros.somente_coordenada = true;
-}

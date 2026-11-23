@@ -20,9 +20,5 @@ export const variables = defineEnvVars({
 	MYSQL_DATABASE: {
 		description: 'Nome do banco',
 		schema: (value) => value ?? 'tcc_contagem_ti'
-	},
-	CEMPRE_REF: {
-		description: 'Referência CEMPRE (unidades locais CNAE 62 em Contagem)',
-		schema: (value) => value ?? '535'
 	}
 });

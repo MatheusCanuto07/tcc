@@ -2,49 +2,40 @@
 
 No Brasil, o acesso a informações públicas é um direito garantido pela Lei de Acesso à Informação (LAI), Lei nº 12.527, de 18 de novembro de 2011 \cite{brasil2011}.
 A LAI obriga os órgãos públicos a divulgar, por iniciativa própria, informações de interesse coletivo em meios eletrônicos e em formatos abertos, e a responder aos pedidos de informação apresentados por qualquer pessoa.
-Para além da LAI, outras legislações, como a Lei da Transparência, Lei Complementar nº 131, de 27 de maio de 2009 \cite{brasil2009}, garantem o acesso da população a informações importantes da esfera pública, ao exigir a divulgação, em tempo real, da execução orçamentária e financeira da União, dos estados e dos municípios.
-
-O uso de dados para compreender a dinâmica econômica de um município pode contribuir para a identificação de características relacionadas à distribuição das atividades econômicas, à ocupação territorial e ao desenvolvimento de determinados setores.
-Nesse contexto, dados produzidos e mantidos por órgãos públicos podem ser utilizados não apenas para fins administrativos, mas também para produzir informações que auxiliem cidadãos, empresas, pesquisadores e gestores na compreensão do ambiente econômico local.
+A Lei da Transparência, Lei Complementar nº 131, de 27 de maio de 2009 \cite{brasil2009}, exige ainda a divulgação, em tempo real, da execução orçamentária e financeira de todos os entes.
 
 Contagem integra a Região Metropolitana de Belo Horizonte e tinha 621.863 habitantes no Censo Demográfico de 2022, em uma área de cerca de 195 km\textsuperscript{2} \cite{ibge2026}.
 Em 2023, o Produto Interno Bruto do município foi de R\$ 45,1 bilhões, o quarto maior de Minas Gerais \cite{ibge2026}.
-Embora a cidade seja conhecida pela indústria, a maior parte da riqueza gerada vem do setor terciário, o de serviços, do qual fazem parte as empresas de Tecnologia da Informação: em 2021, os serviços responderam por 59,1\% do valor adicionado bruto municipal, e a indústria, por 30,8\% \cite{ibge2026}.
+Embora a cidade seja conhecida pela indústria, a maior parte da riqueza gerada vem do setor de serviços, do qual fazem parte as empresas de Tecnologia da Informação (TI): em 2021, os serviços responderam por 59,1\% do valor adicionado bruto municipal, e a indústria, por 30,8\% \cite{ibge2026}.
 
-Contagem está adequada à legislação de acesso à informação.
-Em 2025, o município recebeu pela segunda vez consecutiva o Selo Ouro do Programa Nacional de Transparência Pública, com índice de 85,64\% no Radar da Transparência, por atender a todos os itens considerados essenciais na avaliação \cite{contagem2025}.
+Contagem está adequada à legislação de acesso à informação: em 2025, recebeu pela segunda vez consecutiva o Selo Ouro do Programa Nacional de Transparência Pública \cite{contagem2025}.
 A própria prefeitura declara manter um banco de dados das atividades econômicas do município, com os registros classificados pela Classificação Nacional de Atividades Econômicas (CNAE) e com geolocalização \cite{contagem2026}.
 Esses dados, porém, não são oferecidos ao público em um sistema de consulta de fácil compreensão.
 
-O cumprimento da legislação de acesso à informação nem sempre é garantia de facilidade de acesso e leitura dos dados.
-Segundo \citeonline{ansari2022}, o aumento da quantidade de dados governamentais publicados não resultou, por si só, em maior uso dessas informações pela sociedade.
-Os mesmos autores apontam a visualização de dados como um caminho para reduzir essa distância entre a publicação e o uso.
+O cumprimento da legislação nem sempre é garantia de facilidade de acesso e leitura dos dados.
+Segundo \citeonline{ansari2022}, o aumento da quantidade de dados governamentais publicados não resultou, por si só, em maior uso dessas informações pela sociedade, e a visualização de dados é um caminho para reduzir essa distância.
 
 Diante desse cenário, este trabalho busca responder à seguinte questão de pesquisa: é possível combinar os dados disponibilizados pela legislação para criar um sistema interativo que facilite a visualização dos dados referentes às empresas de TI do município de Contagem?
-
-O objetivo geral deste trabalho é desenvolver uma aplicação web interativa que permita caracterizar e visualizar as empresas do setor de Tecnologia da Informação do município de Contagem a partir da integração de dados abertos.
-A aplicação reunirá indicadores, gráficos, mapas, tabelas e mecanismos de filtragem, ajustados à estrutura e à qualidade das fontes utilizadas.
+O objetivo geral é desenvolver uma aplicação web interativa que permita caracterizar e visualizar as empresas do setor de TI do município a partir da integração de dados abertos, com indicadores, gráficos, mapas, tabelas e mecanismos de filtragem ajustados à estrutura e à qualidade das fontes utilizadas.
 
 Como objetivos específicos, pretende-se:
 
 \begin{itemize}
-    \item coletar e tratar dados abertos sobre os estabelecimentos de Tecnologia da Informação de Contagem, integrando atividade econômica, porte e localização em uma base única;
+    \item coletar e tratar dados abertos sobre os estabelecimentos de TI de Contagem, integrando atividade econômica, porte e localização em uma base única;
     \item projetar uma aplicação web para a consulta desses dados, com levantamento de requisitos, diagrama de casos de uso e esquema do banco de dados;
     \item implementar essa aplicação, de modo que o usuário possa consultar, filtrar e interpretar as informações por meio de mapa, gráficos e tabelas;
     \item testar a aplicação, conferindo a localização atribuída aos estabelecimentos e avaliando a usabilidade da interface por meio de inspeção heurística com três avaliadores independentes.
 \end{itemize}
 
-Todos os dados utilizados no sistema foram coletados em fontes públicas oficiais, ou seja, já estão publicados.
-Ainda assim, foi observada a Lei Geral de Proteção de Dados Pessoais (LGPD), Lei nº 13.709, de 14 de agosto de 2018 \cite{brasil2018}.
-Dados pessoais, como nome e CPF de sócios, não foram divulgados.
+Todos os dados utilizados foram coletados em fontes públicas oficiais, ou seja, já estão publicados.
+Ainda assim, foi observada a Lei Geral de Proteção de Dados Pessoais (LGPD), Lei nº 13.709, de 14 de agosto de 2018 \cite{brasil2018}, e dados pessoais, como nome e CPF de sócios, não foram divulgados.
 
-A relevância deste estudo justifica-se pela necessidade de aproximar dados públicos, hoje muitas vezes dispersos e difíceis de consultar devido à sua apresentação, de públicos que podem utilizá-los na prática, como os cidadãos, que poderão conhecer melhor as empresas de tecnologia existentes no município; os profissionais, que poderão identificar organizações relacionadas às suas áreas de interesse; os empresários, que poderão conhecer empresas do mesmo setor e identificar possíveis fornecedores ou parceiros; e os empreendedores, que poderão explorar características da distribuição das atividades econômicas no município.
+A relevância deste estudo justifica-se pela necessidade de aproximar dados públicos, hoje muitas vezes dispersos e difíceis de consultar, de públicos que podem utilizá-los na prática: os cidadãos, que poderão conhecer melhor as empresas de tecnologia do município; os profissionais, que poderão identificar organizações de suas áreas de interesse; os empresários, que poderão conhecer empresas do mesmo setor e possíveis fornecedores ou parceiros; e os empreendedores, que poderão explorar a distribuição das atividades econômicas no município.
 
 Sob a perspectiva acadêmica, o trabalho contribui para a área de Sistemas de Informação ao integrar dados abertos, análise descritiva e visualização interativa em um recorte municipal concreto, alinhado a estudos que relacionam localização e setor de tecnologia em contextos urbanos, como o de \citeonline{zenka2021}.
-A escolha do tema pauta-se na formação em Sistemas de Informação e no interesse por soluções que transformem bases públicas em instrumentos de consulta e interpretação para usuários não especializados.
 
 Este trabalho está estruturado em seis seções.
 Após esta introdução, a Seção 2 apresenta o referencial teórico, e a Seção 3 os trabalhos relacionados.
-A Seção 4 descreve a metodologia empregada, incluindo a coleta e a integração das bases de dados abertos e o projeto da aplicação web.
-A Seção 5 apresenta o software desenvolvido e os testes da aplicação.
-Por fim, a Seção 6 apresenta as conclusões do trabalho, suas limitações e as possibilidades de continuidade da pesquisa.
+A Seção 4 descreve a metodologia, incluindo a coleta e a integração das bases de dados abertos e o projeto da aplicação web.
+A Seção 5 apresenta o software desenvolvido, os resultados e os testes da aplicação.
+Por fim, a Seção 6 apresenta as conclusões, as limitações e as possibilidades de continuidade da pesquisa.

@@ -6,10 +6,6 @@
 	import type { LayoutProps } from './$types';
 
 	let { data, children }: LayoutProps = $props();
-
-	let desvioPct = $derived(
-		data.resumo.desvio_cempre == null ? null : 100 * data.resumo.desvio_cempre
-	);
 </script>
 
 <svelte:head>
@@ -31,11 +27,11 @@
 		<Navbar />
 		<p class="contexto">
 			Base CNPJ (fotografia {formatarData(data.resumo.data_fotografia)}), município IBGE 3118601,
-			CNAE divisão 62, comparado ao CEMPRE.
+			CNAE divisão 62.
 		</p>
 		<ul class="leituras">
 			<li>
-				<span>Na aplicação</span>
+				<span>Estabelecimentos</span>
 				<strong>{data.resumo.total}</strong>
 			</li>
 			<li>
@@ -46,20 +42,15 @@
 				</strong>
 			</li>
 			<li>
-				<span>CEMPRE (ref.)</span>
-				<strong>{data.resumo.cempre_ref}</strong>
-			</li>
-			<li
-				class={{
-					alerta: data.resumo.atende_criterio_30 === false,
-					ok: data.resumo.atende_criterio_30 === true
-				}}
-			>
-				<span>Desvio vs CEMPRE</span>
+				<span>Sem coordenada</span>
 				<strong>
-					{desvioPct == null ? '—' : `${desvioPct.toFixed(0)}%`}
-					<small>{data.resumo.atende_criterio_30 ? 'dentro de 30%' : 'acima de 30%'}</small>
+					{data.resumo.sem_coordenada}
+					<small>{pct(data.resumo.sem_coordenada, data.resumo.total)}</small>
 				</strong>
+			</li>
+			<li>
+				<span>MEI</span>
+				<strong>{data.resumo.mei}</strong>
 			</li>
 		</ul>
 	</div>
@@ -128,14 +119,6 @@
 		font-weight: 500;
 		font-size: 0.72rem;
 		color: var(--ink-soft);
-	}
-
-	.leituras .alerta strong {
-		color: var(--warn);
-	}
-
-	.leituras .ok strong {
-		color: var(--ok);
 	}
 
 	.conteudo {

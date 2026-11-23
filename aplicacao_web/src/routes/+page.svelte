@@ -1,5 +1,4 @@
 <script lang="ts">
-	import MitigacaoCempre from '#lib/components/MitigacaoCempre.svelte';
 	import { filtrarEstabelecimentos } from '#lib/filtrar.js';
 	import { filtros, limparFiltros } from '#lib/filtros.svelte.js';
 	import { formatarCnpj, nomeExibicao } from '#lib/formatacao.js';
@@ -25,8 +24,6 @@
 		<h1>Inventário</h1>
 		<p>Busque, filtre pela lateral e consulte a lista de estabelecimentos.</p>
 	</header>
-
-	<MitigacaoCempre mitigacao={data.resumo.mitigacao} />
 
 	<section class="busca-faixa" aria-label="Busca e filtros">
 		<label class="campo cresce">
