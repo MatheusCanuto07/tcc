@@ -1,0 +1,23 @@
+# Ambiente e segredos
+**/.env
+**/.env.*
+!**/.env.example
+
+# Dependências e build
+**/node_modules/
+**/.svelte-kit/
+**/build/
+**/.output/
+**/.vercel/
+**/.netlify/
+
+# Pipeline: bases brutas e artefatos pesados (GB) — baixar via pipeline.py
+pipeline_para_obtencao_de_dados/dados_brutos/
+pipeline_para_obtencao_de_dados/dados_tratados/cache_cnefe.json
+pipeline_para_obtencao_de_dados/*.log
+
+# SO / IDE
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp

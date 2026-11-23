@@ -1,0 +1,55 @@
+:root {
+	/* Opção B — acadêmico de banca */
+	--ink: #111827;
+	--ink-soft: #4b5563;
+	--paper: #ffffff;
+	--surface: #f8fafc;
+	--line: #d1d5db;
+	--line-strong: #1f2933;
+	--accent: #1d4e89;
+	--accent-soft: #e8eef6;
+	--warn: #9a3412;
+	--ok: #166534;
+	--focus: #1d4e89;
+
+	--font-display: 'Libre Baskerville', 'Times New Roman', serif;
+	--font-body: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+
+	--radius: 2px;
+	--max: 1180px;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	min-height: 100%;
+}
+
+body {
+	color: var(--ink);
+	font-family: var(--font-body);
+	font-size: 15px;
+	line-height: 1.5;
+	background: var(--paper);
+}
+
+:focus-visible {
+	outline: 2px solid var(--focus);
+	outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}

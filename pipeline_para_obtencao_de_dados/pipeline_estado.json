@@ -1,0 +1,53 @@
+{
+  "atualizado_em": "2026-11-22T20:19:50-03:00",
+  "fontes": {
+    "cnpj": {
+      "status": "ok",
+      "atualizado_em": "2026-11-22T20:13:27-03:00",
+      "url_principal": "https://dados-abertos-rf-cnpj.casadosdados.com.br/arquivos/2026-10-13",
+      "artefato": "C:\\Users\\Matheus Canuto\\Projects\\tcc\\pipeline_para_obtencao_de_dados\\dados_tratados\\cache_cnpj.json",
+      "erro": null,
+      "sugestao": null
+    },
+    "cnae": {
+      "status": "ok",
+      "atualizado_em": "2026-11-22T19:53:01-03:00",
+      "url_principal": "https://concla.ibge.gov.br/images/concla/documentacao/CNAE_Subclasses_2_3_Estrutura_Detalhada.xlsx",
+      "artefato": "C:\\Users\\Matheus Canuto\\Projects\\tcc\\pipeline_para_obtencao_de_dados\\dados_tratados\\cache_cnae.json",
+      "erro": null,
+      "sugestao": null
+    },
+    "cnefe": {
+      "status": "ok",
+      "atualizado_em": "2026-11-22T19:53:06-03:00",
+      "url_principal": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/31_MG/3118601_CONTAGEM.zip",
+      "artefato": "C:\\Users\\Matheus Canuto\\Projects\\tcc\\pipeline_para_obtencao_de_dados\\dados_tratados\\cache_cnefe.json",
+      "erro": null,
+      "sugestao": null
+    },
+    "malhas": {
+      "status": "ok",
+      "atualizado_em": "2026-11-22T19:53:07-03:00",
+      "url_principal": "https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2024/Brasil/BR/BR_Municipios_2024.zip",
+      "artefato": "C:\\Users\\Matheus Canuto\\Projects\\tcc\\pipeline_para_obtencao_de_dados\\dados_tratados\\cache_malhas.json",
+      "erro": null,
+      "sugestao": null
+    },
+    "cempre": {
+      "status": "ok",
+      "atualizado_em": "2026-11-22T20:19:49-03:00",
+      "url_principal": "https://apisidra.ibge.gov.br/values/t/9528/n6/3118601/v/706/p/last%201/c12762/117594",
+      "artefato": "C:\\Users\\Matheus Canuto\\Projects\\tcc\\pipeline_para_obtencao_de_dados\\dados_tratados\\cache_cempre.json",
+      "erro": null,
+      "sugestao": null
+    },
+    "unificar": {
+      "status": "ok",
+      "atualizado_em": "2026-11-22T20:19:50-03:00",
+      "url_principal": "",
+      "artefato": "C:\\Users\\Matheus Canuto\\Projects\\tcc\\pipeline_para_obtencao_de_dados\\dados_tratados\\estabelecimentos_ti_contagem.json",
+      "erro": null,
+      "sugestao": null
+    }
+  }
+}

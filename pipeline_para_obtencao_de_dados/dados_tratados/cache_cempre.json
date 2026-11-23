@@ -1,0 +1,110 @@
+{
+  "ok": true,
+  "fonte": "cempre",
+  "url_principal": "https://apisidra.ibge.gov.br/values/t/9528/n6/3118601/v/706/p/last%201/c12762/117594",
+  "recorte": {
+    "municipio_ibge": "3118601",
+    "cnae": "divisao_62",
+    "codigo_sidra_cnae": "117594",
+    "tabela": "9528",
+    "variavel": "706"
+  },
+  "total_unidades_locais_divisao_62": 535.0,
+  "soma_classes_divisao_62": 535.0,
+  "linhas": [
+    {
+      "Nível Territorial (Código)": "6",
+      "Nível Territorial": "Município",
+      "Unidade de Medida (Código)": "1020",
+      "Unidade de Medida": "Unidades",
+      "Valor": "535",
+      "Município (Código)": "3118601",
+      "Município": "Contagem (MG)",
+      "Variável (Código)": "706",
+      "Variável": "Número de unidades locais",
+      "Ano (Código)": "2024",
+      "Ano": "2024",
+      "Classificação Nacional de Atividades Econômicas (CNAE 2.0) (Código)": "117594",
+      "Classificação Nacional de Atividades Econômicas (CNAE 2.0)": "62 Atividades dos serviços de tecnologia da informação"
+    }
+  ],
+  "linhas_classes": [
+    {
+      "Nível Territorial (Código)": "6",
+      "Nível Territorial": "Município",
+      "Unidade de Medida (Código)": "1020",
+      "Unidade de Medida": "Unidades",
+      "Valor": "134",
+      "Município (Código)": "3118601",
+      "Município": "Contagem (MG)",
+      "Variável (Código)": "706",
+      "Variável": "Número de unidades locais",
+      "Ano (Código)": "2024",
+      "Ano": "2024",
+      "Classificação Nacional de Atividades Econômicas (CNAE 2.0) (Código)": "117596",
+      "Classificação Nacional de Atividades Econômicas (CNAE 2.0)": "62.01-5 Desenvolvimento de programas de computador sob encomenda"
+    },
+    {
+      "Nível Territorial (Código)": "6",
+      "Nível Territorial": "Município",
+      "Unidade de Medida (Código)": "1020",
+      "Unidade de Medida": "Unidades",
+      "Valor": "66",
+      "Município (Código)": "3118601",
+      "Município": "Contagem (MG)",
+      "Variável (Código)": "706",
+      "Variável": "Número de unidades locais",
+      "Ano (Código)": "2024",
+      "Ano": "2024",
+      "Classificação Nacional de Atividades Econômicas (CNAE 2.0) (Código)": "117597",
+      "Classificação Nacional de Atividades Econômicas (CNAE 2.0)": "62.02-3 Desenvolvimento e licenciamento de programas de computador customizáveis"
+    },
+    {
+      "Nível Territorial (Código)": "6",
+      "Nível Territorial": "Município",
+      "Unidade de Medida (Código)": "1020",
+      "Unidade de Medida": "Unidades",
+      "Valor": "22",
+      "Município (Código)": "3118601",
+      "Município": "Contagem (MG)",
+      "Variável (Código)": "706",
+      "Variável": "Número de unidades locais",
+      "Ano (Código)": "2024",
+      "Ano": "2024",
+      "Classificação Nacional de Atividades Econômicas (CNAE 2.0) (Código)": "117598",
+      "Classificação Nacional de Atividades Econômicas (CNAE 2.0)": "62.03-1 Desenvolvimento e licenciamento de programas de computador não-customizáveis"
+    },
+    {
+      "Nível Territorial (Código)": "6",
+      "Nível Territorial": "Município",
+      "Unidade de Medida (Código)": "1020",
+      "Unidade de Medida": "Unidades",
+      "Valor": "111",
+      "Município (Código)": "3118601",
+      "Município": "Contagem (MG)",
+      "Variável (Código)": "706",
+      "Variável": "Número de unidades locais",
+      "Ano (Código)": "2024",
+      "Ano": "2024",
+      "Classificação Nacional de Atividades Econômicas (CNAE 2.0) (Código)": "117599",
+      "Classificação Nacional de Atividades Econômicas (CNAE 2.0)": "62.04-0 Consultoria em tecnologia da informação"
+    },
+    {
+      "Nível Territorial (Código)": "6",
+      "Nível Territorial": "Município",
+      "Unidade de Medida (Código)": "1020",
+      "Unidade de Medida": "Unidades",
+      "Valor": "202",
+      "Município (Código)": "3118601",
+      "Município": "Contagem (MG)",
+      "Variável (Código)": "706",
+      "Variável": "Número de unidades locais",
+      "Ano (Código)": "2024",
+      "Ano": "2024",
+      "Classificação Nacional de Atividades Econômicas (CNAE 2.0) (Código)": "117600",
+      "Classificação Nacional de Atividades Econômicas (CNAE 2.0)": "62.09-1 Suporte técnico, manutenção e outros serviços em tecnologia da informação"
+    }
+  ],
+  "arquivo": "C:\\Users\\Matheus Canuto\\Projects\\tcc\\pipeline_para_obtencao_de_dados\\dados_brutos\\cempre\\cempre_contagem_cnae62.csv",
+  "erros": []
+}

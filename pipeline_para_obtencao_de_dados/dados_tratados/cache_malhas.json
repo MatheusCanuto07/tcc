@@ -1,0 +1,21 @@
+{
+  "ok": true,
+  "fonte": "malhas",
+  "url_principal": "https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2024/Brasil/BR/BR_Municipios_2024.zip",
+  "arquivos": [
+    {
+      "rotulo": "bairros_mg",
+      "zip": "C:\\Users\\Matheus Canuto\\Projects\\tcc\\pipeline_para_obtencao_de_dados\\dados_brutos\\malhas\\MG_bairros_CD2022.zip",
+      "shp": [
+        "C:\\Users\\Matheus Canuto\\Projects\\tcc\\pipeline_para_obtencao_de_dados\\dados_brutos\\malhas\\extraido_bairros_mg\\MG_bairros_CD2022.shp"
+      ],
+      "url": "https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_de_setores_censitarios__divisoes_intramunicipais/censo_2022/bairros/shp/UF/MG_bairros_CD2022.zip"
+    }
+  ],
+  "erros": [
+    "municipios: 404 Client Error: Not Found for url: https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2024/Brasil/BR/BR_Municipios_2024.zip | URL: https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2024/Brasil/BR/BR_Municipios_2024.zip"
+  ],
+  "avisos": [
+    "municipios: 404 Client Error: Not Found for url: https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2024/Brasil/BR/BR_Municipios_2024.zip | URL: https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2024/Brasil/BR/BR_Municipios_2024.zip"
+  ]
+}

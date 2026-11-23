@@ -1,0 +1,25 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: tcc-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: tcc_root
+      MYSQL_DATABASE: tcc_contagem_ti
+      MYSQL_USER: tcc
+      MYSQL_PASSWORD: tcc_senha
+    ports:
+      - "3307:3306"
+    volumes:
+      - tcc_mysql_data:/var/lib/mysql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-ptcc_root"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+volumes:
+  tcc_mysql_data:

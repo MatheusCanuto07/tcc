@@ -1,0 +1,33 @@
+{
+  "ok": true,
+  "fonte": "cnae",
+  "url_principal": "https://concla.ibge.gov.br/images/concla/documentacao/CNAE_Subclasses_2_3_Estrutura_Detalhada.xlsx",
+  "cnae": [
+    {
+      "codigo": "6201-5/01",
+      "descricao": "Desenvolvimento de programas de computador sob encomenda"
+    },
+    {
+      "codigo": "6201-5/02",
+      "descricao": "Web desing"
+    },
+    {
+      "codigo": "6202-3/00",
+      "descricao": "Desenvolvimento e licenciamento de programas de computador customizáveis"
+    },
+    {
+      "codigo": "6203-1/00",
+      "descricao": "Desenvolvimento e licenciamento de programas de computador não customizáveis"
+    },
+    {
+      "codigo": "6204-0/00",
+      "descricao": "Consultoria em tecnologia da informação"
+    },
+    {
+      "codigo": "6209-1/00",
+      "descricao": "Suporte técnico, manutenção e outros serviços em tecnologia da informação"
+    }
+  ],
+  "arquivo": "C:\\Users\\Matheus Canuto\\Projects\\tcc\\pipeline_para_obtencao_de_dados\\dados_brutos\\cnae\\CNAE_Subclasses_2_3_Estrutura_Detalhada.xlsx",
+  "erros": []
+}

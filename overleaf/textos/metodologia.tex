@@ -27,9 +27,9 @@ O CNAE secundário não será usado como critério de entrada.
 
 A descrição dos dados será orientada por quatro perguntas: onde esses estabelecimentos se concentram em Contagem; qual é o perfil de porte; qual é a proporção de microempreendedores individuais; e qual parte dos endereços recebe coordenada em cada nível de junção.
 
-Não haverá teste com usuários nem questionário.
-A avaliação da interface será uma inspeção feita pelo próprio autor, descrita na Seção \ref{subsec:testes}.
-Por isso, não se aplica tramitação em comitê de ética para coleta com pessoas.
+Não haverá teste com usuários finais nem questionário.
+A avaliação da interface será uma inspeção heurística com três avaliadores independentes, descrita na Seção \ref{subsec:testes}.
+Por isso, não se aplica tramitação em comitê de ética para coleta com sujeitos de pesquisa.
 
 \subsection{Proteção de dados}
 
@@ -149,13 +149,22 @@ Ela serve para dizer, de forma aproximada, o quanto o ponto se afasta do endere�
 
 Os totais da base também serão comparados com os do CEMPRE.
 A comparação não busca números iguais, porque o ano e os critérios de cada base são diferentes.
-O que se verifica é se a ordem de grandeza é coerente.
+Adota-se o critério numérico de aceitação de diferença relativa de no máximo 30\% em relação ao total do CEMPRE, isto é,
+$\lvert N_{\mathrm{app}} - N_{\mathrm{CEMPRE}}\rvert / N_{\mathrm{CEMPRE}} \leq 0{,}30$.
+Esse limiar acomoda divergências esperadas de fotografia temporal, de definição de situação cadastral e de inclusão de microempreendedores individuais entre as fontes.
+A justificativa completa e a aplicação do critério aos totais obtidos são apresentadas na Seção 5.
 
-A usabilidade será avaliada por inspeção heurística, feita pelo autor, sem usuários convidados.
-A lista usada é a das dez heurísticas de \citeonline{nielsen1994}, no mesmo tipo de registro adotado por \citeonline{vazquezingelmo2024}: problema encontrado, heurística relacionada e gravidade.
-A gravidade será anotada em três níveis: leve, médio e grave.
-As telas percorridas serão o mapa, os filtros, os gráficos e a tabela.
-O resultado dessa inspeção entra na seção de resultados, como lista de problemas e ajustes possíveis, e não como nota da aplicação.
+A usabilidade será avaliada por inspeção heurística com três avaliadores, e não pelo autor sozinho.
+Os avaliadores serão o professor orientador deste trabalho e dois colegas de faculdade com experiência em desenvolvimento de software.
+O autor não participa da inspeção, para reduzir o viés de quem implementou a interface.
+
+Será preparado um roteiro escrito com as dez heurísticas de \citeonline{nielsen1994}, a descrição das telas a percorrer --- mapa, filtros, gráficos e tabela --- e o formulário de registro.
+Cada avaliador receberá o roteiro e percorrerá o sistema separadamente, sem discutir os achados com os demais antes de concluir a própria lista.
+O registro seguirá o tipo adotado por \citeonline{vazquezingelmo2024}: problema encontrado, heurística relacionada e gravidade, anotada em três níveis --- leve, médio e grave.
+
+Somente após as três inspeções individuais os achados serão reunidos em uma sessão de consolidação.
+Nessa sessão, problemas equivalentes serão unificados em uma lista única, e cada item passará a indicar quantos avaliadores o identificaram.
+Os resultados consolidados, com destaque aos problemas apontados por mais de um avaliador, entram na Seção 5, e não como nota única da aplicação.
 
 \subsection{Procedimentos de análise}
 

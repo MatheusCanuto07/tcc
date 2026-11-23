@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Opções de navbar — Estação Contagem (formal)</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Libre+Baskerville:wght@400;700&family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@600;700&family=Public+Sans:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			:root {
+				--page: #e9eaed;
+				--ink: #1a1f24;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				font-family: 'Source Sans 3', system-ui, sans-serif;
+				color: var(--ink);
+				background: var(--page);
+				line-height: 1.45;
+			}
+
+			.wrap {
+				max-width: 980px;
+				margin: 0 auto;
+				padding: 2rem 1.25rem 3.5rem;
+			}
+
+			h1 {
+				margin: 0 0 0.35rem;
+				font-size: 1.55rem;
+			}
+
+			.lead {
+				margin: 0 0 1.75rem;
+				color: #4b5563;
+				max-width: 58ch;
+			}
+
+			.opcao {
+				margin-bottom: 1.75rem;
+				background: #fff;
+				border: 1px solid #cfd3d8;
+				overflow: hidden;
+			}
+
+			.meta {
+				padding: 0.85rem 1rem 0.95rem;
+				border-bottom: 1px solid #e5e7eb;
+			}
+
+			.meta h2 {
+				margin: 0 0 0.25rem;
+				font-size: 1.05rem;
+			}
+
+			.meta p {
+				margin: 0;
+				font-size: 0.9rem;
+				color: #4b5563;
+			}
+
+			.swatches {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.45rem;
+				margin-top: 0.65rem;
+			}
+
+			.swatch {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.35rem;
+				font-size: 0.75rem;
+				color: #374151;
+			}
+
+			.swatch i {
+				width: 0.9rem;
+				height: 0.9rem;
+				border: 1px solid rgb(0 0 0 / 0.15);
+				display: inline-block;
+			}
+
+			.preview-body {
+				padding: 1rem;
+				min-height: 140px;
+			}
+
+			.preview-body p {
+				margin: 0.85rem 0 0;
+				font-size: 0.92rem;
+				color: #4b5563;
+				max-width: 52ch;
+			}
+
+			/* ========== A ========== */
+			.a-nav {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1rem;
+				padding: 0.85rem 1.1rem;
+				background: #0b3a5b;
+				color: #fff;
+				font-family: 'Source Sans 3', sans-serif;
+			}
+
+			.a-nav .brand {
+				font-family: 'Source Serif 4', serif;
+				font-weight: 700;
+				font-size: 1.05rem;
+				text-decoration: none;
+				color: inherit;
+			}
+
+			.a-nav nav {
+				display: flex;
+				gap: 0.25rem;
+			}
+
+			.a-nav a {
+				color: rgb(255 255 255 / 0.82);
+				text-decoration: none;
+				padding: 0.4rem 0.75rem;
+				font-weight: 600;
+				font-size: 0.92rem;
+				border-bottom: 2px solid transparent;
+			}
+
+			.a-nav a.ativo {
+				color: #fff;
+				border-bottom-color: #c4a35a;
+			}
+
+			.a-body {
+				background: #f5f6f8;
+				font-family: 'Source Sans 3', sans-serif;
+			}
+
+			.a-body h3 {
+				margin: 0;
+				font-family: 'Source Serif 4', serif;
+				font-size: 1.25rem;
+			}
+
+			/* ========== B ========== */
+			.b-nav {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1rem;
+				padding: 0.9rem 1.1rem;
+				background: #fff;
+				border-bottom: 1px solid #1f2933;
+				font-family: 'IBM Plex Sans', sans-serif;
+			}
+
+			.b-nav .brand {
+				font-family: 'Libre Baskerville', serif;
+				font-weight: 700;
+				font-size: 1rem;
+				color: #111827;
+				text-decoration: none;
+			}
+
+			.b-nav .brand small {
+				display: block;
+				font-family: 'IBM Plex Sans', sans-serif;
+				font-weight: 500;
+				font-size: 0.72rem;
+				color: #6b7280;
+				margin-top: 0.15rem;
+			}
+
+			.b-nav nav {
+				display: flex;
+				gap: 0.15rem;
+				align-items: center;
+			}
+
+			.b-nav a {
+				color: #4b5563;
+				text-decoration: none;
+				padding: 0.35rem 0.7rem;
+				font-weight: 500;
+				font-size: 0.9rem;
+			}
+
+			.b-nav a.ativo {
+				color: #1d4e89;
+				box-shadow: inset 0 -2px 0 #1d4e89;
+			}
+
+			.b-nav .sep {
+				color: #c4c9d0;
+				padding: 0 0.15rem;
+			}
+
+			.b-body {
+				background: #fff;
+				font-family: 'IBM Plex Sans', sans-serif;
+			}
+
+			.b-body h3 {
+				margin: 0;
+				font-family: 'Libre Baskerville', serif;
+				font-size: 1.2rem;
+				color: #111827;
+			}
+
+			/* ========== C ========== */
+			.c-nav {
+				background: #1351b4;
+				color: #fff;
+				font-family: 'Noto Sans', sans-serif;
+			}
+
+			.c-top {
+				padding: 0.55rem 1.1rem 0.15rem;
+				font-family: 'Noto Serif', serif;
+				font-weight: 700;
+				font-size: 1.02rem;
+			}
+
+			.c-links {
+				display: flex;
+				gap: 0;
+				padding: 0 0.55rem;
+			}
+
+			.c-links a {
+				color: rgb(255 255 255 / 0.88);
+				text-decoration: none;
+				padding: 0.7rem 1rem;
+				font-weight: 600;
+				font-size: 0.9rem;
+			}
+
+			.c-links a.ativo {
+				background: #0c326f;
+				color: #fff;
+			}
+
+			.c-body {
+				background: #fff;
+				font-family: 'Noto Sans', sans-serif;
+			}
+
+			.c-body h3 {
+				margin: 0;
+				font-family: 'Noto Serif', serif;
+				font-size: 1.2rem;
+				color: #333;
+			}
+
+			/* ========== D ========== */
+			.d-nav {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1rem;
+				padding: 0.9rem 1.1rem;
+				background: #2f343a;
+				color: #f2f2f0;
+				font-family: 'Public Sans', sans-serif;
+			}
+
+			.d-nav .brand {
+				font-family: 'Cormorant Garamond', serif;
+				font-weight: 700;
+				font-size: 1.2rem;
+				letter-spacing: 0.01em;
+				text-decoration: none;
+				color: inherit;
+			}
+
+			.d-nav nav {
+				display: flex;
+				gap: 0.35rem;
+			}
+
+			.d-nav a {
+				color: rgb(242 242 240 / 0.75);
+				text-decoration: none;
+				padding: 0.35rem 0.65rem;
+				font-weight: 600;
+				font-size: 0.88rem;
+				border-bottom: 2px solid transparent;
+			}
+
+			.d-nav a.ativo {
+				color: #e8e6e1;
+				border-bottom-color: #8b7355;
+			}
+
+			.d-body {
+				background: #edebe6;
+				font-family: 'Public Sans', sans-serif;
+			}
+
+			.d-body h3 {
+				margin: 0;
+				font-family: 'Cormorant Garamond', serif;
+				font-size: 1.35rem;
+				color: #2f343a;
+			}
+
+			.pick {
+				margin-top: 1.5rem;
+				padding: 1rem;
+				background: #fff;
+				border: 1px dashed #9aa3ad;
+				font-size: 0.95rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<h1>Opções de navbar (formal)</h1>
+			<p class="lead">
+				Prévia para o TCC com dados públicos (CNPJ / CNEFE / CEMPRE). Escolha A, B, C ou D e me diga
+				qual aplicar na aplicação.
+			</p>
+
+			<article class="opcao" id="a">
+				<div class="meta">
+					<h2>A — Estatística pública</h2>
+					<p>Source Serif 4 + Source Sans 3 · azul institucional + dourado contido</p>
+					<div class="swatches">
+						<span class="swatch"><i style="background: #0b3a5b"></i> #0B3A5B</span>
+						<span class="swatch"><i style="background: #c4a35a"></i> #C4A35A</span>
+						<span class="swatch"><i style="background: #f5f6f8"></i> #F5F6F8</span>
+						<span class="swatch"><i style="background: #1a1f24"></i> #1A1F24</span>
+					</div>
+				</div>
+				<header class="a-nav">
+					<a class="brand" href="#">TI Contagem</a>
+					<nav>
+						<a class="ativo" href="#">Inventário</a>
+						<a href="#">Mapa</a>
+					</nav>
+				</header>
+				<div class="preview-body a-body">
+					<h3>Inventário de estabelecimentos</h3>
+					<p>
+						Leitura de dado público: CNPJ filtrado por Contagem (IBGE 3118601) e CNAE divisão 62,
+						comparado ao CEMPRE.
+					</p>
+				</div>
+			</article>
+
+			<article class="opcao" id="b">
+				<div class="meta">
+					<h2>B — Acadêmico de banca</h2>
+					<p>Libre Baskerville + IBM Plex Sans · branco, tipografia de monografia</p>
+					<div class="swatches">
+						<span class="swatch"><i style="background: #ffffff"></i> #FFFFFF</span>
+						<span class="swatch"><i style="background: #1d4e89"></i> #1D4E89</span>
+						<span class="swatch"><i style="background: #111827"></i> #111827</span>
+						<span class="swatch"><i style="background: #1f2933"></i> #1F2933</span>
+					</div>
+				</div>
+				<header class="b-nav">
+					<a class="brand" href="#">
+						Contagem · CNAE 62
+						<small>Trabalho de conclusão de curso</small>
+					</a>
+					<nav>
+						<a class="ativo" href="#">Inventário</a>
+						<span class="sep" aria-hidden="true">|</span>
+						<a href="#">Mapa</a>
+					</nav>
+				</header>
+				<div class="preview-body b-body">
+					<h3>Inventário de estabelecimentos</h3>
+					<p>
+						Visual de artigo científico: hierarquia tipográfica clara, pouco cromo, adequado à
+						banca.
+					</p>
+				</div>
+			</article>
+
+			<article class="opcao" id="c">
+				<div class="meta">
+					<h2>C — Governo / transparência</h2>
+					<p>Noto Serif + Noto Sans · azul portal + aba ativa escura</p>
+					<div class="swatches">
+						<span class="swatch"><i style="background: #1351b4"></i> #1351B4</span>
+						<span class="swatch"><i style="background: #0c326f"></i> #0C326F</span>
+						<span class="swatch"><i style="background: #ffffff"></i> #FFFFFF</span>
+						<span class="swatch"><i style="background: #be3a34"></i> #BE3A34</span>
+					</div>
+				</div>
+				<header class="c-nav">
+					<div class="c-top">Inventário de TI — Contagem/MG</div>
+					<nav class="c-links">
+						<a class="ativo" href="#">Inventário</a>
+						<a href="#">Mapa</a>
+					</nav>
+				</header>
+				<div class="preview-body c-body">
+					<h3>Inventário de estabelecimentos</h3>
+					<p>
+						Linguagem visual de portal de transparência: imediato como “dado oficial”, um pouco
+						mais “governo” que “tese”.
+					</p>
+				</div>
+			</article>
+
+			<article class="opcao" id="d">
+				<div class="meta">
+					<h2>D — Arquivo / cadastro</h2>
+					<p>Cormorant Garamond + Public Sans · cinza administrativo + sublinhado arquivo</p>
+					<div class="swatches">
+						<span class="swatch"><i style="background: #2f343a"></i> #2F343A</span>
+						<span class="swatch"><i style="background: #8b7355"></i> #8B7355</span>
+						<span class="swatch"><i style="background: #edebe6"></i> #EDEBE6</span>
+						<span class="swatch"><i style="background: #5c6b7a"></i> #5C6B7A</span>
+					</div>
+				</div>
+				<header class="d-nav">
+					<a class="brand" href="#">Inventário cadastral TI</a>
+					<nav>
+						<a class="ativo" href="#">Inventário</a>
+						<a href="#">Mapa</a>
+					</nav>
+				</header>
+				<div class="preview-body d-body">
+					<h3>Inventário de estabelecimentos</h3>
+					<p>
+						Enfase no caráter cadastral das bases (CNPJ, CNEFE): formal, administrativo, sem
+						aparência de produto comercial.
+					</p>
+				</div>
+			</article>
+
+			<p class="pick">
+				Responda no chat com <strong>A</strong>, <strong>B</strong>, <strong>C</strong> ou
+				<strong>D</strong> (ou uma mistura, ex.: “B com navbar azul da A”).
+			</p>
+		</div>
+	</body>
+</html>
