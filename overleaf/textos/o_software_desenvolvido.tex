@@ -1,16 +1,15 @@
 \section{Software Desenvolvido e Resultados}
 \label{sec:resultados}
 
-% Capturas empilhadas (largura total da página).
+% Capturas empilhadas, em altura reduzida para economizar páginas.
 % Enquanto os PNG não existirem, usa example-image-16x9 (pacote mwe).
 % Substituir salvando em figuras/:
 %   tela-inventario.png      — dashboard / inventário
 %   tela-mapa.png            — mapa geral de Contagem
-%   tela-mapa-detalhe.png    — mapa com popup ou filtro aplicado
 \newcommand{\imagemtela}[1]{%
   \IfFileExists{figuras/#1.png}%
-    {\includegraphics[width=\linewidth,height=7.2cm,keepaspectratio]{figuras/#1.png}}%
-    {\includegraphics[width=\linewidth,height=7.2cm,keepaspectratio]{example-image-16x9}}}
+    {\includegraphics[width=\linewidth,height=6.0cm,keepaspectratio]{figuras/#1.png}}%
+    {\includegraphics[width=\linewidth,height=6.0cm,keepaspectratio]{example-image-16x9}}}
 
 \subsection{A aplicação web}
 
@@ -33,7 +32,8 @@ A Figura \ref{fig:tela-inventario} apresenta essa tela.
 \end{figure}
 
 No Mapa, cada estabelecimento com coordenada é um marcador.
-A Figura \ref{fig:tela-mapa} mostra a distribuição dos pontos em Contagem, e a Figura \ref{fig:tela-mapa-detalhe} mostra o detalhe ao selecionar um estabelecimento: o clique abre uma janela com nome, CNAE, CNPJ e o aviso de que a posição é aproximada.
+A Figura \ref{fig:tela-mapa} mostra a distribuição dos pontos em Contagem.
+Ao selecionar um estabelecimento, o clique abre uma janela com nome, CNAE, CNPJ e o aviso de que a posição é aproximada.
 
 \begin{figure}[htbp]
     \centering
@@ -41,15 +41,6 @@ A Figura \ref{fig:tela-mapa} mostra a distribuição dos pontos em Contagem, e a
     \label{fig:tela-mapa}
     \vspace{4pt}
     \imagemtela{tela-mapa}
-    \par\vspace{4pt}\textbf{\footnotesize Fonte: Elaborado pelo autor.}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \caption{Tela Mapa da aplicação --- detalhe do estabelecimento}
-    \label{fig:tela-mapa-detalhe}
-    \vspace{4pt}
-    \imagemtela{tela-mapa-detalhe}
     \par\vspace{4pt}\textbf{\footnotesize Fonte: Elaborado pelo autor.}
 \end{figure}
 
@@ -105,50 +96,32 @@ Na conferência da amostra de 30 endereços, o deslocamento mediano entre o pont
 
 \subsection{Escala de usabilidade (SUS)}
 
-% >>> SUBSTITUIR pelos resultados reais do SUS (notas individuais, média, desvio padrão e médias por afirmação).
+% >>> SUBSTITUIR pelos resultados reais do SUS (notas individuais, média e desvio padrão).
+% A tabela de notas está em layout compacto: cada bloco comporta 10 participantes (até N = 30).
 A Tabela \ref{tab:sus-participantes} apresenta a nota de cada um dos [N] participantes, calculada pela fórmula de \citeonline{brooke1996}.
 A nota média foi de [XX] pontos (desvio padrão de [XX]), [acima/abaixo] do valor de referência de 68 pontos \cite{martins2015}, o que indica [interpretação].
-A Tabela \ref{tab:sus} complementa a análise com a média de cada afirmação, o que ajuda a identificar os itens que mais influenciaram a nota.
 
 \begin{table}[htbp]
     \centering
     \caption{Nota do SUS por participante}
     \label{tab:sus-participantes}
     \small
-    \begin{tabular}{cc}
+    \begin{tabular}{rcrcrc}
         \hline
-        \textbf{Participante} & \textbf{Nota SUS (0 a 100)} \\
+        \textbf{Part.} & \textbf{Nota} & \textbf{Part.} & \textbf{Nota} & \textbf{Part.} & \textbf{Nota} \\
         \hline
-        1 & [XX] \\
-        2 & [XX] \\
-        $\vdots$ & $\vdots$ \\
-        [N] & [XX] \\
+        1  & [XX] & 11 & [XX] & 21 & [XX] \\
+        2  & [XX] & 12 & [XX] & 22 & [XX] \\
+        3  & [XX] & 13 & [XX] & 23 & [XX] \\
+        4  & [XX] & 14 & [XX] & 24 & [XX] \\
+        5  & [XX] & 15 & [XX] & 25 & [XX] \\
+        6  & [XX] & 16 & [XX] & 26 & [XX] \\
+        7  & [XX] & 17 & [XX] & 27 & [XX] \\
+        8  & [XX] & 18 & [XX] & 28 & [XX] \\
+        9  & [XX] & 19 & [XX] & 29 & [XX] \\
+        10 & [XX] & 20 & [XX] & [N] & [XX] \\
         \hline
-        \textbf{Média (desvio padrão)} & [XX] ([XX]) \\
-        \hline
-    \end{tabular}
-    \par\vspace{3pt}\textbf{\footnotesize Fonte: Elaborado pelo autor, a partir das respostas ao questionário.}
-\end{table}
-
-\begin{table}[htbp]
-    \centering
-    \caption{Média das respostas por afirmação do SUS}
-    \label{tab:sus}
-    \small
-    \begin{tabular}{p{0.8cm}p{10.5cm}c}
-        \hline
-        \textbf{Nº} & \textbf{Afirmação} & \textbf{Média} \\
-        \hline
-        1  & Eu acho que gostaria de usar este sistema com frequência. & [X,X] \\
-        2  & Achei o sistema desnecessariamente complexo. & [X,X] \\
-        3  & Achei o sistema fácil de usar. & [X,X] \\
-        4  & Acho que precisaria de ajuda de um técnico para conseguir usar este sistema. & [X,X] \\
-        5  & Achei que as várias funções do sistema estavam bem integradas. & [X,X] \\
-        6  & Achei que o sistema apresenta muita inconsistência. & [X,X] \\
-        7  & Imagino que a maioria das pessoas aprenderia a usar este sistema rapidamente. & [X,X] \\
-        8  & Achei o sistema muito complicado de usar. & [X,X] \\
-        9  & Senti-me muito confiante usando o sistema. & [X,X] \\
-        10 & Precisei aprender muitas coisas antes de conseguir usar o sistema. & [X,X] \\
+        \multicolumn{6}{c}{\textbf{Média (desvio padrão): [XX] ([XX])}} \\
         \hline
     \end{tabular}
     \par\vspace{3pt}\textbf{\footnotesize Fonte: Elaborado pelo autor, a partir das respostas ao questionário.}
@@ -160,5 +133,3 @@ Os quatro objetivos específicos foram atendidos, com a ressalva de que a coorde
 
 Em relação aos trabalhos relacionados, a taxa de 82,1\% de estabelecimentos com coordenada é menor que a de Presidente Prudente (97,4\%), onde \citeonline{silva2024} geocodificaram o endereço padronizado em um \textit{software} de geoprocessamento, e aqui a coordenada é a de um endereço do mesmo CEP.
 Diferentemente do Mapa de Empresas \cite{brasil2026}, que entrega totais agregados, a aplicação lista e localiza cada estabelecimento.
-
-Do ponto de vista prático, a aplicação permite a cidadãos, profissionais e empresários ver onde as empresas de TI se concentram em Contagem e consultar cada uma delas, e, como as coordenadas são aproximadas, a interface informa a data da fotografia e avisa que a posição é aproximada.
