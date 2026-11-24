@@ -103,33 +103,56 @@ Como o mapa desenha um marcador por estabelecimento, parte dos pontos fica sobre
 % >>> SUBSTITUIR pelos resultados reais da conferência da amostra de cerca de 30 endereços (seção de testes).
 Na conferência da amostra de 30 endereços, o deslocamento mediano entre o ponto atribuído e o endereço informado foi de [XX] metros, e [XX] dos 30 pontos ficaram a menos de [XX] metros do endereço.
 
-\subsection{Avaliação heurística}
+\subsection{Escala de usabilidade (SUS)}
 
-% >>> SUBSTITUIR este texto genérico e a Tabela 3 pelos resultados reais da inspeção heurística.
-A inspeção foi feita por três avaliadores, entre eles o orientador Paulo Henrique Rodrigues (\href{mailto:496762@pucminas.edu.br}{496762@pucminas.edu.br}) e dois colegas com experiência em desenvolvimento de \textit{software}.
-Na consolidação das inspeções, foram identificados [N] problemas distintos, sendo [N] leves, [N] médios e [N] graves.
-A Tabela \ref{tab:heuristica} apresenta os problemas apontados por mais de um avaliador, com a heurística de \citeonline{nielsen1994} relacionada e a gravidade atribuída.
+% >>> SUBSTITUIR pelos resultados reais do SUS (notas individuais, média, desvio padrão e médias por afirmação).
+A Tabela \ref{tab:sus-participantes} apresenta a nota de cada um dos [N] participantes, calculada pela fórmula de \citeonline{brooke1996}.
+A nota média foi de [XX] pontos (desvio padrão de [XX]), [acima/abaixo] do valor de referência de 68 pontos \cite{martins2015}, o que indica [interpretação].
+A Tabela \ref{tab:sus} complementa a análise com a média de cada afirmação, o que ajuda a identificar os itens que mais influenciaram a nota.
 
 \begin{table}[htbp]
     \centering
-    \caption{Problemas de usabilidade apontados por mais de um avaliador}
-    \label{tab:heuristica}
+    \caption{Nota do SUS por participante}
+    \label{tab:sus-participantes}
     \small
-    \begin{tabular}{p{6.2cm}p{3.4cm}cc}
+    \begin{tabular}{cc}
         \hline
-        \textbf{Problema encontrado} & \textbf{Heurística} & \textbf{Gravidade} & \textbf{Avaliadores} \\
+        \textbf{Participante} & \textbf{Nota SUS (0 a 100)} \\
         \hline
-        [Descrição do problema 1] & [H\# -- nome da heurística] & [Grave] & [3] \\
-        \relax[Descrição do problema 2] & [H\# -- nome da heurística] & [Médio] & [2] \\
-        \relax[Descrição do problema 3] & [H\# -- nome da heurística] & [Leve] & [2] \\
+        1 & [XX] \\
+        2 & [XX] \\
+        $\vdots$ & $\vdots$ \\
+        [N] & [XX] \\
+        \hline
+        \textbf{Média (desvio padrão)} & [XX] ([XX]) \\
         \hline
     \end{tabular}
-    \par\vspace{3pt}\textbf{\footnotesize Fonte: Elaborado pelo autor, a partir do registro dos avaliadores.}
+    \par\vspace{3pt}\textbf{\footnotesize Fonte: Elaborado pelo autor, a partir das respostas ao questionário.}
 \end{table}
 
-As heurísticas com mais ocorrências foram [heurística A] e [heurística B], concentradas principalmente na tela [Inventário/Mapa].
-Os avaliadores também destacaram como pontos positivos [pontos positivos da interface].
-Os problemas graves foram [descrição resumida], e a correção sugerida pelos avaliadores foi [sugestão de correção].
+\begin{table}[htbp]
+    \centering
+    \caption{Média das respostas por afirmação do SUS}
+    \label{tab:sus}
+    \small
+    \begin{tabular}{p{0.8cm}p{10.5cm}c}
+        \hline
+        \textbf{Nº} & \textbf{Afirmação} & \textbf{Média} \\
+        \hline
+        1  & Eu acho que gostaria de usar este sistema com frequência. & [X,X] \\
+        2  & Achei o sistema desnecessariamente complexo. & [X,X] \\
+        3  & Achei o sistema fácil de usar. & [X,X] \\
+        4  & Acho que precisaria de ajuda de um técnico para conseguir usar este sistema. & [X,X] \\
+        5  & Achei que as várias funções do sistema estavam bem integradas. & [X,X] \\
+        6  & Achei que o sistema apresenta muita inconsistência. & [X,X] \\
+        7  & Imagino que a maioria das pessoas aprenderia a usar este sistema rapidamente. & [X,X] \\
+        8  & Achei o sistema muito complicado de usar. & [X,X] \\
+        9  & Senti-me muito confiante usando o sistema. & [X,X] \\
+        10 & Precisei aprender muitas coisas antes de conseguir usar o sistema. & [X,X] \\
+        \hline
+    \end{tabular}
+    \par\vspace{3pt}\textbf{\footnotesize Fonte: Elaborado pelo autor, a partir das respostas ao questionário.}
+\end{table}
 
 \subsection{Discussão}
 
