@@ -1,75 +1,108 @@
 \section{Metodologia}
 
-Quanto à natureza, esta pesquisa é aplicada, pois resulta em uma aplicação web.
-Quanto aos objetivos, é descritiva, por caracterizar os estabelecimentos de TI de um município, e, quanto aos procedimentos, combina pesquisa documental em bases públicas com o desenvolvimento de \textit{software} \cite{gil2008}.
-A abordagem é quantitativa na descrição dos dados e na avaliação de usabilidade.
+Este trabalho tem como objetivo desenvolver uma aplicação web interativa que caracterize e apresente as empresas de Tecnologia da Informação do município de Contagem a partir da integração de dados abertos.
+Bases públicas sobre estabelecimentos, atividades econômicas e endereços foram coletadas, tratadas e combinadas em um banco de dados único, que alimenta a aplicação com mapa, indicadores, tabelas e filtros.
+A usabilidade da interface foi avaliada com a System Usability Scale (SUS).
 
-O trabalho seguiu quatro etapas, correspondentes aos objetivos específicos: coleta e tratamento dos dados, projeto da solução, implementação e testes.
+Quanto à natureza, a pesquisa é aplicada, pois resulta em uma aplicação web.
+Quanto aos objetivos, é descritiva, por caracterizar os estabelecimentos de TI de um município \cite{gil2008}.
+Quanto aos procedimentos, combina pesquisa documental em bases públicas com o desenvolvimento de software.
+A abordagem é quantitativa na descrição dos dados e na pontuação do SUS.
 
-\subsection{Objeto de estudo, recorte e proteção de dados}
+O trabalho foi realizado nas seguintes etapas:
 
-O objeto de estudo são os estabelecimentos de Tecnologia da Informação situados no município de Contagem (MG), identificado pelo código IBGE 3118601.
-O setor foi delimitado pela CNAE-Subclasses 2.3 \cite{ibge2020}, com a atividade principal na divisão 62: 6201-5/01 (programas de computador sob encomenda), 6201-5/02 (\textit{web design}), 6202-3/00 (programas customizáveis), 6203-1/00 (programas não customizáveis), 6204-0/00 (consultoria em TI) e 6209-1/00 (suporte técnico e outros serviços de TI).
-Ficaram de fora hospedagem e portais (divisão 63), comércio e fabricação de equipamentos de informática, conserto de computador e curso de informática.
+\begin{enumerate}
+    \item coleta e tratamento dos dados (CNPJ, CNAE, CNEFE e malhas do IBGE, integrados em MySQL);
+    \item projeto da solução (requisitos, casos de uso e esquema do banco);
+    \item implementação da solução (programa de carga e aplicação web);
+    \item testes (conferência da localização, comparação com o CEMPRE e avaliação SUS).
+\end{enumerate}
 
-A unidade de análise é o estabelecimento do cadastro de CNPJ, e matriz e filial entram como registros distintos.
-Foram mantidos apenas os estabelecimentos com situação cadastral ativa na fotografia da base, e o CNAE secundário não foi usado como critério de entrada.
+Na primeira etapa ocorreu a coleta e o tratamento dos dados.
+Foi feita a pesquisa das fontes oficiais e o \textit{download} dos arquivos publicados.
+A lista de estabelecimentos veio da base pública de CNPJ da Receita Federal do Brasil, com identificação, situação cadastral, porte e endereço declarado; o arquivo de sócios não foi utilizado.
+Os dados considerados foram os da divisão 62 da CNAE-Subclasses 2.3, conforme o recorte definido no referencial teórico.
+As coordenadas vieram do Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE) do Censo Demográfico 2022, do IBGE.
+As malhas territoriais do IBGE forneceram o contorno do município, e tabelas do Cadastro Central de Empresas (CEMPRE), via SIDRA, serviram para conferência dos totais.
+O objeto de análise ficou restrito a Contagem (código IBGE 3118601), com estabelecimentos em situação cadastral ativa na fotografia das bases, unidade igual ao estabelecimento do CNPJ (matriz e filial contam separadas quando ambas estão no município e na atividade escolhida).
 
-A descrição dos dados foi orientada por quatro perguntas: onde esses estabelecimentos se concentram em Contagem; qual é o perfil de porte; qual é a proporção de microempreendedores individuais (MEI); e qual parte dos endereços recebe coordenada em cada nível de junção.
+Ainda na primeira etapa, o tratamento foi feito em ambiente local, por um programa em Python.
+Em linhas gerais, o script faz requisições às fontes públicas, baixa os arquivos, lê os CSV, aplica os filtros do recorte e transforma o resultado em SQL para carga no MySQL.
+Primeiro, o programa obteve e leu os arquivos.
+Em seguida, filtrou Contagem e as subclasses da divisão 62, antes de qualquer junção.
+Depois, integrou as bases por chaves explícitas: o CNPJ básico uniu o estabelecimento aos dados da empresa, como razão social, porte e capital social; o código de atividade padronizou a subclasse; e o código IBGE 3118601 isolou o município.
+O endereço passou por padronização (CEP com oito dígitos, texto em maiúsculas sem acento e expansão de abreviações de logradouro) e foi ligado ao CNEFE por níveis sucessivos: endereço completo, só CEP ou sem coordenada.
+O resultado foi gravado em um banco MySQL, com a data da fotografia das bases.
+A aplicação consulta esse banco, e não os arquivos nacionais nem os sites da Receita e do IBGE.
 
-A base de sócios da Receita Federal, que traz CPF mesmo que mascarado, não foi baixada, porque a unidade de análise é o estabelecimento, e não as pessoas ligadas a ele.
-No caso do MEI, o nome do estabelecimento pode ser o nome da pessoa; esse nome já é público no cadastro do CNPJ, e a aplicação o exibe como consta ali, sem associá-lo a CPF nem a sócios.
-[CONFIRMAR: tramitação em comitê de ética, exigida pela aplicação do SUS a pessoas. Este parágrafo precisa ser atualizado conforme a decisão.]
+Na segunda etapa ocorreu o projeto da solução.
+Foram levantados os requisitos funcionais e não funcionais, elaborados o diagrama de casos de uso e o esquema do banco de dados.
+Os requisitos funcionais e não funcionais definidos constam nas Tabelas \ref{tab:rf} e \ref{tab:rnf}.
 
-\subsection{Coleta e tratamento dos dados}
-\label{subsec:coleta}
+\begin{table}[htbp]
+    \centering
+    \caption{Requisitos funcionais da aplicação}
+    \label{tab:rf}
+    \begin{tabular}{|c|p{11.5cm}|}
+        \hline
+        \textbf{Código} & \textbf{Descrição} \\
+        \hline
+        RF01 & Exibir indicadores gerais, como o total de estabelecimentos e a distribuição por subclasse e por porte. \\
+        \hline
+        RF02 & Filtrar por subclasse, porte, condição de MEI e disponibilidade de coordenada. \\
+        \hline
+        RF03 & Exibir os estabelecimentos em um mapa de pontos. \\
+        \hline
+        RF04 & Listar os estabelecimentos em uma tabela com busca. \\
+        \hline
+        RF05 & Informar a data da fotografia das bases e se há coordenada. \\
+        \hline
+    \end{tabular}
+    \\\textbf{\footnotesize Fonte: Elaborado pelo autor.}
+\end{table}
 
-A lista de estabelecimentos veio da base de CNPJ da Receita Federal, com identificação, CNAE, situação cadastral, porte e endereço, na versão de 13/10/2026, obtida em um espelho público dos dados abertos da Receita; a condição de MEI foi lida do arquivo do Simples Nacional.
-A descrição das atividades veio da CNAE-Subclasses 2.3, e as coordenadas, do Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE) do Censo Demográfico 2022, ambos do IBGE.
+\begin{table}[htbp]
+    \centering
+    \caption{Requisitos não funcionais da aplicação}
+    \label{tab:rnf}
+    \begin{tabular}{|c|p{11.5cm}|}
+        \hline
+        \textbf{Código} & \textbf{Descrição} \\
+        \hline
+        RNF01 & Acesso pelo navegador, sem cadastro de usuário. \\
+        \hline
+        RNF02 & Não exibir CPF, quadro de sócios, telefone ou e-mail. \\
+        \hline
+        RNF03 & Indicadores, mapa e tabela respondendo aos mesmos filtros. \\
+        \hline
+        RNF04 & Consultas feitas no banco da aplicação, sem depender de serviço externo além do mapa de fundo. \\
+        \hline
+    \end{tabular}
+    \\\textbf{\footnotesize Fonte: Elaborado pelo autor.}
+\end{table}
 
-O tratamento foi feito em ambiente local, por um programa em Python que lê os arquivos, filtra Contagem e as subclasses da divisão 62 antes de qualquer junção e integra as bases por chaves explícitas.
-O CNPJ básico une o estabelecimento aos dados da empresa, como razão social, porte e capital social; o CNAE sem máscara padroniza a atividade; e o código IBGE 3118601 isola o município.
-O resultado é gravado em um banco MySQL, com a data da fotografia das bases, e a aplicação consulta esse banco, e não os arquivos nacionais nem os sites da Receita e do IBGE.
-
-Como o CNEFE não tem CNPJ, a coordenada foi atribuída pelo endereço.
-Antes da junção, o CEP foi padronizado com 8 dígitos e o logradouro foi convertido para maiúsculas, sem acento e com as abreviações de tipo expandidas, como R.\ para RUA.
-A junção seguiu uma ordem: primeiro, CEP, logradouro e número; se não houvesse correspondência, apenas o CEP, com a coordenada de um endereço do CNEFE de mesmo CEP, marcada como aproximada; e, se o CEP não existisse no CNEFE, o estabelecimento permanecia na base, sem coordenada e fora do mapa.
-
-Cada registro guarda o nível de junção obtido e o nível de geocodificação informado pelo CNEFE na variável \texttt{NV\_GEO\_COORD}.
-O código 1 indica coordenada original do Censo 2022, e os demais, coordenada modificada, estimada ou atribuída por face de quadra, localidade ou setor.
-
-\subsection{Aplicação desenvolvida}
-\label{subsec:aplicacao}
-
-Os requisitos funcionais definidos foram: exibir indicadores gerais, como o total de estabelecimentos e a distribuição por subclasse e por porte (RF01); filtrar por subclasse, porte, condição de MEI e disponibilidade de coordenada (RF02); exibir os estabelecimentos em um mapa de pontos (RF03); listá-los em uma tabela com busca (RF04); e informar a data da fotografia das bases e se há coordenada (RF05).
-Os requisitos não funcionais foram: acesso pelo navegador, sem cadastro de usuário (RNF01); não exibir CPF, quadro de sócios, telefone ou e-mail (RNF02); indicadores, mapa e tabela respondendo aos mesmos filtros (RNF03); e consultas feitas no banco da aplicação, sem depender de serviço externo além do mapa de fundo (RNF04).
-
-A solução tem arquitetura cliente/servidor, com três partes: o programa de carga, em Python; o banco de dados MySQL; e a aplicação web, desenvolvida com o SvelteKit, cujo servidor consulta o banco e entrega os dados já filtrados à interface executada no navegador.
-O mapa usa a biblioteca Leaflet, com \textit{tiles} do OpenStreetMap como fundo.
-Uma atualização dos dados é uma nova carga, e não uma consulta às bases da Receita e do IBGE a cada acesso ao site.
-
-A Figura \ref{fig:casos-de-uso} apresenta os casos de uso, com dois atores: o visitante, que consulta indicadores, filtra, explora o mapa, busca na tabela e vê a data da base e a situação da coordenada, e o administrador, papel do autor, que carrega uma nova fotografia das bases.
+A Figura \ref{fig:casos-de-uso} apresenta o diagrama de casos de uso.
+O visitante consulta indicadores, aplica filtros, explora o mapa e a tabela e vê a data da fotografia.
+O administrador, papel exercido pelo autor, carrega uma nova fotografia das bases.
 
 \input{figuras/casos-de-uso}
 
-A Figura \ref{fig:esquema-banco} apresenta o esquema do banco de dados.
-Cada estabelecimento se liga à empresa pelo CNPJ básico, à atividade pelo CNAE e à carga em que foi gravado, e guarda a coordenada e os níveis de junção e de geocodificação.
-A carga registra a data da fotografia, as versões das bases e as regras de filtro, para que o processo possa ser refeito, e a aplicação lê os dados por uma visão (\textit{view}) que reúne as quatro tabelas.
+A Figura \ref{fig:esquema-banco} apresenta o esquema do banco MySQL.
+Cada estabelecimento se liga à empresa pelo CNPJ básico, à atividade pela subclasse e à carga em que foi gravado.
+A localização guarda a coordenada e o nível de junção com o CNEFE.
+A carga registra a data da fotografia e as versões das bases.
 
 \input{figuras/esquema-banco}
 
-\subsection{Testes e análise}
-\label{subsec:testes}
+Na terceira etapa ocorreu a implementação da solução.
+Foi desenvolvida uma aplicação web na arquitetura cliente/servidor, organizada em três partes: o programa de carga, o banco de dados e a aplicação que o visitante usa no navegador.
+O programa de carga importa e trata os arquivos; o banco guarda o resultado da fotografia; a aplicação consulta esse banco e entrega mapa, indicadores e tabela já filtrados.
 
-Os testes verificaram a localização atribuída aos estabelecimentos e a usabilidade da interface.
-Para estimar o erro da localização, uma amostra de cerca de 30 endereços foi conferida em outra fonte, por consulta manual no mapa.
-A conferência não substitui o CNEFE na base inteira e serve para dizer, de forma aproximada, o quanto o ponto se afasta do endereço.
+As tecnologias utilizadas foram Python no programa de carga, MySQL no armazenamento, SvelteKit na aplicação web e Leaflet com \textit{tiles} do OpenStreetMap no mapa.
+O sistema opera com dados estáticos: a base reflete o momento em que os arquivos foram carregados, e não é atualizada em tempo real a cada acesso.
+Quando as fontes oficiais mudam, os dados da aplicação ficam desatualizados até que seja feita uma nova carga, com outra data de fotografia.
 
-A usabilidade foi avaliada com o System Usability Scale (SUS) \citeonline{brooke1996}, questionário padronizado de dez afirmações, cada uma respondida em uma escala Likert de cinco pontos, de 1 (discordo totalmente) a 5 (concordo totalmente). O instrumento completo está no Apêndice A.
-Antes de iniciar, cada participante leu e aceitou o Termo de Consentimento Livre e Esclarecido (TCLE), que garantiu a participação voluntária e o anonimato das respostas. [CONFIRMAR: aprovação do comitê de ética, exigida pela coleta com pessoas.]
-Em seguida, todos executaram o mesmo roteiro de quatro tarefas, na mesma ordem: (i) consultar os indicadores gerais do Inventário; (ii) filtrar os estabelecimentos por subclasse e por porte; (iii) localizar um estabelecimento pela busca da tabela e identificar sua coordenada e a data da fotografia; e (iv) localizar no Mapa os estabelecimentos de um filtro selecionado. [CONFIRMAR: roteiro, com base nos requisitos RF01 a RF05.]
-Ao final, cada participante respondeu às dez afirmações. A pontuação individual foi calculada pela fórmula de \citeonline{brooke1996}: para os itens ímpares, subtrai-se 1 da resposta; para os pares, subtrai-se a resposta de 5; a soma dos dez valores é multiplicada por 2,5, resultando em uma nota de 0 a 100. As notas foram resumidas pela média e pelo desvio padrão, e a interpretação seguiu o valor de referência de 68 pontos \cite{martins2015}.
-[PREENCHER: número e perfil dos participantes, e forma de recrutamento.]
-
-A análise dos dados foi descritiva e seguiu as quatro perguntas do recorte.
-Os resultados estão na Seção \ref{sec:resultados}.
+Na quarta etapa ocorreram os testes.
+Foi aplicada a System Usability Scale (SUS) após os participantes usarem a interface, conforme descrito na Seção \ref{subsec:testes}.
+Também foi conferida, de forma aproximada, a localização de uma amostra de endereços em outra fonte, sem substituir o CNEFE na base inteira.
+Os totais da base foram comparados com os do CEMPRE, observando a ordem de grandeza e não a igualdade estrita dos números.

@@ -14,20 +14,23 @@ Muita gente não consegue ler o formato, cruzar bases diferentes e interpretar a
 Uma aplicação que junta as bases e mostra mapa, gráfico e filtro pode tornar essa consulta mais simples.
 Esse é o caminho deste trabalho: caracterizar as empresas de TI de Contagem a partir de bases abertas nacionais, e não a partir de um arquivo municipal já pronto.
 
-\subsection{Visualização de dados e usabilidade}
-
-A visualização de dados é uma forma de reduzir a distância entre o arquivo publicado e o uso por quem não tem domínio técnico.
-\citeonline{mesquita2026} analisaram 30 painéis e 53 telas de consulta de dados de orçamento público no Brasil.
-O achado principal foi que a maior parte dos portais entrega o dado, mas pouco ajuda quem não tem familiaridade com números e tabelas.
-Falta contexto, e a tela quase não considera a pessoa que está consultando.
-\citeonline{ansari2022} descrevem uma lacuna parecida: há muitos relatos de visualização de dados abertos e pouca avaliação de usabilidade para públicos diferentes.
-Para os autores, gráfico, mapa e consulta junto do dado tendem a ser mais úteis do que a entrega isolada do arquivo.
-\subsection{Escala de usabilidade SUS}
+\subsection{System Usability Scale (SUS)}
 
 Usabilidade, neste trabalho, é a facilidade de usar a interface.
 A pessoa encontra a informação, entende o que está vendo e consegue filtrar sem se perder.
-O System Usability Scale (SUS) é um questionário padronizado de dez afirmações, criado por John Brooke \citeonline{brooke1996}.
-Cada afirmação é respondida em uma escala de cinco pontos, e o resultado é convertido em uma nota única de 0 a 100, que resume a usabilidade percebida.
-Como o SUS é respondido após o uso, ele mede a percepção de usabilidade, e não o desempenho em tarefas.
-Por ser curto e de baixo custo, é usado com frequência em avaliações de interfaces.
-Este trabalho aplica o SUS à aplicação desenvolvida, para medir a percepção de usabilidade do Inventário e do Mapa.
+A System Usability Scale (SUS), proposta por \citeonline{brooke1996}, é um questionário de dez itens em escala Likert de cinco pontos, com afirmações alternadas entre positivas e negativas.
+Após o uso do sistema, cada participante responde aos itens; a pontuação individual é convertida para uma escala de 0 a 100.
+Essa medida única resume a percepção global de usabilidade e permite comparar o resultado com faixas de interpretação usadas na literatura.
+Este trabalho aplica o SUS à aplicação desenvolvida, após os participantes percorrerem o mapa, os filtros, os indicadores e a tabela.
+
+\subsection{Classificação Nacional de Atividades Econômicas (CNAE)}
+
+A identificação de um setor em cadastros públicos depende de uma classificação padronizada das atividades.
+No Brasil, a Classificação Nacional de Atividades Econômicas (CNAE), mantida pelo IBGE, é o instrumento usado pelo sistema estatístico e pelos órgãos que registram empresas \cite{ibge2020}.
+A CNAE organiza as atividades em níveis, da seção até a subclasse.
+No CNPJ, cada estabelecimento tem um código de atividade principal.
+
+Neste trabalho, empresa de TI é o estabelecimento cuja atividade principal está na divisão 62, de serviços de tecnologia da informação, na versão CNAE-Subclasses 2.3.
+Os códigos são 6201-5/01 (desenvolvimento de programas sob encomenda), 6201-5/02 (web design), 6202-3/00 (programas customizáveis), 6203-1/00 (programas não customizáveis), 6204-0/00 (consultoria em tecnologia da informação) e 6209-1/00 (suporte técnico e outros serviços em TI).
+Não entram a divisão 63 (hospedagem, tratamento de dados e portais), o comércio e a fabricação de equipamentos, o conserto de computador nem o curso de informática.
+A regra usa só a atividade principal, para a lista não crescer com códigos secundários de empresas de outro ramo.
