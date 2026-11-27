@@ -41,7 +41,7 @@
 		</label>
 		<label class="campo">
 			<span>Porte</span>
-			<select bind:value={filtros.porte} disabled={filtros.excluir_micro}>
+			<select bind:value={filtros.porte}>
 				<option value="">Todos</option>
 				{#each portes as p (p)}
 					<option value={p}>{p}</option>
@@ -59,10 +59,6 @@
 		<label class="check">
 			<input type="checkbox" bind:checked={filtros.somente_coordenada} />
 			Só com coordenada
-		</label>
-		<label class="check">
-			<input type="checkbox" bind:checked={filtros.excluir_micro} />
-			Exceto micro
 		</label>
 		<button type="button" class="ghost" onclick={limparFiltros}>Limpar</button>
 	</section>
@@ -177,7 +173,7 @@
 
 	.busca-faixa {
 		display: grid;
-		grid-template-columns: 1.5fr 0.9fr 0.9fr 0.75fr auto auto auto;
+		grid-template-columns: 1.5fr 0.9fr 0.9fr 0.75fr auto auto;
 		gap: 0.65rem;
 		align-items: end;
 		padding: 0.85rem 0;

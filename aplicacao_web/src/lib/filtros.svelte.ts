@@ -4,8 +4,7 @@ export const filtros = $state({
 	cnae: '',
 	porte: '',
 	mei: '' as '' | '0' | '1',
-	somente_coordenada: false,
-	excluir_micro: false
+	somente_coordenada: false
 });
 
 export function limparFiltros() {
@@ -14,5 +13,4 @@ export function limparFiltros() {
 	filtros.porte = '';
 	filtros.mei = '';
 	filtros.somente_coordenada = false;
-	filtros.excluir_micro = false;
 }
