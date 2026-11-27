@@ -5,7 +5,6 @@ export type Estabelecimento = {
 	cnae_principal: string;
 	cnae_descricao: string | null;
 	porte: string | null;
-	is_mei: number | null;
 	latitude: number | null;
 	longitude: number | null;
 	nivel_juncao_cnefe: string | null;
@@ -30,7 +29,6 @@ export type ResumoDashboard = {
 	total: number;
 	com_coordenada: number;
 	sem_coordenada: number;
-	mei: number;
 	data_fotografia: string | null;
 	por_cnae: CnaeAgg[];
 	por_porte: PorteAgg[];
@@ -40,5 +38,4 @@ export type FiltrosEstabelecimento = {
 	q?: string;
 	cnae?: string;
 	porte?: string;
-	mei?: '0' | '1' | '';
 };

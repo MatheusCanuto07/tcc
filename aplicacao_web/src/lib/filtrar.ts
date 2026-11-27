@@ -4,7 +4,6 @@ export type FiltrosCliente = {
 	busca: string;
 	cnae: string;
 	porte: string;
-	mei: '' | '0' | '1';
 	somente_coordenada?: boolean;
 	excluir_micro?: boolean;
 };
@@ -17,8 +16,6 @@ export function filtrarEstabelecimentos(
 	return lista.filter((e) => {
 		if (f.cnae && e.cnae_principal !== f.cnae) return false;
 		if (f.porte && (e.porte ?? '') !== f.porte) return false;
-		if (f.mei === '0' && e.is_mei !== 0) return false;
-		if (f.mei === '1' && e.is_mei !== 1) return false;
 		if (f.excluir_micro && (e.porte ?? '') === 'MICRO EMPRESA') return false;
 		if (f.somente_coordenada && (e.latitude == null || e.longitude == null)) return false;
 		if (!q) return true;

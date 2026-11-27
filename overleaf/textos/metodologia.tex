@@ -39,7 +39,7 @@ Na segunda etapa ocorreu o projeto da solução.
 Foram levantados os requisitos funcionais e não funcionais, elaborados o diagrama de casos de uso e o esquema do banco de dados.
 Os requisitos funcionais e não funcionais definidos constam nas Tabelas \ref{tab:rf} e \ref{tab:rnf}.
 
-\begin{table}[htbp]
+\begin{table}[H]
     \centering
     \caption{Requisitos funcionais da aplicação}
     \label{tab:rf}
@@ -49,7 +49,7 @@ Os requisitos funcionais e não funcionais definidos constam nas Tabelas \ref{ta
         \hline
         RF01 & Exibir indicadores gerais, como o total de estabelecimentos e a distribuição por subclasse e por porte. \\
         \hline
-        RF02 & Filtrar por subclasse, porte, condição de MEI e disponibilidade de coordenada. \\
+        RF02 & Filtrar por subclasse, porte e disponibilidade de coordenada. \\
         \hline
         RF03 & Exibir os estabelecimentos em um mapa de pontos. \\
         \hline
@@ -61,7 +61,7 @@ Os requisitos funcionais e não funcionais definidos constam nas Tabelas \ref{ta
     \\\textbf{\footnotesize Fonte: Elaborado pelo autor.}
 \end{table}
 
-\begin{table}[htbp]
+\begin{table}[H]
     \centering
     \caption{Requisitos não funcionais da aplicação}
     \label{tab:rnf}
@@ -80,12 +80,6 @@ Os requisitos funcionais e não funcionais definidos constam nas Tabelas \ref{ta
     \end{tabular}
     \\\textbf{\footnotesize Fonte: Elaborado pelo autor.}
 \end{table}
-
-A Figura \ref{fig:casos-de-uso} apresenta o diagrama de casos de uso.
-O visitante consulta indicadores, aplica filtros, explora o mapa e a tabela e vê a data da fotografia.
-O administrador, papel exercido pelo autor, carrega uma nova fotografia das bases.
-
-\input{figuras/casos-de-uso}
 
 A Figura \ref{fig:esquema-banco} apresenta o esquema do banco MySQL.
 Cada estabelecimento se liga à empresa pelo CNPJ básico, à atividade pela subclasse e à carga em que foi gravado.

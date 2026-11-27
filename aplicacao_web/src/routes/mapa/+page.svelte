@@ -14,7 +14,6 @@
 			filtros.busca ||
 				filtros.cnae ||
 				filtros.porte ||
-				filtros.mei ||
 				filtros.somente_coordenada ||
 				filtros.excluir_micro
 		)

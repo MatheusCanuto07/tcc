@@ -48,10 +48,6 @@
 					<small>{pct(data.resumo.sem_coordenada, data.resumo.total)}</small>
 				</strong>
 			</li>
-			<li>
-				<span>MEI</span>
-				<strong>{data.resumo.mei}</strong>
-			</li>
 		</ul>
 	</div>
 

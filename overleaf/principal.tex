@@ -221,7 +221,15 @@ A CNAE organiza as atividades em níveis, da seção até a subclasse.
 No CNPJ, cada estabelecimento tem um código de atividade principal.
 
 Neste trabalho, empresa de TI é o estabelecimento cuja atividade principal está na divisão 62, de serviços de tecnologia da informação, na versão CNAE-Subclasses 2.3.
-Os códigos são 6201-5/01 (desenvolvimento de programas sob encomenda), 6201-5/02 (web design), 6202-3/00 (programas customizáveis), 6203-1/00 (programas não customizáveis), 6204-0/00 (consultoria em tecnologia da informação) e 6209-1/00 (suporte técnico e outros serviços em TI).
+Os códigos incluídos são:
+\begin{itemize}
+    \item 6201-5/01, desenvolvimento de programas sob encomenda;
+    \item 6201-5/02, web design;
+    \item 6202-3/00, programas customizáveis;
+    \item 6203-1/00, programas não customizáveis;
+    \item 6204-0/00, consultoria em tecnologia da informação;
+    \item 6209-1/00, suporte técnico e outros serviços em TI.
+\end{itemize}
 Não entram a divisão 63 (hospedagem, tratamento de dados e portais), o comércio e a fabricação de equipamentos, o conserto de computador nem o curso de informática.
 A regra usa só a atividade principal, para a lista não crescer com códigos secundários de empresas de outro ramo.
 
@@ -287,7 +295,7 @@ Na segunda etapa ocorreu o projeto da solução.
 Foram levantados os requisitos funcionais e não funcionais, elaborados o diagrama de casos de uso e o esquema do banco de dados.
 Os requisitos funcionais e não funcionais definidos constam nas Tabelas \ref{tab:rf} e \ref{tab:rnf}.
 
-\begin{table}[htbp]
+\begin{table}[H]
     \centering
     \caption{Requisitos funcionais da aplicação}
     \label{tab:rf}
@@ -297,7 +305,7 @@ Os requisitos funcionais e não funcionais definidos constam nas Tabelas \ref{ta
         \hline
         RF01 & Exibir indicadores gerais, como o total de estabelecimentos e a distribuição por subclasse e por porte. \\
         \hline
-        RF02 & Filtrar por subclasse, porte, condição de MEI e disponibilidade de coordenada. \\
+        RF02 & Filtrar por subclasse, porte e disponibilidade de coordenada. \\
         \hline
         RF03 & Exibir os estabelecimentos em um mapa de pontos. \\
         \hline
@@ -309,7 +317,7 @@ Os requisitos funcionais e não funcionais definidos constam nas Tabelas \ref{ta
     \\\textbf{\footnotesize Fonte: Elaborado pelo autor.}
 \end{table}
 
-\begin{table}[htbp]
+\begin{table}[H]
     \centering
     \caption{Requisitos não funcionais da aplicação}
     \label{tab:rnf}
@@ -328,60 +336,6 @@ Os requisitos funcionais e não funcionais definidos constam nas Tabelas \ref{ta
     \end{tabular}
     \\\textbf{\footnotesize Fonte: Elaborado pelo autor.}
 \end{table}
-
-A Figura \ref{fig:casos-de-uso} apresenta o diagrama de casos de uso.
-O visitante consulta indicadores, aplica filtros, explora o mapa e a tabela e vê a data da fotografia.
-O administrador, papel exercido pelo autor, carrega uma nova fotografia das bases.
-
-\begin{figure}[H]
-    \centering
-    \caption{Diagrama de casos de uso da aplicação}
-    \label{fig:casos-de-uso}
-    \vspace{-0.2cm}
-    \begin{tikzpicture}[
-        caso/.style={
-            draw=black,
-            thick,
-            ellipse,
-            font=\small,
-            inner sep=0pt,
-            minimum height=0.9cm
-        },
-        assoc/.style={thick},
-        ator/.pic={
-            \draw[thick] (0,1.05) circle (0.2);
-            \draw[thick] (0,0.85) -- (0,0.3);
-            \draw[thick] (-0.35,0.65) -- (0.35,0.65);
-            \draw[thick] (0,0.3) -- (-0.3,-0.15);
-            \draw[thick] (0,0.3) -- (0.3,-0.15);
-        }
-    ]
-        \draw[thick] (-3.9,4.0) rectangle (3.9,-4.9);
-        \node[font=\small\bfseries, anchor=north] at (0,3.95) {Aplicação web};
-
-        \node[caso] (uc1) at (0,2.9) {Consultar indicadores gerais};
-        \node[caso] (uc2) at (0,1.7) {Filtrar estabelecimentos};
-        \node[caso] (uc3) at (0,0.5) {Explorar o mapa de pontos};
-        \node[caso] (uc4) at (0,-0.7) {Consultar densidade por área};
-        \node[caso] (uc5) at (0,-1.9) {Buscar na tabela por nome};
-        \node[caso] (uc6) at (0,-3.1) {Ver data e nível de coordenada};
-        \node[caso] (uc7) at (0,-4.3) {Carregar nova fotografia};
-
-        \pic at (-5.8,-0.6) {ator};
-        \node[font=\small, below] at (-5.8,-0.75) {Visitante};
-        \coordinate (v) at (-5.4,0.35);
-        \foreach \uc in {uc1,uc2,uc3,uc4,uc5,uc6} {
-            \draw[assoc] (v) -- (\uc.west);
-        }
-
-        \pic at (5.8,-4.9) {ator};
-        \node[font=\small, below] at (5.8,-5.05) {Administrador};
-        \draw[assoc] (5.4,-4.15) -- (uc7.east);
-    \end{tikzpicture}
-    \vspace{-0.2cm}
-    \\\textbf{\footnotesize Fonte: Elaborado pelo autor.}
-\end{figure}
-
 
 A Figura \ref{fig:esquema-banco} apresenta o esquema do banco MySQL.
 Cada estabelecimento se liga à empresa pelo CNPJ básico, à atividade pela subclasse e à carga em que foi gravado.
@@ -438,8 +392,7 @@ A carga registra a data da fotografia e as versões das bases.
                 cnpj\_basico (PK) \\
                 razao\_social \\
                 porte \\
-                capital\_social \\
-                opcao\_mei
+                capital\_social
             \end{tabular}};
 
         \node[tabela, below=0.9cm of estab] (loc) {%
@@ -498,30 +451,7 @@ Foi aplicada a System Usability Scale (SUS) após os participantes usarem a inte
 Também foi conferida, de forma aproximada, a localização de uma amostra de endereços em outra fonte, sem substituir o CNEFE na base inteira.
 Os totais da base foram comparados com os do CEMPRE, observando a ordem de grandeza e não a igualdade estrita dos números.
 
-\section{O Software Desenvolvido}
-
-Esta seção apresenta a aplicação construída a partir do projeto descrito na metodologia.
-A tela principal reúne, sobre a mesma base de dados, os indicadores gerais do setor, a distribuição por subclasse e por porte, o mapa de pontos dos estabelecimentos e a tabela com busca por nome.
-Os filtros aplicados em qualquer parte atualizam as demais, de modo que indicadores, mapa e tabela descrevem o mesmo conjunto de estabelecimentos.
-A data da fotografia das bases e a indicação de coordenada ficam visíveis na própria interface.
-
-% Continuar daqui: descrever as telas com capturas e a carga dos dados.
-
-\subsection{Testes e análise}
-\label{subsec:testes}
-
-Foram realizados testes de usabilidade no sistema por meio do método System Usability Scale (SUS) \cite{brooke1996}.
-Cinco participantes percorreram a aplicação com um roteiro curto: consultar os indicadores gerais, aplicar filtros por subclasse e por porte, localizar estabelecimentos no mapa e buscar um registro na tabela.
-Em seguida, cada um respondeu aos dez itens do SUS, em escala Likert de 1 (discordo totalmente) a 5 (concordo totalmente), sem discussão prévia entre os respondentes.
-
-A pontuação de cada participante foi calculada conforme \citeonline{brooke1996}: nos itens ímpares, subtraiu-se 1 da resposta; nos itens pares, subtraiu-se a resposta de 5; a soma dos dez valores foi multiplicada por 2,5, gerando um escore de 0 a 100.
-A média dos cinco escores individuais foi 74,5.
-Esse resultado situa-se acima da média de referência de 68 frequentemente citada para o SUS e, na escala de adjetivos de \citeonline{bangor2009}, aproxima-se da faixa associada a ``bom''.
-A pontuação resume a percepção global de usabilidade e não identifica, sozinha, falhas pontuais de tela; eventuais comentários abertos dos participantes foram anotados apenas como apoio qualitativo à leitura do escore.
-
-Além do SUS, uma amostra de cerca de 30 endereços foi conferida manualmente em mapa, para estimar, de forma aproximada, o afastamento entre o ponto atribuído e o endereço informado.
-Essa conferência não substitui o CNEFE na base inteira.
-Os detalhes numéricos da amostra e a comparação dos totais com o CEMPRE complementam a análise descritiva dos dados carregados.
+\input{textos/o_software_desenvolvido}
 
 \section{Considerações Finais}
 

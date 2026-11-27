@@ -37,4 +37,4 @@ Abra http://127.0.0.1:5173/
 ## Endpoints
 
 - `GET /api/resumo` — KPIs e agregações
-- `GET /api/estabelecimentos?q=&cnae=&porte=&mei=` — lista filtrada
+- `GET /api/estabelecimentos?q=&cnae=&porte=` — lista filtrada

@@ -48,14 +48,6 @@
 				{/each}
 			</select>
 		</label>
-		<label class="campo">
-			<span>MEI</span>
-			<select bind:value={filtros.mei}>
-				<option value="">Todos</option>
-				<option value="1">Somente MEI</option>
-				<option value="0">Exceto MEI</option>
-			</select>
-		</label>
 		<label class="check">
 			<input type="checkbox" bind:checked={filtros.somente_coordenada} />
 			Só com coordenada

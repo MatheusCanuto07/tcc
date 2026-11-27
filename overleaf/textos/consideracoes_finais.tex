@@ -4,7 +4,7 @@ Este trabalho partiu da questão de se é possível combinar dados abertos para 
 A resposta é positiva, com ressalvas: a aplicação integra as bases da Receita Federal e do IBGE e permite consultar, filtrar e localizar 781 estabelecimentos, mas a coordenada é aproximada.
 
 Os objetivos específicos foram atingidos, com ressalvas.
-Na base única, a coordenada vem apenas do CEP, e a proporção de MEI não pôde ser afirmada com segurança; na aplicação, a agregação por área do município, prevista no início, não foi implementada.
+Na base única, a coordenada vem apenas do CEP; na aplicação, a agregação por área do município, prevista no início, não foi implementada.
 Nos testes, o SUS resultou em uma nota média de [XX] pontos, em uma escala de 0 a 100, o que indica [interpretação da nota].
 
 Como contribuição prática, o trabalho oferece uma consulta única e sem cadastro às empresas de TI do município, com aviso da precisão da coordenada.
@@ -14,11 +14,11 @@ A principal lição foi que a ligação entre bases por endereço é a etapa mai
 \subsection{Limitações}
 
 A CNAE é a atividade declarada no cadastro, e usar só a atividade principal deixa de fora estabelecimentos de outro ramo que também prestam serviço de TI.
-A coordenada representa um endereço do CNEFE no mesmo CEP, e não a localização auditada do estabelecimento, e o campo de MEI não foi validado em outra fonte.
+A coordenada representa um endereço do CNEFE no mesmo CEP, e não a localização auditada do estabelecimento.
 O banco guarda a fotografia de um mês, e o SUS mede a percepção de usabilidade declarada por [N] participantes, sem medir o desempenho em tarefas reais.
 
 \subsection{Trabalhos futuros}
 
 Como continuidade, propõe-se incluir o tipo de logradouro na chave de junção, agrupar ou deslocar os marcadores sobrepostos no mapa e implementar a agregação por bairro, com o total e a densidade por quilômetro quadrado, a partir das malhas do IBGE.
-Outras possibilidades são validar a condição de MEI em outra fonte, aplicar testes de usabilidade com usuários reais e estender a aplicação a outros municípios e setores.
+Outras possibilidades são aplicar testes de usabilidade com usuários reais e estender a aplicação a outros municípios e setores.
 Como proposta central de continuidade, a aplicação pode deixar de operar apenas com dados estáticos e passar a atualizar a base em tempo real, ou em ciclos automáticos próximos a isso, agendando novas cargas a partir das fontes oficiais.

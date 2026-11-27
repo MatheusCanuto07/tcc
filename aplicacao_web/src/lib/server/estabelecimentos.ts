@@ -29,11 +29,6 @@ function montarWhere(filtros: FiltrosEstabelecimento): {
 		params.porte = filtros.porte.trim();
 	}
 
-	if (filtros.mei === '0' || filtros.mei === '1') {
-		partes.push(`v.is_mei = :mei`);
-		params.mei = filtros.mei;
-	}
-
 	return {
 		sql: partes.length ? `WHERE ${partes.join(' AND ')}` : '',
 		params
@@ -55,7 +50,6 @@ export async function listarEstabelecimentos(
 			v.cnae_principal,
 			v.cnae_descricao,
 			v.porte,
-			v.is_mei,
 			v.latitude,
 			v.longitude,
 			v.nivel_juncao_cnefe,
@@ -83,7 +77,6 @@ export async function obterResumo(): Promise<ResumoDashboard> {
 			COUNT(*) AS total,
 			SUM(CASE WHEN latitude IS NOT NULL AND longitude IS NOT NULL THEN 1 ELSE 0 END) AS com_coordenada,
 			SUM(CASE WHEN latitude IS NULL OR longitude IS NULL THEN 1 ELSE 0 END) AS sem_coordenada,
-			SUM(CASE WHEN is_mei = 1 THEN 1 ELSE 0 END) AS mei,
 			DATE_FORMAT(MAX(data_fotografia), '%Y-%m-%d') AS data_fotografia
 		FROM vw_dashboard_estabelecimentos
 		`
@@ -92,7 +85,6 @@ export async function obterResumo(): Promise<ResumoDashboard> {
 		total: number;
 		com_coordenada: number;
 		sem_coordenada: number;
-		mei: number;
 		data_fotografia: string | null;
 	}>)[0];
 
@@ -123,7 +115,6 @@ export async function obterResumo(): Promise<ResumoDashboard> {
 		total: Number(totais.total),
 		com_coordenada: Number(totais.com_coordenada),
 		sem_coordenada: Number(totais.sem_coordenada),
-		mei: Number(totais.mei),
 		data_fotografia: totais.data_fotografia,
 		por_cnae: porCnae as ResumoDashboard['por_cnae'],
 		por_porte: porPorte as ResumoDashboard['por_porte']
